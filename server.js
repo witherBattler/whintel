@@ -365,7 +365,7 @@ app.post("/api/create-post", async (req, res) => {
                 posts: postId,
             },
         })
-        res.send("http://localhost:3000/post/" + postId)
+        res.send("https://whintel.herokuapp.com/post/" + postId)
         
         // Sending update to subscribed sockets
         for(let i = 0; i != feedSubscriptions.length; i++) {

@@ -1,4 +1,4 @@
-const mainDomain = "http://localhost:3000" // "http://" + window.location.hostname
+const mainDomain = "https://whintel.herokuapp.com" // "http://" + window.location.hostname
 
 
 async function post(url, data) {
