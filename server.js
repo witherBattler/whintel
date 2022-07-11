@@ -345,6 +345,16 @@ app.post("/api/create-post", async (req, res) => {
         if(title == "") {
             title = "Untitled"
         }
+        const safeTitle = xss(req.body.title)
+        if(title != safeTitle) {
+            const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
+            await xssShame.insertOne({
+                userid: user.id,
+                ip: ip
+            })
+            res.send("/xss")
+            return
+        }
         const content = req.body.content
         const safeContent = xss(content)
         if(content != safeContent) {
