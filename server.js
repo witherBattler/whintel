@@ -177,6 +177,7 @@ app.post("/api/register/", async(req, res) => {
     let ipBanned = await ipInXssShame(getIpFromReq(req))
     if(ipBanned) {
         res.send(false)
+        return
     }
     
     const username = xss(req.body.username)
