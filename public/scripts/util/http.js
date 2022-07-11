@@ -12,7 +12,6 @@ async function post(url, data) {
                 resolve(request.response);
             } else {
                 reject(Error(request.statusText));
-                console.log("problem")
             }
         }
     })

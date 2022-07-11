@@ -160,7 +160,25 @@ app.post("/api/login/", async(req, res) => {
         res.send(false)
     })()
 })
+async function ipInXssShame(ip) {
+    let result = await xssShame.findOne({
+        ip: ip
+    })
+    if(result == null) {
+        return false
+    }
+    return true
+}
+function getIpFromReq(req) {
+    return req.headers['x-forwarded-for'] || req.socket.remoteAddress
+
+}
 app.post("/api/register/", async(req, res) => {
+    let ipBanned = await ipInXssShame(getIpFromReq(req))
+    if(ipBanned) {
+        res.send(false)
+    }
+    
     const username = xss(req.body.username)
     const password = req.body.password
     const result = await users.findOne({ username: username })
@@ -317,6 +335,10 @@ async function getUserBySession(session, res = false) {
 }
 
 app.post("/api/create-post", async (req, res) => {
+    let ipBanned = await ipInXssShame(getIpFromReq(req))
+    if(ipBanned) {
+        res.send(false)
+    }
     let user = await getUserBySession(req.cookies.session, res)
     if(user != false) {
         let title = req.body.title
@@ -326,8 +348,12 @@ app.post("/api/create-post", async (req, res) => {
         const content = req.body.content
         const safeContent = xss(content)
         if(content != safeContent) {
-            res.redirect("/xss")
-            console.log(req.headers['x-forwarded-for'] || req.socket.remoteAddress)
+            const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
+            await xssShame.insertOne({
+                userid: user.id,
+                ip: ip
+            })
+            res.send("/xss")
             return
         }
         const options = req.body.options
@@ -488,6 +514,10 @@ app.get("/api/posts/:id", async (req, res) => {
     res.send(post)
 })
 app.post("/api/follow/:id", async(req, res) => {
+    let ipBanned = await ipInXssShame(getIpFromReq(req))
+    if(ipBanned) {
+        res.send(false)
+    }
     let follower = await getUserBySession(req.cookies.session)
     let target = await getUserById(req.params.id)
     if(target == null) {
@@ -533,6 +563,10 @@ app.post("/api/follow/:id", async(req, res) => {
     })
 })
 app.post("/api/unfollow/:id", async(req, res) => {
+    let ipBanned = await ipInXssShame(getIpFromReq(req))
+    if(ipBanned) {
+        res.send(false)
+    }
     let unfollower = await getUserBySession(req.cookies.session)
     let target = await getUserById(req.params.id)
     if(target == null) {
@@ -578,6 +612,10 @@ app.post("/api/unfollow/:id", async(req, res) => {
     })
 })
 app.post("/api/post-toggle-heart/:id", async (req, res) => {
+    let ipBanned = await ipInXssShame(getIpFromReq(req))
+    if(ipBanned) {
+        res.send(false)
+    }
     let user = await getUserBySession(req.cookies.session, res)
     let post = await posts.findOne({ id: req.params.id })
     if(post == null) {
