@@ -716,9 +716,10 @@ function deleteAllData() {
 }
 
 
+
 const months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 function timeToHumanReadableString(time) {
 	let date = new Date(time)
 	return date.getDay() + " " + months[date.getMonth()] + ", " + date.getFullYear()
 }
-app.locals.timeToHumanReadableString = timeToHumanReadableString
+app.locals.timeToHumanReadableString = timeToHumanReadableString;
