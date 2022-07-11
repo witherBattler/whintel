@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="63.546001mm"
+   height="78.349998mm"
+   viewBox="0 0 63.546001 78.349999"
+   version="1.1"
+   id="svg897"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="notification-blurred.svg">
+  <defs
+     id="defs891" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="62.443158"
+     inkscape:cy="66.66991"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1267"
+     inkscape:window-height="1198"
+     inkscape:window-x="1271"
+     inkscape:window-y="156"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata894">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#d1d1d1;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 60.244072,69.430404 c 10.05456,0.0236 -6.0423,-13.53351 -6.31816,-27.37708 l 0.53454,-8.45725 C 54.545152,20.610734 46.740742,5.8693344 31.970866,6.0038044 17.278818,5.9147044 8.6731779,21.002284 8.5363419,33.974054 l -0.156563,7.62302 c 0.205738,12.60116 -14.809168,27.84853 -5.115433,27.83334 28.8523401,-0.0452 28.1274131,-0.0677 56.9797261,-1e-5 z"
+       id="path1464"
+       sodipodi:nodetypes="scccccss" />
+    <path
+       style="fill:#d1d1d1;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 21.819349,70.657084 c 0.129444,4.14142 5.761768,7.66898 9.93315,7.69215 4.215749,0.0234 10.292663,-3.34259 10.163863,-7.6449 z"
+       id="path1466"
+       sodipodi:nodetypes="cscc" />
+    <path
+       id="path1472"
+       sodipodi:nodetypes="cccc"
+       d="m 26.066682,6.0780544 c 4.304592,-1.5564 7.365661,-1.49082 11.714138,0 0.04145,-2.75305 -2.208559,-6.17367002 -6.073998,-6.07400002 -3.044438,-0.0237 -5.655097,3.42337002 -5.64014,6.07400002 z"
+       style="fill:#d1d1d1;fill-opacity:1;stroke:none;stroke-width:0.173543px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>

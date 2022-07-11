@@ -1,0 +1,118 @@
+@font-face {
+    font-family: "Red Hat";
+    src: url("../fonts/rh/light.otf");
+    font-weight: 300;
+}
+@font-face {
+    font-family: "Red Hat";
+    src: url("../fonts/rh/semibold.otf");
+    font-weight: 500;
+}
+@font-face {
+    font-family: "Red Hat";
+    src: url("../fonts/rh/black.otf");
+    font-weight: 800;
+}
+
+* {
+    margin: 0px;
+}
+
+.marked-h1 {
+    font-size: 100px;
+    line-height: 100%;
+    font-family: var(--marked-main-font);
+    font-weight: 300;
+}
+
+.marked-h2 {
+    font-size: 80px;
+    font-family: var(--marked-main-font);
+    font-weight: 300;
+    line-height: 100%;
+}
+
+.marked-h3 {
+    font-size: 60px;
+    font-family: var(--marked-main-font);
+    font-weight: 300;
+    line-height: 100%;
+}
+
+.marked-h4 {
+    font-size: 50px;
+    font-family: var(--marked-main-font);
+    font-weight: 300;
+    line-height: 100%;
+}
+
+.marked-h5 {
+    font-size: 40px;
+    font-family: var(--marked-main-font);
+    font-weight: 300;
+    line-height: 100%;
+}
+
+.marked-h6 {
+    font-size: 30px;
+    font-family: var(--marked-main-font);
+    font-weight: 300;
+    line-height: 100%;
+}
+
+.marked-link {
+    color: #0070f3;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: var(--marked-main-font);
+    line-height: 100%;
+}
+
+.marked-paragraph {
+    font-size: 22px;
+    font-family: var(--marked-main-font);
+    font-weight: 300;
+    line-height: 140%;
+}
+
+.marked-list {
+    font-size: 22px;
+    font-family: var(--marked-main-font);
+    font-weight: 300;
+    line-height: 100%;
+    position: relative;
+}
+.marked-ol > li::marker {
+    color: black;
+    z-index: 10;
+}
+
+.marked-image-container {
+    position: relative;
+}
+.marked-image-caption {
+    font-size: 25px;
+    letter-spacing: 1px;
+    font-family: var(--marked-main-font);
+    font-weight: bold;
+    line-height: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    box-sizing: border-box;
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    -o-transform: translateY(-5px);
+}
+.marked-code {
+    font-family: consolas, monospace;
+    font-size: 20px;
+}

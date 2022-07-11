@@ -1,0 +1,159 @@
+#profileCard {
+    width: 300px;
+    background-color: white;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 25px;
+    box-shadow: 0px 0px 20px rgb(160, 160, 160);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding-bottom: 0px;
+    display: none;
+    transition: top 0.3s, left 0.3s;
+    -webkit-transition: top 0.3s, left 0.3s;
+    -moz-transition: top 0.3s, left 0.3s;
+    -ms-transition: top 0.3s, left 0.3s;
+    -o-transition: top 0.3s, left 0.3s;
+}
+#profileCardBanner {
+    background-color: #e0e5ea;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 100px;
+    position: relative;
+    cursor: pointer;
+    pointer-events: none;
+}
+#profileCardProfilePicture {
+    position: absolute;
+    top: 65px;
+    left: 15px;
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border: white 5px solid;
+    background-color: #e0e5ea;
+    cursor: pointer;
+    pointer-events: all;
+}
+#profileCardBanner::after {
+    content: "View Profile";
+    color: white;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    visibility: hidden;
+    pointer-events: none;
+}
+#profileCardBanner:hover::after {
+    visibility: visible;
+}
+#profileCardUsername {
+    margin-left: 100px;
+    line-height: 40px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    width: 140px;
+}
+#profileCardFollowingFollowersContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -10px;
+    width: 100%;
+}
+#profileCardfollowersContainer {
+    display: flex;
+    font-size: 20px;
+}
+#profileCardfollowersContainer > .followersNumber {
+    font-weight: 900;
+}
+#profileCardfollowersContainer:hover {
+    text-decoration: black 2px underline solid;
+    cursor: pointer;
+    user-select: none;
+}
+#profileCardFollowingContainer {
+    display: flex;
+    font-size: 20px;
+}
+#profileCardFollowingContainer > .followingNumber {
+    font-weight: 900;
+}
+#profileCardFollowingContainer:hover {
+    text-decoration: black 2px underline solid;
+    cursor: pointer;
+    user-select: none;
+}
+#profileCardBioDivider {
+    border: none;
+    background-color: var(--theme-color);
+    height: 5px;
+    width: 30%;
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+#profileCardBio {
+    font-size: 22px;
+    text-align: left;
+    width: 100%;
+}
+#profileCardInnerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#profileCardFollowButtonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+#profileCardFollowButton, #profileCardEditButton {
+    background-color: var(--theme-color);
+    border: none;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    display: flex;
+    cursor: pointer;
+    padding: 5px;
+    padding-inline: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+#profileCardFollowButtonIcon, #profileCardEditButtonIcon {
+    height: 22px;
+    margin-right: 5px;
+}
+#profileCardFollowButtonLabel, #profileCardEditButtonLabel {
+    font-size: 22px;
+    color: white;
+    font-weight: 900;
+}

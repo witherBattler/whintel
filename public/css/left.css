@@ -1,0 +1,192 @@
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/light.ttf");
+    font-weight: 300;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/regular.ttf");
+    font-weight: 400;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/semibold.ttf");
+    font-weight: 500;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/bold.ttf");
+    font-weight: 700;
+}
+
+:root {
+    --main-font: euclid;
+    --theme-color: #14C1F9;
+}
+body {
+    display: flex;
+    height: 100vh;
+    max-height: 100vh;
+    width: 100vw;
+    position: sticky;
+    overflow-x: hidden;
+    top: 0;
+    left: 0;
+    background-color: #f5f8ff;
+}
+* {
+    margin: 0px;
+    font-family: var(--main-font);
+}
+
+
+
+
+#left {
+    background-color: white;
+    width: calc(300px);
+    box-shadow: rgba(0, 0, 0, 0.05) 10px 0px 20px;
+    display: flex;
+    flex-direction: column;
+}
+#logoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 120px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+#logoImage {
+    width: 100%;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+.leftButton {
+    width: 100%;
+    height: 60px;
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.leftButton > img {
+    width: 30px;
+}
+.leftButton > p {
+    margin-left: 15px;
+    font-weight: 500;
+    font-size: 25px;
+    color: #D1D1D1;
+}
+.leftButton.selectedButton {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 40px;
+}
+.leftButton.selectedButton p {
+    color: black;
+    font-weight: 900;
+}
+.homeIcon {
+    transform: translateY(-4px);
+}
+#profileImageBlurred {
+    filter: grayscale(1);
+}
+
+
+
+#profileWidgetContainer {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    align-items: end;
+}
+#profileWidget {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+#profileWidgetImage {
+    height: 40px;
+    aspect-ratio: 1;
+    border-radius: 5px;
+}
+#profileWidgetUsername {
+    font-size: 40px;
+    line-height: 46px;
+    font-weight: 700;
+    margin-left: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+#profileWidgetUsernameContainer {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+#profileWidgetTop {
+    display: flex;
+    max-width: 250px;
+}
+#profileWidgetBottom {
+    display: flex;
+}
+#profileWidgetLevelLabel {
+    font-weight: 900;
+    font-size: 20px;
+}
+.separator {
+    margin-inline: 5px;
+    user-select: none;
+    transform: scale(1.5);
+    display: inline-block;
+}
+#profileWidgetNotificationIcon {
+    height: 25px;
+    margin-inline: 5px;
+}
+#profileWidgetNotificationsLabel {
+    font-weight: 900;
+    font-size: 20px;
+}
+#accountButtonsContainer {
+    display: flex;
+    margin-top: 10px;
+}
+#accountButtonsContainer > button {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    font-size: 20px;
+    line-height: 100%;
+    font-weight: 900;
+    color: white;
+    border: none;
+    box-shadow: rgb(170, 170, 170) 0px 0px 10px
+}
+#accountButtonsContainer > button > img {
+    height: 100%;
+    margin-right: 5px;
+}
+#postButton {
+    background-color: #14C1F9;
+}
+#logOutButton {
+    background-color: #f15247;
+    margin-left: 10px;
+}
+#profileCardInnerContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}

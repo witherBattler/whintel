@@ -1,0 +1,71 @@
+#editProfileMiddle {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+#editProfileContainer {
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    margin-top: 80px;
+}
+#profileBanner {
+    width: 100%;
+    background-image: url(../images/logo.svg);
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    box-shadow: inset 0 -200px 200px -200px black, inset 0 -200px 200px -200px #000000b5;
+    padding: 10px;
+    box-sizing: border-box;
+    align-items: end;
+    display: flex;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+#profileBannerContent {
+    display: flex;
+    flex-direction: column;
+}
+#profileBannerUsername {
+    color: white;
+    font-weight: 900;
+    font-size: 50px;
+    line-height: 100%;
+}
+#profileBannerBio {
+    color: white;
+    font-size: 20px;
+    line-height: 100%;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+#underBanner {
+    display: flex;
+}
+#from, #level, #createdAt {
+    font-size: 20px;
+}
+#fromLocation, #levelNumber, #createdAtDate {
+    font-weight: 500;
+}
+#underBanner {
+    display: flex;
+}
+.dividor {
+    margin-inline: 10px;
+    user-select: none;
+    font-size: 19px;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+}

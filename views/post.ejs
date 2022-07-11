@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Whintel</title>
+        <%- include('partials/base'); -%>
+        <link rel="stylesheet" href="css/left.css">
+        <link rel="stylesheet" href="css/post-middle.css">
+        <link rel="stylesheet" href="css/marked.css">
+    </head>
+    <body>
+        <div id="left">
+            <div id="logoContainer">
+                <img src="images/logo.svg" id="logoImage">
+            </div>
+            <div>
+                <div class="leftButton selectedButton" id="homeButtonLeft">
+                    <img src="images/icons/home.svg" class="homeIcon">
+                    <p class="leftButtonText">
+                        Home
+                    </p>
+                </div>
+                <div class="leftButton" id="postButtonLeft">
+                    <img src="images/icons/plusLeft-blurred.svg">
+                    <p class="leftButtonText">
+                        Post
+                    </p>
+                </div>
+                <div class="leftButton" id="messagesButtonLeft">
+                    <img src="images/icons/messages-blurred.svg">
+                    <p class="leftButtonText">
+                        Messages
+                    </p>
+                </div>
+                <div class="leftButton" id="profileButtonLeft">
+                    <img id="profileImageBlurred" src="<%= profilePicture == "default" ? "/images/icons/defaultProfile-blurred.svg" : profilePicture %>">
+                    <p class="leftButtonText">
+                        Profile
+                    </p>
+                </div>
+                <div class="leftButton" id="settingsButtonLeft">
+                    <img src="/images/icons/settings-blurred.svg">
+                    <p class="leftButtonText">
+                        Settings
+                    </p>
+                </div>
+                <div class="leftButton" id="logOutButtonLeft">
+                    <img src="/images/icons/logOut.svg">
+                    <p class="leftButtonText">
+                        Log Out
+                    </p>
+                </div>
+            </div>
+            <div id="profileWidgetContainer">
+                <div id="profileWidget">
+                    <div id="profileWidgetTop">
+                        <img src="<%= profilePicture == "default" ? "/images/icons/defaultProfile.svg" : profilePicture %>" id="profileWidgetImage">
+                        <div id="profileWidgetUsernameContainer">
+                            <p id="profileWidgetUsername">
+                                <%= username %>
+                            </p>
+                        </div>
+                    </div>
+                    <div id="profileWidgetBottom">
+                        <p id="profileWidgetLevelLabel">
+                            Level <span class="indicator"><%= level %></span>
+                            <span class="separator">•</span>
+                        </p>
+                        <image src="images/icons/notification-blurred.svg" id="profileWidgetNotificationIcon"></image>
+                        <p id="profileWidgetNotificationsLabel">
+                            0
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="middle-post">
+            <div id="postContainer">
+                <div id="postTitle">
+                    <%= postData.title %>
+                </div>
+                <div id="postAuthor">
+                    <img src="/images/icons/defaultProfile.svg">
+                    <div class="main">
+                        <%= authorData.username %>
+                    </div>
+                </div>
+                <hr class="equalHr">
+                <div id="postContent">
+                    <%= postData.content %>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="scripts/util/util.js"></script>
+    <script src="scripts/util/http.js"></script>
+    <script src="scripts/left.js"></script>
+    <script src="scripts/viewPost.js"></script>
+    <script>
+        function stringToBoolean(string) {
+            return string == "true"
+        }
+        var postFont = "<%= postData.options.font %>";
+        var postIsSmartypants = stringToBoolean("<%= postData.options.smartypants %>");
+        var content = `<%= postData.content %>`;
+        var uploadedImagesIds = `<%= postImages %>`.replaceAll('&#34;', "").replace("[", "").replace("]", "").split(",");
+        var uploadedImages = [];
+        (async () => {
+            if(uploadedImagesIds[0] != "") {
+                for (var i = 0; i < uploadedImagesIds.length; i++) {
+                    var image = await ajax("GET", "/api/assets/images/" + uploadedImagesIds[i]);
+                    uploadedImages.push({
+                        id: "image-" + (i + 1),
+                        dataUrl: image
+                    });
+                }
+            }
+            initMarked()
+        })()
+        
+        
+        
+    </script>
+</html>

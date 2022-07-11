@@ -1,0 +1,36 @@
+#postContainer {
+    width: 700px;
+    margin-top: 30px;
+}
+#middle-post {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+#postTitle {
+    font-size: 55px;
+    margin: 0px;
+    line-height: 140%;
+}
+#postAuthor {
+    display: flex;
+    height: 20px;
+    font-size: 20px;
+    margin-left: 3px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+#postAuthor * {
+    line-height: 80%;
+}
+#postAuthor > img {
+    height: 100%;
+}
+#postAuthor > .main {
+    font-weight: 900;
+    margin-left: 5px;
+    font-size: 23px;
+}
+.equalHr {
+    margin-bottom: 5px;
+}

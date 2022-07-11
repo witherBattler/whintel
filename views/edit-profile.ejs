@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Whintel</title>
+        <%- include('partials/base'); -%>
+        <link rel="stylesheet" href="css/left.css">
+        <link rel="stylesheet" href="css/editProfile.css">
+    </head>
+    <body>
+        <div id="left">
+            <div id="logoContainer">
+                <img src="images/logo.svg" id="logoImage">
+            </div>
+            <div>
+                <div class="leftButton" id="homeButtonLeft">
+                    <img src="images/icons/home-blurred.svg" class="homeIcon">
+                    <p class="leftButtonText">
+                        Home
+                    </p>
+                </div>
+                <div class="leftButton" id="postButtonLeft">
+                    <img src="images/icons/plusLeft-blurred.svg">
+                    <p class="leftButtonText">
+                        Post
+                    </p>
+                </div>
+                <div class="leftButton" id="messagesButtonLeft">
+                    <img src="images/icons/messages-blurred.svg">
+                    <p class="leftButtonText">
+                        Messages
+                    </p>
+                </div>
+                <div class="leftButton selectedButton" id="profileButtonLeft">
+                    <img id="profileImage" src="<%= profilePicture == "default" ? "/images/icons/defaultProfile.svg" : profilePicture %>">
+                    <p class="leftButtonText">
+                        Profile
+                    </p>
+                </div>
+                <div class="leftButton" id="settingsButtonLeft">
+                    <img src="/images/icons/settings-blurred.svg">
+                    <p class="leftButtonText">
+                        Settings
+                    </p>
+                </div>
+                <div class="leftButton" id="logOutButtonLeft">
+                    <img src="/images/icons/logOut.svg">
+                    <p class="leftButtonText">
+                        Log Out
+                    </p>
+                </div>
+            </div>
+            <div id="profileWidgetContainer">
+                <div id="profileWidget">
+                    <div id="profileWidgetTop">
+                        <img src="<%= profilePicture == "default" ? "/images/icons/defaultProfile.svg" : profilePicture %>" id="profileWidgetImage">
+                        <div id="profileWidgetUsernameContainer">
+                            <p id="profileWidgetUsername">
+                                <%= username %>
+                            </p>
+                        </div>
+                    </div>
+                    <div id="profileWidgetBottom">
+                        <p id="profileWidgetLevelLabel">
+                            Level <span class="indicator"><%= level %></span>
+                            <span class="separator">•</span>
+                        </p>
+                        <image src="images/icons/notification-blurred.svg" id="profileWidgetNotificationIcon"></image>
+                        <p id="profileWidgetNotificationsLabel">
+                            0
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="editProfileMiddle">
+            <div id="editProfileContainer">
+                <div id="profileBanner" bannerImage="<%= userData.bannerImage  %>">
+                    <div id="profileBannerContent">
+                        <div id="profileBannerUsername"><%= userData.username %></div>
+                        <div id="profileBannerBio"><%= userData.bio %></div>
+                    </div>
+                </div>
+                <div id="underBanner">
+                    <div id="level">
+                        Level:
+                        <span id="levelNumber">
+                            <%- userData.level %>
+                        </span>
+                    </div>
+                    <span class="dividor">•</span>
+                    <div id="from">
+                        From: 
+                        <span id="fromLocation">
+                            <%- userData.location == "unknown" ? 
+                                `<span class="grey">unknown</span>` :
+                                userData.location
+                            %>
+                        </span>
+                    </div>
+                    <span class="dividor">•</span>
+                    <div id="createdAt">
+                        Created at:
+                        <span id="createdAtDate">
+                            <%- timeToHumanReadableString(userData.createdAt) %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const userData = <%- JSON.stringify(userData) %>
+        </script>
+        <script src="scripts/util/util.js"></script>
+        <script src="scripts/util/http.js"></script>
+        <script src="scripts/left.js"></script>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Whintel</title>
+        <%- include('partials/base'); -%>
+        <link rel="stylesheet" href="css/left.css">
+        <link rel="stylesheet" href="css/app-middle.css">
+    </head>
+    <body>
+        <div id="left">
+            <div id="logoContainer">
+                <img src="images/logo.svg" id="logoImage">
+            </div>
+            <div>
+                <div class="leftButton selectedButton" id="homeButtonLeft">
+                    <img src="images/icons/home.svg" class="homeIcon">
+                    <p class="leftButtonText">
+                        Home
+                    </p>
+                </div>
+                <div class="leftButton" id="postButtonLeft">
+                    <img src="images/icons/plusLeft-blurred.svg">
+                    <p class="leftButtonText">
+                        Post
+                    </p>
+                </div>
+                <div class="leftButton" id="messagesButtonLeft">
+                    <img src="images/icons/messages-blurred.svg">
+                    <p class="leftButtonText">
+                        Messages
+                    </p>
+                </div>
+                <div class="leftButton" id="profileButtonLeft">
+                    <img id="profileImageBlurred" src="<%= profilePicture == "default" ? "/images/icons/defaultProfile-blurred.svg" : profilePicture %>">
+                    <p class="leftButtonText">
+                        Profile
+                    </p>
+                </div>
+                <div class="leftButton" id="settingsButtonLeft">
+                    <img src="/images/icons/settings-blurred.svg">
+                    <p class="leftButtonText">
+                        Settings
+                    </p>
+                </div>
+                <div class="leftButton" id="logOutButtonLeft">
+                    <img src="/images/icons/logOut.svg">
+                    <p class="leftButtonText">
+                        Log Out
+                    </p>
+                </div>
+            </div>
+            <div id="profileWidgetContainer">
+                <div id="profileWidget">
+                    <div id="profileWidgetTop">
+                        <img src="<%= profilePicture == "default" ? "/images/icons/defaultProfile.svg" : profilePicture %>" id="profileWidgetImage">
+                        <div id="profileWidgetUsernameContainer">
+                            <p id="profileWidgetUsername">
+                                <%= username %>
+                            </p>
+                        </div>
+                    </div>
+                    <div id="profileWidgetBottom">
+                        <p id="profileWidgetLevelLabel">
+                            Level <span class="indicator"><%= level %></span>
+                            <span class="separator">•</span>
+                        </p>
+                        <image src="images/icons/notification-blurred.svg" id="profileWidgetNotificationIcon"></image>
+                        <p id="profileWidgetNotificationsLabel">
+                            0
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="middle">
+            <div id="middle-top">
+                <div id="middleTopContent">
+                    <div id="middleTopContentLabel">
+                        Feed
+                    </div>
+                    <div id="feedCategories">
+                        <div id="feedCategoryRecent" class="feedCategory selected">
+                            Recent
+                        </div>
+                        <div id="feedCategoryFollowing" class="feedCategory">
+                            Following
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div id="postsContainer">
+
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <script src="scripts/util/util.js"></script>
+        <script src="scripts/util/http.js"></script>
+        <script src="scripts/util/postDisplayer/postDisplayer.js"></script>
+        <script src="scripts/util/automaticPostManager/automaticPostManager.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/left.js"></script>
+        <%- include('partials/profileCard'); -%>
+    </body>
+</html>

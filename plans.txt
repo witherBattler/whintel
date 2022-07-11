@@ -1,0 +1,7 @@
+1st of july (+night): try to FULLY finish all of the UI for the app.
+2nd of july (+night): try to FULLY finish all for create-post.
+
+6nd of july update: finally finished create-post. Work on view-post.
+Also make it so that an account isn't required to view a post or the feed.
+
+rn: finish view-port. (post)

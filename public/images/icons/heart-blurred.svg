@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="17.620001mm"
+   height="16.146999mm"
+   viewBox="0 0 17.620002 16.146999"
+   version="1.1"
+   id="svg847"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="heart-blurred.svg">
+  <defs
+     id="defs841" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="86.16232"
+     inkscape:cy="10.860956"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1278"
+     inkscape:window-height="1360"
+     inkscape:window-x="1273"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata844">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path1410"
+       style="fill:#d1d1d1;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 4.0941363,0.00291353 C 1.4592816,0.06245351 -0.62297807,2.6066196 0.17551245,7.5580083 0.16729741,10.56509 6.3326745,14.798426 8.9827279,16.145597 11.809045,14.880185 17.399489,10.751148 17.481949,7.8417104 18.57724,-0.7735224 12.845211,-1.9116037 8.9305335,2.5955204 7.4548862,0.82557427 5.6750492,-0.03281025 4.0941363,0.00291353 Z M 13.31218,2.5231727 c 0.08389,-0.00235 0.174643,0.01129 0.271301,0.044958 0.836157,0.1906852 1.62601,1.0246307 1.91771,1.7440804 0.374417,0.7310014 -0.304093,1.6351594 -0.871262,0.7673948 C 14.307873,4.5312782 14.002242,3.8470868 13.126143,3.6719406 12.487547,3.3475694 12.724929,2.5396483 13.31218,2.5231727 Z" />
+  </g>
+</svg>

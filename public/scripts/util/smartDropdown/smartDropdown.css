@@ -1,0 +1,48 @@
+.dropdown {
+    background-color: white;
+    outline: 2px solid black;
+    padding: 5px;
+    padding-inline: 10px;
+    border-radius: 3px;
+    line-height: 100%;
+    display: flex;
+    user-select: none;
+    cursor: pointer;
+    /* Because padding-top is not the same as padding inline */
+    z-index: 1000;
+    position: relative;
+    font-family: euclid;
+    color: black;
+}
+
+.dropdownIconContainer {
+    display: flex;
+    flex-grow: 1;
+    justify-content: end;
+    align-items: center;
+}
+.dropdownIcon {
+    height: 8px;
+    transform: rotate(0deg);
+    transition: transform 0.2s;
+    filter: brightness(0);
+    -webkit-filter: brightness(0);
+}
+.dropdownOptions {
+    overflow-y: hidden;
+    height: 0px;
+    position: absolute;
+    cursor: pointer;
+    padding-inline: 10px;
+    background-color: white;
+    outline: 2px inset black;
+    opacity: 0;
+    transition: height 0.5s, opacity 0.5s;
+    margin-top: 10px;
+    border-radius: 3px;
+    z-index: 1001;
+}
+.dropdownOption {
+    line-height: 40px;
+    border-bottom: 1px solid black;
+}

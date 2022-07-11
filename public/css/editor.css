@@ -1,0 +1,284 @@
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/light.ttf");
+    font-weight: 300;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/regular.ttf");
+    font-weight: 400;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/semibold.ttf");
+    font-weight: 500;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/bold.ttf");
+    font-weight: 700;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/light-italic.ttf");
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/regular-italic.ttf");
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/semibold-italic.ttf");
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: euclid;
+    src: url("../fonts/euclid/bold-italic.ttf");
+    font-weight: 700;
+    font-style: italic;
+}
+
+#editor {
+    width: 700px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
+    height: fit-content;
+    border-radius: 10px;;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+:root {
+    --main-font: euclid;
+    --theme-color: #14C1F9;
+    --marked-main-font: euclid;
+}
+
+#editorTitle {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: none;
+    margin: none;
+    font-size: 25px;
+    height: 40px;
+    box-sizing: border-box;
+    font-family: var(--main-font);
+    border-radius: 5px;
+    color: black;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+#editorTitle::placeholder {
+    font-family: var(--main-font);
+    font-size: 23px;
+    color: dimgrey;
+    font-style: italic;
+}
+
+#editorContent {
+    padding: 5px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    font-family: consolas, monospace !important;
+    font-size: 20px;
+    background-color: white;
+    height: 300px;
+    border-radius: 5px;
+    outline: 2px solid black;
+    line-height: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-bottom: 4px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+#editorContent * {
+    font-family: consolas, monospace !important;
+}
+#markupResult {
+    padding: 5px;
+    padding-top: 10px;
+    min-height: 100px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 50px;
+    outline: 2px solid black;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    max-height: 300px;
+    overflow: auto;
+}
+
+#editorToolbar {
+    font-family: euclid;
+    background-color: white;
+    width: 100%;
+    padding-top: 7px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-sizing: border-box;
+}
+#editorToolbar > .toolbarDefault {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    justify-content: space-between;
+}
+#editorToolbar > .toolbarDefault > p {
+    margin-right: 10px;
+    line-height: 30px;
+    font-size: 30px;
+}
+.headingButtonEditor {
+    border-radius: 3px;
+    background-color: var(--theme-color);
+    height: 35px;
+    width: 35px;
+    margin-left: 10px;
+    border: none;
+    outline: black 2px solid;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+.headingButtonEditor > img {
+    width: 30px;
+}
+#headingButtonEditor1 {
+    margin-left: 10px;
+}
+#caseSwitchButtonEditor {
+    width: 35px;
+    height: 35px;
+    outline: 2px black solid;
+    border-radius: 3px;
+    border: none;
+    background-color: white;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+#caseSwitchButtonEditor > img {
+    width: 80%;
+    height: 100%;
+}
+#customImageButtonEditor, .listButtonEditor {
+    margin-left: 10px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    background-color: var(--theme-color);
+    border: none;
+    outline: black 2px solid;
+    cursor: pointer;
+}
+#customImageButtonEditor > img {
+    width: 80%;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+.listButtonEditor > img {
+    -webkit-user-drag: none;
+    height: 100%;
+    max-width: 100%;
+    user-select: none;
+}
+#imageButtonEditor {
+    display: none;
+    margin-top: 10px;
+}
+#imageUploadingEditor {
+    display: none;
+}
+#uploadedImagesContainerEditor {
+    display: flex;
+    align-items: start;
+    background-color: black;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    min-width: 100%;
+    width: fit-content;
+}
+#uploadedImagesInnerContainerEditor {
+    overflow-y: auto;
+}
+uploaded-image-editor {
+    margin-left: 5px;
+}
+uploaded-image-editor:first-child {
+    margin-left: 0px;
+}
+#editorInnerContainer {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+#editorContainer {
+    display: flex;
+    flex-direction: column;
+}
+#confirmPost {
+    display: flex;
+    align-items: center;
+    background-color: var(--theme-color);
+    outline: 2px solid black;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    height: 40px;
+    width: fit-content;
+    margin-top: 10px;
+    cursor: pointer;
+}
+#confirmPost > img {
+    margin-right: 5px;
+    height: 100%;
+}
+#confirmPost > p {
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+}
+[contenteditable=true]:empty:after{
+    content: attr(placeholder);
+    font-family: var(--main-font);
+    font-weight: 400;
+    pointer-events: none;
+    color: grey;
+    display: block;
+    line-height: 30px;
+    outline: none;
+    border: none;
+    padding: 0px;
+}

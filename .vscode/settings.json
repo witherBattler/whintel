@@ -1,0 +1,5 @@
+{
+    "html-to-css-autocompletion.getSelectorsFromFileTypes": [
+        "ejs"
+    ]
+}
