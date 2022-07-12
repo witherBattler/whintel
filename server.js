@@ -63,7 +63,7 @@ let sessions = {}
 let users = client.db("users").collection("users")
 let posts = client.db("posts").collection("posts")
 let imageAssets = client.db("assets").collection("images")
-let xssShame = client.db("assets").collection("xss")
+let xssShame = client.db("shame").collection("xss")
 
 app.get("xss")
 app.get("/app", async (req, res) => {
