@@ -1,8 +1,8 @@
+require("dotenv").config()
 const tinify = require("tinify")
-tinify.key = "G44DY8Mq4f2NVZYHMJL8Pd9pPrzmQ7jh"
+tinify.key = process.env.TINIFY_KEY
 const { MongoClient, ServerApiVersion } = require('mongodb')
-const uri = "mongodb+srv://impixel:1234@html5help.3kvrfaf.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+const client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 const express = require("express")
 const app = express()
 const fs = require("fs")
@@ -10,7 +10,6 @@ const cookieParser = require("cookie-parser")
 const socketIo = require("socket.io");
 const bcrypt = require("bcrypt")
 const xss = require("xss")
-
 
 const hashRounds = 10
 app.use(cookieParser())
