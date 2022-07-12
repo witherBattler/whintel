@@ -1,4 +1,4 @@
-require("dotenv/config").config()
+require("dotenv").config()
 const tinify = require("tinify")
 tinify.key = process.env.TINIFY_KEY
 const { MongoClient, ServerApiVersion } = require('mongodb')
