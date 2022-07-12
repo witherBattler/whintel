@@ -21,9 +21,7 @@ settingsButtonLeft.addEventListener("click", (event) => {
     window.location = `${mainDomain}/settings`
 })
 logOutButtonLeft.addEventListener("click", async (event) => {
-    console.log("posdf")
     let success = await ajax("POST", mainDomain + "/api/log-out")
-    console.log(success)
     if(success) {
         window.location = `${mainDomain}/login`
     }

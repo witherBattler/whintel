@@ -58,13 +58,16 @@ io.on("connection", (socket) => {
     })
 })
 
+
 let sessions = {}
 let users = client.db("users").collection("users")
 let posts = client.db("posts").collection("posts")
 let imageAssets = client.db("assets").collection("images")
 let xssShame = client.db("shame").collection("xss")
 
-app.get("xss")
+app.get("xss", async (req, res) => {
+    res.render("xss")
+})
 app.get("/app", async (req, res) => {
     res.redirect("/home")
 })
@@ -197,7 +200,7 @@ app.post("/api/register/", async(req, res) => {
         posts: [],
         comments: [],
         heartedPosts: [],
-        heartedComment: [],
+        heartedComments: [],
         followers: [],
         following: [],
         bio: "No bio yet.",
@@ -331,13 +334,14 @@ async function getUserBySession(session, res = false) {
         if(res != false) res.redirect(405, "/login")
         return false
     }
-    return result
+    return tryDelete(result, "_id")
 }
 
 app.post("/api/create-post", async (req, res) => {
     let ipBanned = await ipInXssShame(getIpFromReq(req))
     if(ipBanned) {
         res.send(false)
+        return
     }
     let user = await getUserBySession(req.cookies.session, res)
     if(user != false) {
@@ -350,7 +354,8 @@ app.post("/api/create-post", async (req, res) => {
             const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
             await xssShame.insertOne({
                 userid: user.id,
-                ip: ip
+                ip: ip,
+                content: title
             })
             res.send("/xss")
             return
@@ -370,7 +375,7 @@ app.post("/api/create-post", async (req, res) => {
         const heartsCount = 0
         const heartsFrom = []
         const commentsCount = 0
-        const commentsFrom = []
+        const commentsData = {}
         const creationDate = Date.now()
         const postId = getPostId()
         // It's important to add images into the database before the post
@@ -387,7 +392,7 @@ app.post("/api/create-post", async (req, res) => {
             heartsCount: heartsCount,
             heartsFrom: heartsFrom,
             commentsCount: commentsCount,
-            commentsFrom: commentsFrom,
+            commentsData: commentsData,
             creationDate: creationDate,
             id: postId,
             user: user.id,
@@ -483,8 +488,19 @@ app.get("/api/feed/recent", async (req, res) => {
     let skip = validInt(req.query.skip, 0)
     let recentPosts = posts.find({}).limit(14).skip(skip).sort({ creationDate: -1 })
     recentPosts.toArray((err, data) => {
+        for(let i = 0; i != data.length; i++) {
+            data[i] = tryDelete(data[i], "_id", "options", "heartsFrom", "commentsData", "images")
+        }
         res.send(data)
     })
+})
+app.get("/api/get-basic-user-data/:id", async (req, res) => {
+    let user = await getUserById(req.params.id)
+    if(user == false) {
+        res.send(false)
+    }
+    user = tryDelete(user, "_id", "level", "posts", "comments", "heartedPosts", "heartedComments", "followers", "following", "bio", "location", "createdAt")
+    res.send(user)
 })
 function validInt(int, fallback) {
     let parsedInt = parseInt(int)
@@ -507,6 +523,7 @@ app.get("/api/post-is-liked/:id", async(req, res) => {
     }
 })
 app.get("/api/user/:id", async (req, res) => {
+    console.log("request sent")
     let user = await users.findOne({ id: req.params.id })
     if(user == null) {
         res.send("User not found")
@@ -527,6 +544,7 @@ app.post("/api/follow/:id", async(req, res) => {
     let ipBanned = await ipInXssShame(getIpFromReq(req))
     if(ipBanned) {
         res.send(false)
+        return
     }
     let follower = await getUserBySession(req.cookies.session)
     let target = await getUserById(req.params.id)
@@ -576,6 +594,7 @@ app.post("/api/unfollow/:id", async(req, res) => {
     let ipBanned = await ipInXssShame(getIpFromReq(req))
     if(ipBanned) {
         res.send(false)
+        return
     }
     let unfollower = await getUserBySession(req.cookies.session)
     let target = await getUserById(req.params.id)
@@ -625,6 +644,7 @@ app.post("/api/post-toggle-heart/:id", async (req, res) => {
     let ipBanned = await ipInXssShame(getIpFromReq(req))
     if(ipBanned) {
         res.send(false)
+        return
     }
     let user = await getUserBySession(req.cookies.session, res)
     let post = await posts.findOne({ id: req.params.id })
@@ -723,3 +743,13 @@ function timeToHumanReadableString(time) {
 	return date.getDay() + " " + months[date.getMonth()] + ", " + date.getFullYear()
 }
 app.locals.timeToHumanReadableString = timeToHumanReadableString;
+
+function tryDelete(object, ...keys) {
+    for(let key of keys) {
+        if(object[key] != undefined) {
+            delete object[key]
+        }
+    }
+
+    return object
+}

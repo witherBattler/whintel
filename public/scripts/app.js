@@ -17,7 +17,6 @@ socket.on("new-post", async (data) => {
 })
 
 
-
 let feedCategoriesElements = document.getElementById("feedCategories").children
 let feedCategoryRecent = document.getElementById("feedCategoryRecent")
 let feedCategoryFollowing = document.getElementById("feedCategoryFollowing")
@@ -54,7 +53,7 @@ async function triggerFeedRerender(type, skip = 0, callback = function() {}) {
     }
     let userData = []
     for(let i = 0; i != result.length; i++) {
-        let user = await ajax("GET", "/api/user/" + result[i].user)
+        let user = await ajax("GET", "/api/get-basic-user-data/" + result[i].user)
         user = JSON.parse(user)
         userData.push(user)
         let isHearted = await ajax("GET", "/api/post-is-liked/" + result[i].id)

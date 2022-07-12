@@ -1,5 +1,16 @@
-const mainDomain = "https://whintel.herokuapp.com" // "http://" + window.location.hostname
+const mainDomain = "http://localhost:3000" // "http://" + window.location.hostname
 
+let cachedFullUserData = {}
+
+// Implements caching for user data
+async function getFullUserData(id) {
+    if(cachedFullUserData[id]) {
+        return cachedFullUserData[id]
+    }
+    let data = await ajax("GET", mainDomain + "/api/user/" + id)
+    cachedFullUserData[id] = JSON.parse(data)
+    return cachedFullUserData[id]
+}
 
 async function post(url, data) {
     let request = new XMLHttpRequest();

@@ -8,6 +8,8 @@ class AutomaticPostManager extends HTMLElement {
         let element = document.createElement("post-displayer")
         let id = this.getAttribute("post-id")
         let postData = JSON.parse(this.dataset.postData)
+
+        // this user data is incomplete and only contains profile picture, username and id
         let userData = JSON.parse(this.dataset.userData)
 
         element.setAttribute("title", postData.title)
@@ -29,8 +31,10 @@ class AutomaticPostManager extends HTMLElement {
         element.appendEvent("heartToggled", (event) => {
             ajax("POST", "/api/post-toggle-heart/" + id)
         })
-        element.appendEvent("profileClicked", (event) => {
-            setProfileCard(event.clientX, event.clientY, userData.id, userData.profilePicture, userData.username, userData.bio, userData.followers, userData.following)
+        element.appendEvent("profileClicked", async (event) => {
+            let fullUserData = await getFullUserData(userData.id)
+            console.log(fullUserData)
+            setProfileCard(event.clientX, event.clientY, fullUserData.id, fullUserData.profilePicture, fullUserData.username, fullUserData.bio, fullUserData.followers, fullUserData.following)
         })
     }
 }
