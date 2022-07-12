@@ -16,6 +16,7 @@
     "xss-checker": "^1.0.1"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "push-progress": "concurrently \"git push heroku master\" \"git push origin master\""
   }
 }
