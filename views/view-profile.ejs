@@ -7,7 +7,8 @@
         <title>Whintel</title>
         <%- include('partials/base'); -%>
         <link rel="stylesheet" href="css/left.css">
-        <link rel="stylesheet" href="css/editProfile.css">
+        <link rel="stylesheet" href="css/view-profile.css">
+        <link rel="stylesheet" href="css/followers-following.css">
     </head>
     <body>
         <div id="left">
@@ -15,42 +16,42 @@
                 <img src="images/logo.svg" id="logoImage">
             </div>
             <div>
-                <div class="leftButton" id="homeButtonLeft">
+                <a class="leftButton" id="homeButtonLeft" href="/home">
                     <img src="images/icons/home-blurred.svg" class="homeIcon">
                     <p class="leftButtonText">
                         Home
                     </p>
-                </div>
-                <div class="leftButton" id="postButtonLeft">
+                </a>
+                <a class="leftButton" id="postButtonLeft" href="/create-post">
                     <img src="images/icons/plusLeft-blurred.svg">
                     <p class="leftButtonText">
                         Post
                     </p>
-                </div>
-                <div class="leftButton" id="messagesButtonLeft">
+                </a>
+                <a class="leftButton" id="messagesButtonLeft" href="/messages">
                     <img src="images/icons/messages-blurred.svg">
                     <p class="leftButtonText">
                         Messages
                     </p>
-                </div>
-                <div class="leftButton selectedButton" id="profileButtonLeft">
+                </a>
+                <a class="leftButton selectedButton" id="profileButtonLeft" href="/view-profile">
                     <img id="profileImage" src="<%= profilePicture == "default" ? "/images/icons/defaultProfile.svg" : profilePicture %>">
                     <p class="leftButtonText">
                         Profile
                     </p>
-                </div>
-                <div class="leftButton" id="settingsButtonLeft">
+                </a>
+                <a class="leftButton" id="settingsButtonLeft" href="/settings">
                     <img src="/images/icons/settings-blurred.svg">
                     <p class="leftButtonText">
                         Settings
                     </p>
-                </div>
-                <div class="leftButton" id="logOutButtonLeft">
+                </a>
+                <button class="leftButton" id="logOutButtonLeft">
                     <img src="/images/icons/logOut.svg">
                     <p class="leftButtonText">
                         Log Out
                     </p>
-                </div>
+                </button>
             </div>
             <div id="profileWidgetContainer">
                 <div id="profileWidget">
@@ -79,8 +80,21 @@
             <div id="editProfileContainer">
                 <div id="profileBanner" bannerImage="<%= userData.bannerImage  %>">
                     <div id="profileBannerContent">
-                        <div id="profileBannerUsername"><%= userData.username %></div>
-                        <div id="profileBannerBio"><%= userData.bio %></div>
+                        <div id="profileBannerLeft">
+                            <img id="profileBannerProfilePicture" src="<%= profilePicture == "default" ? "/images/icons/defaultProfile.svg" : profilePicture %>">
+                            <div>
+                                <div id="profileBannerUsername"><%= userData.username %></div>
+                                <div id="profileBannerBio"><%= userData.bio %></div>    
+                            </div>
+                        </div>
+                        <div id="followersFollowingContainerBanner">
+                            <button id="followersLabel">
+                                <span id="followersLabelNumber"><%= userData.followers.length %></span> followers
+                            </button>
+                            <button id="followingLabel">
+                                <span id="followingLabelNumber"><%= userData.following.length %></span> following
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div id="underBanner">
@@ -109,6 +123,26 @@
                     </div>
                 </div>
             </div>
+            <div id="followersFollowingContainer">
+                <div id="followersFollowingTop">
+                    <button id="followersFollowingTopBackButton">
+                        <img src="images/icons/exitArrow.svg">
+                    </button>
+                    <div id="followersFollowingTopUsernameLabel">
+                        @<%- userData.username %>
+                    </div>
+                        
+                </div>
+                <tab-switch tabs="Followers,Following" id="followersFollowingTabSwitch"></tab-switch>
+                <div id="followersFollowingContent">
+                    <div id="followersContainer">
+
+                    </div>
+                    <div id="followingContainer">
+
+                    </div>
+                </div>
+            </div>
         </div>
         <script>
             const userData = <%- JSON.stringify(userData) %>
@@ -116,5 +150,8 @@
         <script src="scripts/util/util.js"></script>
         <script src="scripts/util/http.js"></script>
         <script src="scripts/left.js"></script>
+        <script src="scripts/util/tabSwitch/tabSwitch.js"></script>
+        <script src="scripts/viewProfile.js"></script>
+        <script src="scripts/util/followersListElement/followersListElement.js"></script>
     </body>
 </html>

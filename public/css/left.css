@@ -22,6 +22,9 @@
 :root {
     --main-font: euclid;
     --theme-color: #14C1F9;
+    --disabled-text: #464454;
+    --hovered-background: #f0f0f0;
+    --selected-background: #e9e9e9;
 }
 body {
     display: flex;
@@ -71,6 +74,7 @@ body {
     align-items: center;
     box-sizing: border-box;
     cursor: pointer;
+    text-decoration: none;
 }
 .leftButton > img {
     width: 30px;
@@ -152,41 +156,15 @@ body {
     font-weight: 900;
     font-size: 20px;
 }
-#accountButtonsContainer {
-    display: flex;
-    margin-top: 10px;
-}
-#accountButtonsContainer > button {
-    flex-grow: 1;
-    padding: 10px;
-    border-radius: 10px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    user-select: none;
-    font-size: 20px;
-    line-height: 100%;
-    font-weight: 900;
-    color: white;
-    border: none;
-    box-shadow: rgb(170, 170, 170) 0px 0px 10px
-}
-#accountButtonsContainer > button > img {
-    height: 100%;
-    margin-right: 5px;
-}
-#postButton {
-    background-color: #14C1F9;
-}
-#logOutButton {
-    background-color: #f15247;
-    margin-left: 10px;
-}
 #profileCardInnerContainer {
     display: flex;
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
+}
+button {
+    background-color: none;
+    background-color: transparent;
+    outline: none;
+    border: none;
 }

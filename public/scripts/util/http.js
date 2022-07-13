@@ -1,5 +1,3 @@
-const mainDomain = "http://localhost:3000" // "http://" + window.location.hostname
-
 let cachedFullUserData = {}
 
 // Implements caching for user data
@@ -53,3 +51,20 @@ let selfData
 (async () => {
     selfData = await getSelfData()
 })()
+
+let cachedProfileImages = {}
+async function parseProfileImage(image) {
+    return new Promise(async (resolve, reject) => {
+        if(image == "default") {
+            resolve("/images/icons/defaultProfile.png")
+        } else {
+            if(cachedProfileImages[image]) {
+                resolve(cachedProfileImages[image])
+                return
+            }
+            let realSrc = await ajax("GET", mainDomain + "/api/assets/images/" + image)
+            cachedProfileImages[image] = realSrc
+            resolve(realSrc)
+        }
+    })
+}

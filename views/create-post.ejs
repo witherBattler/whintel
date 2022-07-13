@@ -16,42 +16,42 @@
                 <img src="images/logo.svg" id="logoImage">
             </div>
             <div>
-                <div class="leftButton" id="homeButtonLeft">
+                <a class="leftButton" id="homeButtonLeft" href="/home">
                     <img src="images/icons/home-blurred.svg" class="homeIcon">
                     <p class="leftButtonText">
                         Home
                     </p>
-                </div>
-                <div class="leftButton selectedButton" id="postButtonLeft">
+                </a>
+                <a class="leftButton selectedButton" id="postButtonLeft" href="/create-post">
                     <img src="images/icons/plusLeft.svg">
                     <p class="leftButtonText">
                         Post
                     </p>
-                </div>
-                <div class="leftButton" id="messagesButtonLeft">
+                </a>
+                <a class="leftButton" id="messagesButtonLeft" href="/messages">
                     <img src="images/icons/messages-blurred.svg">
                     <p class="leftButtonText">
                         Messages
                     </p>
-                </div>
-                <div class="leftButton" id="profileButtonLeft">
-                    <img id="profileImageBlurred" src="<%= profilePicture == "default" ? "/images/icons/defaultProfile-blurred.svg" : profilePicture %>">
+                </a>
+                <a class="leftButton" id="profileButtonLeft" href="/view-profile">
+                    <img id="profileImage" src="<%= profilePicture == "default" ? "/images/icons/defaultProfile-blurred.svg" : profilePicture %>">
                     <p class="leftButtonText">
                         Profile
                     </p>
-                </div>
-                <div class="leftButton" id="settingsButtonLeft">
+                </a>
+                <a class="leftButton" id="settingsButtonLeft" href="/settings">
                     <img src="/images/icons/settings-blurred.svg">
                     <p class="leftButtonText">
                         Settings
                     </p>
-                </div>
-                <div class="leftButton" id="logOutButtonLeft">
+                </a>
+                <button class="leftButton" id="logOutButtonLeft">
                     <img src="/images/icons/logOut.svg">
                     <p class="leftButtonText">
                         Log Out
                     </p>
-                </div>
+                </button>
             </div>
             <div id="profileWidgetContainer">
                 <div id="profileWidget">

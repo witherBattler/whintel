@@ -13,8 +13,9 @@
 // })
 
 
-
-
+function changeUrlWithoutReload(url) {
+    window.history.pushState({}, null, url);
+}
 
 function getFileTypeFromBase64(base64) {
     switch(base64.charAt(0)) {

@@ -77,18 +77,67 @@ app.get("/", (req, res) => {
 app.get("/login", (req, res) => {
     res.render("login")
 })
-app.get("/edit-profile", async (req, res) => {
-    let user = await getUserBySession(req.cookies.session, res)
+app.get("/view-profile", async (req, res) => {
+    res.redirect("/view-profile/self")
+})
+app.get("/view-profile/self", async (req, res) => {
+    let user = await getUserBySession(req.cookies.session)
     if(user == false) {
+        res.redirect("/home")
         return
     }
-
-
-    res.render('edit-profile', {
+    res.render("view-profile", {
         username: user.username,
         level: user.level,
         profilePicture: user.profilePicture,
-        userData: user,
+        userData: user
+    })
+})
+app.get("/view-profile/self/followers", async () => {
+    let user = await getUserBySession(req.cookies.session)
+    if(user == false) {
+        res.redirect("/home")
+        return
+    }
+    const username = user.username
+    const level = user.level
+    const profilePicture = user.profilePicture
+    res.render("view-profile", {
+        username: username,
+        level: level,
+        profilePicture: profilePicture,
+    })
+})
+app.get("/view-profile/self/following", async () => {
+    let user = await getUserBySession(req.cookies.session)
+    if(user == false) {
+        res.redirect("/home")
+        return
+    }
+    const username = user.username
+    const level = user.level
+    const profilePicture = user.profilePicture
+    user = tryDelete(user, "username", "password", "profilePicture", "level", "posts", "comments", "heartedPosts", "heartedComments", "followers", "bio", "location", "createdAt", "hearts")
+    res.render("view-profile", {
+        username: username,
+        level: level,
+        profilePicture: profilePicture,
+        userData: user
+    })
+})
+app.get("/view-profile/:id", async (req, res) => {
+    let id = req.params.id
+    let user = await getUserById(id)
+    if(user == null) {
+        res.redirect(404, "/404")
+        return
+    }
+    user = tryDelete(user, "posts", "comments", "heartedPosts", "heartedComments")
+    res.render("view-profile", {
+        username: user.username,
+        level: user.level,
+        profilePicture: user.profilePicture,
+        userData: user
     })
 })
 async function getStartingAppData(req, res, onSuccess) {
@@ -290,7 +339,6 @@ app.post("/api/set-profile-image", (req, res) => {
                             return
                         }
                         // Updating profile picture
-                        console.log(data)
                         users.updateOne({
                             username: sessionObject.username,
                         }, {
@@ -366,7 +414,8 @@ app.post("/api/create-post", async (req, res) => {
             const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
             await xssShame.insertOne({
                 userid: user.id,
-                ip: ip
+                ip: ip,
+                content: content
             })
             res.send("/xss")
             return
@@ -640,6 +689,34 @@ app.post("/api/unfollow/:id", async(req, res) => {
         value: unfollower
     })
 })
+app.get("/api/get-followers-basic-data/self", async (req, res) => {
+    let user = await getUserBySession(req.cookies.session)
+    if(user == null) {
+        res.send("Error")
+        return
+    }
+    let followers = users.find({ id: { $in: user.followers } }).skip(validInt(req.query.skip, 0)).limit(validInt(req.query.limit, 0))
+    followers.toArray((err, data) => {
+        for(let i = 0; i != data.length; i++) {
+            data[i] = tryDelete(data[i], "_id", "password", "level", "posts", "comments", "heartedPosts", "heartedComments", "followers", "following", "location", "createdAt")
+        }
+        res.send(data)
+    })
+})
+app.get("/api/get-following-basic-data/:id", async (req, res) => {
+    let user = await getUserById(req.params.id)
+    if(user == null) {
+        res.send("User not found")
+        return
+    }
+    let following = users.find({ id: { $in: user.following } }).skip(validInt(req.query.skip, 0)).limit(validInt(req.query.limit, 0))
+    following.toArray((err, data) => {
+        for(let i = 0; i != data.length; i++) {
+            data[i] = tryDelete(data[i], "_id", "password", "level", "posts", "comments", "heartedPosts", "heartedComments", "followers", "following", "location", "createdAt")
+        }
+        res.send(data)
+    })
+})
 app.post("/api/post-toggle-heart/:id", async (req, res) => {
     let ipBanned = await ipInXssShame(getIpFromReq(req))
     if(ipBanned) {
@@ -753,3 +830,7 @@ function tryDelete(object, ...keys) {
 
     return object
 }
+
+
+const range = (start, stop, step) => 
+  Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step))

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "concurrently": "^7.2.2",
     "cookie-parser": "^1.4.6",
     "data-uri-to-buffer": "^4.0.0",
     "dotenv": "^16.0.1",

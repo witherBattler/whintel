@@ -1,0 +1,39 @@
+#followersFollowingContainer {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    display: none;
+    margin-top: 80px;
+}
+#followersFollowingTop {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    position: relative;
+}
+#followersFollowingSwitch {
+    display: flex;
+}
+#followersFollowingTopBackButton {
+    height: 80%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#followersFollowingTopBackButton > img {
+    height: 60%;
+}
+#followersFollowingTopUsernameLabel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+}
+#followersContainer, #followingContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
