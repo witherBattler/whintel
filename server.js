@@ -9,7 +9,7 @@ const fs = require("fs")
 const cookieParser = require("cookie-parser")
 const socketIo = require("socket.io");
 const bcrypt = require("bcrypt")
-const xss = require("xss")
+const xss = require("xss");
 
 const hashRounds = 10
 app.use(cookieParser())
