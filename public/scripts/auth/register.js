@@ -1,13 +1,11 @@
-let loginButton = document.getElementById('buttonLogin');
+let loginButton = document.getElementById('confirmButton');
 let registerButton = document.getElementById('buttonRegister');
 let usernameInput = document.getElementById('usernameInput');
 let passwordInput = document.getElementById('passwordInput');
 
-loginButton.addEventListener("click", (event) => {
-    window.location = mainDomain + "/login"
-})
 
-registerButton.addEventListener("click", (event) => {
+
+loginButton.addEventListener("click", (event) => {
     let username = usernameInput.value
     let password = passwordInput.value
     register(username, password)

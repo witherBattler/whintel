@@ -5,26 +5,31 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Whintel</title>
-        <link rel="stylesheet" href="css/login-signup.css">
         <%- include('partials/base'); -%>
+        <link rel="stylesheet" href="css/login-signup.css">
     </head>
     <body>
-        <div id="right">
-            <div id="form-container">
-                <h1 id="form-header">Register</h1>
-                <input id="usernameInput" type="text" autocorrect="off" autocapitalize="off" spellcheck="false">
-                <input id="passwordInput" type="password">
-                <div id="buttonsDiv">
-                    <button id="buttonRegister">Register</button>
-                    <button id="buttonLogin">Login</button>
-                </div>
+        <img src="images/auth-background.svg" id="background" draggable="false">
+        <div id="form">
+            <div id="formTitle">
+                Register
             </div>
-        </div>
-        <div id="left">
-            W
+            <div>
+                <p class="label">Username</p>
+                <input id="usernameInput">
+            </div>
+            <div>
+                <p style="margin-top: 20px;" class="label">Password</p>
+                <input type="password" id="passwordInput">
+            </div>
+            <button id="confirmButton">Register</button>
+            <div id="registerButtonContainer">
+                Already have an account?
+                <a id="registerButton" href="/login">Login</a>
+            </div>
         </div>
     </body>
     <script src="scripts/util/http.js"></script>
-    <script src="scripts/auth/signUp.js"></script>
+    <script src="scripts/auth/register.js"></script>
 </html>
 

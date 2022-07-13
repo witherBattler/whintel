@@ -1,5 +1,5 @@
-let loginButton = document.getElementById('buttonLogin');
-let registerButton = document.getElementById('buttonRegister');
+let loginButton = document.getElementById('confirmButton');
+let registerButton = document.getElementById('registerButton');
 let usernameInput = document.getElementById('usernameInput');
 let passwordInput = document.getElementById('passwordInput');
 
@@ -9,9 +9,7 @@ loginButton.addEventListener('click', () => {
     login(username, password)
 })
 
-registerButton.addEventListener("click", (event) => {
-    window.location = mainDomain + "/register"
-})
+
 
 async function login(username, password) {
     let result = await post(mainDomain + "/api/login", {

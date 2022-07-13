@@ -9,19 +9,23 @@
         <link rel="stylesheet" href="css/login-signup.css">
     </head>
     <body>
-        <div id="left">
-            W
-        </div>
-        <div id="right">
-            <div id="form-container">
-                <h1 id="form-header">Login</h1>
-                <input id="usernameInput" type="text" autocorrect="off" autocapitalize="off" spellcheck="false">
-                <input id="passwordInput" type="password">
-                <div id="buttonsDiv">
-                    <button id="buttonLogin">Login</button>
-                    <button id="buttonRegister">Register</button>
-                    <button id="buttonPasswordReset">Reset Password</button>
-                </div>
+        <img src="images/auth-background.svg" id="background" draggable="false">
+        <div id="form">
+            <div id="formTitle">
+                Login
+            </div>
+            <div>
+                <p class="label">Username</p>
+                <input id="usernameInput">
+            </div>
+            <div>
+                <p style="margin-top: 20px;" class="label">Password</p>
+                <input type="password" id="passwordInput">
+            </div>
+            <button id="confirmButton">Login</button>
+            <div id="registerButtonContainer">
+                Don't have an account yet?
+                <a id="registerButton" href="/register">Register</a>
             </div>
         </div>
     </body>
