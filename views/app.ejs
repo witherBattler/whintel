@@ -35,9 +35,7 @@
                 </div>
                 <hr>
             </div>
-            <div id="postsContainer">
-
-            </div>
+            <div id="postsContainer"></div>
         </div>
         <%- include("partials/loggedIn.ejs") %>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -47,6 +45,7 @@
         <script src="scripts/util/automaticPostManager/automaticPostManager.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/left.js"></script>
-        <%- include('partials/profileCard'); -%>
+        <%- include('partials/profileCard'); %>
+        <%- include("partials/popup.ejs") %>
     </body>
 </html>

@@ -28,7 +28,18 @@ class AutomaticPostManager extends HTMLElement {
         shadow.appendChild(element)
 
         element.appendEvent("heartToggled", (event) => {
-            ajax("POST", "/api/post-toggle-heart/" + id)
+            if(loggedIn) {
+                ajax("POST", "/api/post-toggle-heart/" + id)
+                return true
+            } else {
+                setPopup(
+                    `<span class="special">Login</span> to heart this post.`,
+                    `On Whintel, you need to be logged into an account to be able to heart posts. Why aren't you!?`,
+                    `<a href="/login">Login</a>`,
+                    `<button style="background-color: black;" onclick="hidePopup()">Later</button>`
+                )
+                return false
+            }
         })
         element.appendEvent("profileClicked", async (event) => {
             let fullUserData = await getFullUserData(userData.id)

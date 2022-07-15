@@ -91,23 +91,26 @@ class postDisplayer extends HTMLElement {
         heartImage.setAttribute("class", "heartImage")
         heartImage.src = this.getAttribute("post-hearted") == "true" ? "images/icons/heart.svg" : "images/icons/heart-blurred.svg"
         heartImage.addEventListener("click", (event) => {
-            this.currentlyHearted = !this.currentlyHearted
+            let switchHeart = true;
             for(let i = 0; i != this.events.heartToggled.length; i++) {
-                this.events.heartToggled[i](this.currentlyHearted)
+                switchHeart = this.events.heartToggled[i](!this.currentlyHearted)
             }
-            if(this.currentlyHearted) {
-                heartImage.src = "images/icons/heart.svg"
-                heartCount.style.color = "#ff5775"
-                heartCount.innerHTML = parseInt(heartCount.innerHTML) + 1
-                for(let i = 0; i != this.events.heartAdded.length; i++) {
-                    this.events.heartAdded[i]()
-                }
-            } else {
-                heartImage.src = "images/icons/heart-blurred.svg"
-                heartCount.style.color = "#d1d1d1"
-                heartCount.innerHTML = parseInt(heartCount.innerHTML) - 1
-                for(let i = 0; i != this.events.heartRemoved.length; i++) {
-                    this.events.heartRemoved[i]()
+            if(switchHeart) {
+                this.currentlyHearted = !this.currentlyHearted
+                if(this.currentlyHearted) {
+                    heartImage.src = "images/icons/heart.svg"
+                    heartCount.style.color = "#ff5775"
+                    heartCount.innerHTML = parseInt(heartCount.innerHTML) + 1
+                    for(let i = 0; i != this.events.heartAdded.length; i++) {
+                        this.events.heartAdded[i]()
+                    }
+                } else {
+                    heartImage.src = "images/icons/heart-blurred.svg"
+                    heartCount.style.color = "#d1d1d1"
+                    heartCount.innerHTML = parseInt(heartCount.innerHTML) - 1
+                    for(let i = 0; i != this.events.heartRemoved.length; i++) {
+                        this.events.heartRemoved[i]()
+                    }
                 }
             }
         })

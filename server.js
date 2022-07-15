@@ -142,7 +142,7 @@ app.get("/view-profile/:id", async (req, res) => {
         userData: user
     })
 })
-async function getStartingAppData(req, res, onSuccess, notLoggedIn) {
+async function getStartingAppData(req, res, onSuccess, notLoggedIn = function() {}) {
     let session = req.cookies.session
     if(sessions[session] == undefined) {
         notLoggedIn()
@@ -605,6 +605,11 @@ app.get("/api/posts/:id", async (req, res) => {
     res.send(post)
 })
 app.post("/api/follow/:id", async(req, res) => {
+    if(!userIsLoggedIn(true)) {
+        res.send(false)
+        return
+    }
+
     let ipBanned = await ipInXssShame(getIpFromReq(req))
     if(ipBanned) {
         res.send(false)

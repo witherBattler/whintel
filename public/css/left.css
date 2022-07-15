@@ -25,6 +25,7 @@
     --disabled-text: #464454;
     --hovered-background: #f0f0f0;
     --selected-background: #e9e9e9;
+    --popup-transition: cubic-bezier(.17,1,.17,1);
 }
 body {
     display: flex;
