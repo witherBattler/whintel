@@ -671,10 +671,10 @@ app.post("/api/unfollow/:id", async(req, res) => {
         value: unfollower
     })
 })
-app.get("/api/get-followers-basic-data/self", async (req, res) => {
-    let user = await getUserBySession(req.cookies.session)
+app.get("/api/get-followers-basic-data/:id", async (req, res) => {
+    let user = await getUserById(req.params.id)
     if(user == null) {
-        res.send("Error")
+        res.send("User not found")
         return
     }
     let followers = users.find({ id: { $in: user.followers } }).skip(validInt(req.query.skip, 0)).limit(validInt(req.query.limit, 0))
