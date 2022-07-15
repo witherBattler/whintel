@@ -1,0 +1,74 @@
+.container {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    background-color: transparent;
+    border: none;
+}
+.profilePicture {
+    aspect-ratio: 1 / 1;
+    border-radius: 50px;
+    height: 45px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    border: none;
+    margin-top: 10px;
+}
+.top {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.right {
+    margin-left: 2px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.username {
+    font-family: euclid;
+    font-size: 30px;
+    margin: 0px;
+    font-weight: 500;
+    line-height: 100%;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    flex-grow: 1;
+    text-align: left;
+}
+.followButton {
+    background-color: var(--theme-color);
+    border: none;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    display: flex;
+    cursor: pointer;
+    padding: 5px;
+    padding-inline: 15px;
+    align-items: center;
+    justify-content: center;
+}
+.followButtonIcon {
+    height: 22px;
+    margin-right: 5px;
+}
+.followButtonText {
+    font-size: 22px;
+    color: white;
+    font-weight: 900;
+    font-family: euclid;
+    margin: 0px;
+}
+.bio {
+    margin: 0px;
+    margin-top: -10px;
+    font-size: 20px;
+    font-family: euclid;
+    text-align: left;
+}

@@ -56,7 +56,7 @@ let cachedProfileImages = {}
 async function parseProfileImage(image) {
     return new Promise(async (resolve, reject) => {
         if(image == "default") {
-            resolve("/images/icons/defaultProfile.png")
+            resolve("/images/icons/defaultProfile.svg")
         } else {
             if(cachedProfileImages[image]) {
                 resolve(cachedProfileImages[image])

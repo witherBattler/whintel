@@ -11,71 +11,7 @@
         <link rel="stylesheet" href="css/marked.css">
     </head>
     <body>
-        <div id="left">
-            <div id="logoContainer">
-                <img src="images/logo.svg" id="logoImage">
-            </div>
-            <div>
-                <a class="leftButton selectedButton" id="homeButtonLeft" href="/home">
-                    <img src="images/icons/home-blurred.svg" class="homeIcon">
-                    <p class="leftButtonText">
-                        Home
-                    </p>
-                </a>
-                <a class="leftButton" id="postButtonLeft" href="/create-post">
-                    <img src="images/icons/plusLeft-blurred.svg">
-                    <p class="leftButtonText">
-                        Post
-                    </p>
-                </a>
-                <a class="leftButton" id="messagesButtonLeft" href="/messages">
-                    <img src="images/icons/messages-blurred.svg">
-                    <p class="leftButtonText">
-                        Messages
-                    </p>
-                </a>
-                <a class="leftButton" id="profileButtonLeft" href="/view-profile">
-                    <img id="profileImage" src="<%= profilePicture == "default" ? "/images/icons/defaultProfile.svg" : profilePicture %>">
-                    <p class="leftButtonText">
-                        Profile
-                    </p>
-                </a>
-                <a class="leftButton" id="settingsButtonLeft" href="/settings">
-                    <img src="/images/icons/settings-blurred.svg">
-                    <p class="leftButtonText">
-                        Settings
-                    </p>
-                </a>
-                <button class="leftButton" id="logOutButtonLeft">
-                    <img src="/images/icons/logOut.svg">
-                    <p class="leftButtonText">
-                        Log Out
-                    </p>
-                </button>
-            </div>
-            <div id="profileWidgetContainer">
-                <div id="profileWidget">
-                    <div id="profileWidgetTop">
-                        <img src="<%= profilePicture == "default" ? "/images/icons/defaultProfile.svg" : profilePicture %>" id="profileWidgetImage">
-                        <div id="profileWidgetUsernameContainer">
-                            <p id="profileWidgetUsername">
-                                <%= username %>
-                            </p>
-                        </div>
-                    </div>
-                    <div id="profileWidgetBottom">
-                        <p id="profileWidgetLevelLabel">
-                            Level <span class="indicator"><%= level %></span>
-                            <span class="separator">•</span>
-                        </p>
-                        <image src="images/icons/notification-blurred.svg" id="profileWidgetNotificationIcon"></image>
-                        <p id="profileWidgetNotificationsLabel">
-                            0
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%- include("partials/left", {activeCategory: "home"}) %>
         <div id="middle-post">
             <div id="postContainer">
                 <div id="postTitle">

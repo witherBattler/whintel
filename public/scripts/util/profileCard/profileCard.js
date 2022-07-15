@@ -62,12 +62,24 @@ profileCardProfilePicture.addEventListener("click", (event) => {
 let profileCardFollow = true
 let profileCardCurrentUserId
 profileCardFollowButton.addEventListener("click", async (event) => {
-    if(profileCardFollow) {
-        let success = await ajax("POST", "/api/follow/" + profileCardCurrentUserId)
-        setProfileCardIsFollowed(stringToBoolean(success))
+    console.log("we clicking")
+    if(loggedIn) {
+        if(profileCardFollow) {
+            let success = await ajax("POST", "/api/follow/" + profileCardCurrentUserId)
+            console.log(success)
+            setProfileCardIsFollowed(stringToBoolean(success))
+        } else {
+            let success = await ajax("POST", "/api/unfollow/" + profileCardCurrentUserId)
+            console.log(success)
+            setProfileCardIsFollowed(!stringToBoolean(success))
+        }
     } else {
-        let success = await ajax("POST", "/api/unfollow/" + profileCardCurrentUserId)
-        setProfileCardIsFollowed(!stringToBoolean(success))
+        setPopup(
+            `<span class="special">Login</span> to follow this user.`,
+            `On Whintel, you need to be logged into an account to be able to follow other people. Why aren't you!?`,
+            `<a href="/login">Login</a>`,
+            `<button style="background-color: black;" onclick="hidePopup()">Later</button>`
+        )
     }
 })
 profileCardEditButton.addEventListener("click", (event) => {
@@ -120,7 +132,6 @@ socket.on("user-update", (data) => {
     if(data.id == profileCardCurrentUserId) {
         setProfileCardFollowers(data.value.followers)
         setProfileCardFollowing(data.value.following)
-        console.log(data.value.followers, data.value.following)
     }
 })
 

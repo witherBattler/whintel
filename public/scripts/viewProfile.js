@@ -5,11 +5,25 @@ let followingLabelNumber = document.getElementById("followingLabelNumber")
 let editProfileContainer = document.getElementById("editProfileContainer")
 let followersFollowingContainer = document.getElementById("followersFollowingContainer")
 let followersFollowingTopBackButton = document.getElementById("followersFollowingTopBackButton")
-let followersFollowingTabSwitch = document.getElementById("followersFollowingTabSwitch")
+let followersFollowingSwitch = document.getElementById("followersFollowingSwitch")
+let followersSwitch = document.getElementById("followersSwitch")
+let followingSwitch = document.getElementById("followingSwitch")
 let followersContainer = document.getElementById("followersContainer")
 let followingContainer = document.getElementById("followingContainer")
 
-
+followersSwitch.style.color = "var(--theme-color)"
+followersSwitch.addEventListener("click", (event) => {
+    followersContainer.style.display = "flex"
+    followingContainer.style.display = "none"
+    followersSwitch.style.color = "var(--theme-color)"
+    followingSwitch.style.color = "#d1d1d1"
+})
+followingSwitch.addEventListener("click", (event) => {
+    followingContainer.style.display = "flex"
+    followersContainer.style.display = "none"
+    followingSwitch.style.color = "var(--theme-color)"
+    followersSwitch.style.color = "#d1d1d1"
+})
 
 followersLabel.addEventListener("click", async (event) => {
     followersFollowingContainer.style.display = "flex"
@@ -41,16 +55,4 @@ followingLabel.addEventListener("click", (event) => {
 followersFollowingTopBackButton.addEventListener("click", (event) => {
     followersFollowingContainer.style.display = "none"
     editProfileContainer.style.display = "flex"
-})
-
-
-
-followersFollowingTabSwitch.appendEvent("tabSwitch", (tab) => {
-    if(tab == "followers") {
-        followersContainer.style.display = "flex"
-        followingContainer.style.display = "none"
-    } else {
-        followingContainer.style.display = "flex"
-        followersContainer.style.display = "none"
-    }
 })

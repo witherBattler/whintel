@@ -7,12 +7,16 @@
 }
 #followersFollowingTop {
     display: flex;
-    height: 60px;
     align-items: center;
     position: relative;
 }
 #followersFollowingSwitch {
     display: flex;
+    justify-content: end;
+    flex-grow: 1;
+}
+#followersFollowingSwitch > p {
+    color: #d1d1d1;
 }
 #followersFollowingTopBackButton {
     height: 80%;
@@ -23,13 +27,10 @@
     cursor: pointer;
 }
 #followersFollowingTopBackButton > img {
-    height: 60%;
+    height: 100%;
 }
 #followersFollowingTopUsernameLabel {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-left: 10px;
     font-size: 30px;
 }
 #followersContainer, #followingContainer {

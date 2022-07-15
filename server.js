@@ -83,63 +83,17 @@ app.get("/view-profile", async (req, res) => {
     res.redirect("/view-profile/self")
 })
 app.get("/view-profile/self", async (req, res) => {
-    let user = await getUserBySession(req.cookies.session)
-    if(user == false) {
-        res.redirect("/home")
-        return
-    }
-    res.render("view-profile", {
-        username: user.username,
-        level: user.level,
-        profilePicture: user.profilePicture,
-        userData: user
-    })
-})
-app.get("/view-profile/self/followers", async () => {
-    let user = await getUserBySession(req.cookies.session)
-    if(user == false) {
-        res.redirect("/home")
-        return
-    }
-    const username = user.username
-    const level = user.level
-    const profilePicture = user.profilePicture
-    res.render("view-profile", {
-        username: username,
-        level: level,
-        profilePicture: profilePicture,
-    })
-})
-app.get("/view-profile/self/following", async () => {
-    let user = await getUserBySession(req.cookies.session)
-    if(user == false) {
-        res.redirect("/home")
-        return
-    }
-    const username = user.username
-    const level = user.level
-    const profilePicture = user.profilePicture
-    user = tryDelete(user, "username", "password", "profilePicture", "level", "posts", "comments", "heartedPosts", "heartedComments", "followers", "bio", "location", "createdAt", "hearts")
-    res.render("view-profile", {
-        username: username,
-        level: level,
-        profilePicture: profilePicture,
-        userData: user
-    })
-})
-app.get("/view-profile/:id", async (req, res) => {
-    let id = req.params.id
-    let user = await getUserById(id)
-    if(user == null) {
-        res.redirect(404, "/404")
-        return
-    }
-    user = tryDelete(user, "posts", "comments", "heartedPosts", "heartedComments")
-    res.render("view-profile", {
-        username: user.username,
-        level: user.level,
-        profilePicture: user.profilePicture,
-        userData: user
+    getStartingAppData(req, res, function(username, level, profilePicture, fullUser) {
+        res.render("view-profile", {
+            username,
+            level,
+            profilePicture,
+            loggedIn: true,
+            isSelf: true,
+            userData: fullUser,
+        })
+    }, function() {
+        res.render("404")
     })
 })
 async function getStartingAppData(req, res, onSuccess, notLoggedIn = function() {}) {
@@ -156,11 +110,10 @@ async function getStartingAppData(req, res, onSuccess, notLoggedIn = function() 
     let username = user.username || ""
     let level = user.level || "?"
     let profilePicture = user.profilePicture || "default"
-    onSuccess(username, level, profilePicture)
+    onSuccess(username, level, profilePicture, user)
     return true
 }
 app.get("/home", (req, res) => {
-    console.log("home")
     getStartingAppData(req, res, function(username, level, profilePicture) {
         res.render("app", {
             username,
@@ -282,14 +235,22 @@ app.get("/post/:id", async (req, res) => {
     let authorData = await getUserById(postData.user)
     let postImages = await postData.images
     postImages = JSON.stringify(postImages)
-    getStartingAppData(req, res, async function(username, level, profilePicture) {
+    getStartingAppData(req, res, function(username, level, profilePicture) {
         res.render("post", {
             username,
             level,
             profilePicture,
             postData,
             authorData,
-            postImages: JSON.stringify(postImages),
+            postImages,
+            loggedIn: true
+        })
+    }, function() {
+        res.render("post", {
+            postImages,
+            postData,
+            authorData,
+            loggedIn: false,
         })
     })
 })
@@ -605,7 +566,7 @@ app.get("/api/posts/:id", async (req, res) => {
     res.send(post)
 })
 app.post("/api/follow/:id", async(req, res) => {
-    if(!userIsLoggedIn(true)) {
+    if(!userIsLoggedIn(req.cookies.session)) {
         res.send(false)
         return
     }
@@ -643,13 +604,14 @@ app.post("/api/follow/:id", async(req, res) => {
         res.send(true)
     } else {
         res.send(false)
+        console.log("already following")
+        return
     }
         
     
 
     target.followers.push(follower.id)
     follower.following.push(target.id)
-    console.log(target.followers, follower.following)
     io.to("update:" + target.id).emit("user-update", {
         id: target.id,
         value: target
@@ -672,7 +634,7 @@ app.post("/api/unfollow/:id", async(req, res) => {
         return
     }
     if(unfollower.id == target.id) {
-        res.send("Can't follow yourself")
+        res.send("Can't unfollow yourself")
         return
     }
     if(target.followers.indexOf(unfollower.id) != -1) {
@@ -835,7 +797,6 @@ function deleteAllData() {
     users.deleteMany({})
     imageAssets.deleteMany({})
 }
-
 
 
 const months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
