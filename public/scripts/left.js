@@ -5,10 +5,11 @@ let profileButtonLeft = document.getElementById("profileButtonLeft")
 let settingsButtonLeft = document.getElementById("settingsButtonLeft")
 let logOutButtonLeft = document.getElementById("logOutButtonLeft")
 
-
-logOutButtonLeft.addEventListener("click", async (event) => {
-    let success = await ajax("POST", mainDomain + "/api/log-out")
-    if(success) {
-        window.location = `${mainDomain}/login`
-    }
-})
+if(loggedIn) {
+    logOutButtonLeft.addEventListener("click", async (event) => {
+        let success = await ajax("POST", mainDomain + "/api/log-out")
+        if(success) {
+            window.location = `${mainDomain}/login`
+        }
+    })
+}

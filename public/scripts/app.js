@@ -1,6 +1,5 @@
 const socket = io()
 socket.on("connect", () => {
-    console.log("connected i think")
     socket.emit("subscribe", {
         type: "feed-update",
     })
@@ -87,11 +86,15 @@ async function appendToFeed(type, skip = 0, callback = function() {}) {
     }
     let userData = []
     for(let i = 0; i != result.length; i++) {
-        let user = await ajax("GET", "/api/user/" + result[i].user)
-        user = JSON.parse(user)
-        userData.push(user)
-        let isHearted = await ajax("GET", "/api/post-is-liked/" + result[i].id)
-        result[i].hearted = isHearted
+        if(loggedIn) {
+            let user = await ajax("GET", "/api/user/" + result[i].user)
+            user = JSON.parse(user)
+            userData.push(user)
+            let isHearted = await ajax("GET", "/api/post-is-liked/" + result[i].id)
+            result[i].hearted = isHearted
+        } else {
+            result[i].hearted = false
+        }
     }
     for(let i = 0; i != result.length; i++) {
         let element = document.createElement("automatic-post-manager")

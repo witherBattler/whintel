@@ -20,7 +20,6 @@ class AutomaticPostManager extends HTMLElement {
         element.setAttribute("redirect", mainDomain + "/post/" + id)
         
         let dateDelta = Date.now() - postData.creationDate
-        console.log(dateDelta)
         let convertedTime = convertTimeFromMS(dateDelta)
         element.setAttribute("date", convertedTime + " ago")
 

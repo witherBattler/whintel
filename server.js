@@ -1,4 +1,5 @@
 require("dotenv").config()
+require('source-map-support').install();
 const tinify = require("tinify")
 tinify.key = process.env.TINIFY_KEY
 const { MongoClient, ServerApiVersion } = require('mongodb')
@@ -72,7 +73,8 @@ app.get("/app", async (req, res) => {
     res.redirect("/home")
 })
 app.get("/", (req, res) => {
-    res.redirect("/login")
+    console.log("redirecting to home")
+    res.redirect("/home")
 })
 app.get("/login", (req, res) => {
     res.render("login")
@@ -140,15 +142,15 @@ app.get("/view-profile/:id", async (req, res) => {
         userData: user
     })
 })
-async function getStartingAppData(req, res, onSuccess) {
+async function getStartingAppData(req, res, onSuccess, notLoggedIn) {
     let session = req.cookies.session
     if(sessions[session] == undefined) {
-        res.redirect(405, "/login")
+        notLoggedIn()
         return false
     }
     let user = await users.findOne({ id: sessions[session].id })
     if(user == null) {
-        res.redirect(405, "/login")
+        notLoggedIn()
         return false
     }
     let username = user.username || ""
@@ -158,11 +160,17 @@ async function getStartingAppData(req, res, onSuccess) {
     return true
 }
 app.get("/home", (req, res) => {
+    console.log("home")
     getStartingAppData(req, res, function(username, level, profilePicture) {
         res.render("app", {
             username,
             level,
             profilePicture,
+            loggedIn: true,
+        })
+    }, function() {
+        res.render("app", {
+            loggedIn: false
         })
     })
 })
@@ -184,6 +192,11 @@ app.get("/create-post", (req, res) => {
             username,
             level,
             profilePicture,
+            loggedIn: true,
+        })
+    }, function() {
+        res.render("app", {
+            loggedIn: false
         })
     })
 })
@@ -530,9 +543,6 @@ function getPostId() {
     }
     return id
 }
-app.get("/test", (req, res) => {
-    res.send("test")
-})
 app.get("/api/feed/recent", async (req, res) => {
     let skip = validInt(req.query.skip, 0)
     let recentPosts = posts.find({}).limit(14).skip(skip).sort({ creationDate: -1 })
@@ -559,6 +569,11 @@ function validInt(int, fallback) {
     return parsedInt
 }
 app.get("/api/post-is-liked/:id", async(req, res) => {
+    if(!userIsLoggedIn(req.cookies.session)) {
+        res.send("error");
+        return;
+    }
+    
     let user = await users.findOne({ id: sessions[req.cookies.session].id })
     let post = await posts.findOne({ id: req.params.id })
     if(user == null || post == null) {
@@ -723,6 +738,10 @@ app.post("/api/post-toggle-heart/:id", async (req, res) => {
         res.send(false)
         return
     }
+    if(!userIsLoggedIn(req.cookies.session)) {
+        res.send("error");
+        return;
+    }
     let user = await getUserBySession(req.cookies.session, res)
     let post = await posts.findOne({ id: req.params.id })
     if(post == null) {
@@ -820,6 +839,10 @@ function timeToHumanReadableString(time) {
 	return date.getDay() + " " + months[date.getMonth()] + ", " + date.getFullYear()
 }
 app.locals.timeToHumanReadableString = timeToHumanReadableString;
+
+function userIsLoggedIn(sessionId) {
+    return sessions[sessionId] != undefined
+}
 
 function tryDelete(object, ...keys) {
     for(let key of keys) {
