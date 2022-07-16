@@ -66,7 +66,23 @@ let posts = client.db("posts").collection("posts")
 let imageAssets = client.db("assets").collection("images")
 let xssShame = client.db("shame").collection("xss")
 
-app.get("xss", async (req, res) => {
+app.get("/settings", async (req, res) => {
+    getStartingAppData(req, res, function(username, level, profilePicture, fullUser) {
+        res.render("settings", {
+            username,
+            level,
+            profilePicture,
+            loggedIn: true,
+            settings: fullUser.settings
+        })
+    }, function() {
+        res.render("settings", {
+            loggedIn: false,
+            settings: fullUser.settings,
+        })
+    })
+})
+app.get("/xss", async (req, res) => {
     res.render("xss")
 })
 app.get("/app", async (req, res) => {
