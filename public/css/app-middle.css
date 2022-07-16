@@ -5,6 +5,7 @@
     align-items: center;
     height: 100vh;
     overflow-y: auto;
+    
 }
 
 #middle-top {
@@ -12,6 +13,7 @@
     margin-top: 60px;
     display: flex;
     flex-direction: column;
+    max-width: calc(100% - 60px);
 }
 #middleTopContent {
     display: flex;
@@ -25,6 +27,10 @@
     display: flex;
     align-items: end;
 }
+#postsContainer{
+    max-width: calc(100% - 60px);
+    width: 700px;
+}
 .feedCategory {
     margin-left: 20px;
     height: 30px;
@@ -37,3 +43,4 @@
 .feedCategory.selected {
     color: var(--theme-color);
 }
+

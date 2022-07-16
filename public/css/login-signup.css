@@ -65,6 +65,7 @@ body {
     -o-border-radius: 10px;
     padding: 30px;
     box-sizing: border-box;
+    max-width: calc(100vw - 20px);
 }
 
 #formTitle {
@@ -130,4 +131,30 @@ body {
 }
 #registerButton:hover {
     text-decoration: underline 2px;
+}
+
+@media only screen and (max-width: 500px) {
+    #form {
+        padding: 15px;
+    }
+    #formTitle {
+        font-size: 30px;
+        text-align: center;
+    }
+    #form .label {
+        font-size: 15px;
+    }
+    #form input {
+        font-size: 20px;
+    }
+    #confirmButton {
+        font-size: 20px;
+    }
+    #registerButtonContainer {
+        text-align: center;
+        display: block;
+    }
+    #registerButton {
+        margin: 0px;
+    }
 }

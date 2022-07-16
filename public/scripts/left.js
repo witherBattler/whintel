@@ -4,6 +4,8 @@ let messagesButtonLeft = document.getElementById("messagesButtonLeft")
 let profileButtonLeft = document.getElementById("profileButtonLeft")
 let settingsButtonLeft = document.getElementById("settingsButtonLeft")
 let logOutButtonLeft = document.getElementById("logOutButtonLeft")
+let leftBurgerMenu = document.getElementById("leftBurgerMenu")
+let left = document.getElementById("left")
 
 if(loggedIn) {
     logOutButtonLeft.addEventListener("click", async (event) => {
@@ -13,3 +15,17 @@ if(loggedIn) {
         }
     })
 }
+let leftCurrentlyOpened = false
+leftBurgerMenu.addEventListener("click", (event) => {
+    leftCurrentlyOpened = !leftCurrentlyOpened
+    switch(leftCurrentlyOpened) {
+        case true:
+            leftBurgerMenu.src = "images/icons/burgerMenu-opened.svg"
+            left.style.left = "0px"
+            break;
+        case false:
+            leftBurgerMenu.src = "images/icons/burgerMenu-closed.svg"
+            left.style.left = "-300px"
+            break;
+    }
+})

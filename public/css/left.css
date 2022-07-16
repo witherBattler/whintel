@@ -47,11 +47,20 @@ body {
 
 
 #left {
+    z-index: 100;
     background-color: white;
-    width: calc(300px);
+    min-width: 300px;
     box-shadow: rgba(0, 0, 0, 0.05) 10px 0px 20px;
     display: flex;
     flex-direction: column;
+    left: 300px;
+    top: 0px;
+    height: 100vh;
+    transition: left 0.2s;
+    -webkit-transition: left 0.2s;
+    -moz-transition: left 0.2s;
+    -ms-transition: left 0.2s;
+    -o-transition: left 0.2s;
 }
 #logoContainer {
     display: flex;
@@ -168,4 +177,34 @@ button {
     background-color: transparent;
     outline: none;
     border: none;
+}
+#leftBurgerMenu {
+    display: none;
+    position: absolute;
+    bottom: 20px;
+    right: -20px;
+    width: 60px;
+    height: 60px;
+    transform: translateX(100%);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    -o-transform: translateX(100%);
+}
+
+@media only screen and (max-width: 850px)  {
+    #left {
+        position: absolute;
+        left: -300px;
+        top: 0px;
+    }
+    #leftBurgerMenu {
+        display: block;
+    }
+}
+#leftScrollable {
+    overflow-y: auto;
 }

@@ -3,11 +3,12 @@
 }
 
 .container {
-    width: 700px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     margin: 0px;
     margin-top: 30px;
+
 }
 .thumbnail {
     width: 100%;
