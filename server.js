@@ -213,13 +213,7 @@ app.post("/api/login/", async(req, res) => {
     })()
 })
 async function ipInXssShame(ip) {
-    let result = await xssShame.findOne({
-        ip: ip
-    })
-    if(result == null) {
-        return false
-    }
-    return true
+    return false
 }
 function getIpFromReq(req) {
     return req.headers['x-forwarded-for'] || req.socket.remoteAddress
@@ -406,29 +400,9 @@ app.post("/api/create-post", async (req, res) => {
         if(title == "") {
             title = "Untitled"
         }
-        const safeTitle = xss(req.body.title)
-        if(title != safeTitle) {
-            const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
-            await xssShame.insertOne({
-                userid: user.id,
-                ip: ip,
-                content: title
-            })
-            res.send("/xss")
-            return
-        }
+        const safeTitle = xss(title)
         const content = req.body.content
         const safeContent = xss(content)
-        if(content != safeContent) {
-            const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
-            await xssShame.insertOne({
-                userid: user.id,
-                ip: ip,
-                content: content
-            })
-            res.send("/xss")
-            return
-        }
         const options = req.body.options
         const heartsCount = 0
         const heartsFrom = []
@@ -444,8 +418,8 @@ app.post("/api/create-post", async (req, res) => {
             imagesIds.push(imageId)
         }
         const post = {
-            title: title || "Untitled",
-            content: content,
+            title: safeTitle || "Untitled",
+            content: safeContent,
             options: options,
             heartsCount: heartsCount,
             heartsFrom: heartsFrom,
@@ -854,3 +828,4 @@ function tryDelete(object, ...keys) {
 
     return object
 }
+
