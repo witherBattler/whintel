@@ -52,7 +52,7 @@ class FollowersListElement extends HTMLElement {
             } else {
                 setPopup(
                     `<span class="special">Login</span> to follow this user.`,
-                    `On Whintel, you need to be logged into an account to be able to follow other people. Why aren't you!?`,
+                    `On SOCAL, you need to be logged into an account to be able to follow other people. Why aren't you!?`,
                     `<a href="/login">Login</a>`,
                     `<button style="background-color: black;" onclick="hidePopup()">Later</button>`
                 )

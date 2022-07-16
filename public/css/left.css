@@ -63,7 +63,7 @@ body {
     box-sizing: border-box;
 }
 #logoImage {
-    width: 100%;
+    width: 80%;
     -webkit-user-drag: none;
     user-select: none;
 }

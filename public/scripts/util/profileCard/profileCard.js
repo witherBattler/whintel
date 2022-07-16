@@ -10,7 +10,6 @@ let profileCardFollowers = document.querySelector("#profileCardfollowersContaine
 let profileCardFollowing = document.querySelector("#profileCardFollowingContainer > .followingNumber")
 let profileCardEditButton = document.getElementById("profileCardEditButton")
 
-
 let lastProfileCardReset = -Infinity
 async function setProfileCard(x, y, userId, profilePicture, username, bio, followersList, followingList) {
     lastProfileCardReset = Date.now()
@@ -19,7 +18,7 @@ async function setProfileCard(x, y, userId, profilePicture, username, bio, follo
     if([profilePicture, username, bio, followersList, followingList].indexOf(undefined) == -1) {
         let bannerColor
         let profilePictureSrc
-        let profileLink = mainDomain + "/user/" + userId
+        let profileLink = mainDomain + "/view-profile/" + userId
         let followed = followersList.indexOf(selfData.id) != -1
         if(profilePicture != "default") {
             bannerColor = await getMainColorFromImageSrc(profilePicture)
@@ -62,7 +61,6 @@ profileCardProfilePicture.addEventListener("click", (event) => {
 let profileCardFollow = true
 let profileCardCurrentUserId
 profileCardFollowButton.addEventListener("click", async (event) => {
-    console.log("we clicking")
     if(loggedIn) {
         if(profileCardFollow) {
             let success = await ajax("POST", "/api/follow/" + profileCardCurrentUserId)
@@ -76,7 +74,7 @@ profileCardFollowButton.addEventListener("click", async (event) => {
     } else {
         setPopup(
             `<span class="special">Login</span> to follow this user.`,
-            `On Whintel, you need to be logged into an account to be able to follow other people. Why aren't you!?`,
+            `On SOCAL, you need to be logged into an account to be able to follow other people. Why aren't you!?`,
             `<a href="/login">Login</a>`,
             `<button style="background-color: black;" onclick="hidePopup()">Later</button>`
         )

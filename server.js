@@ -73,7 +73,6 @@ app.get("/app", async (req, res) => {
     res.redirect("/home")
 })
 app.get("/", (req, res) => {
-    console.log("redirecting to home")
     res.redirect("/home")
 })
 app.get("/login", (req, res) => {
@@ -94,6 +93,26 @@ app.get("/view-profile/self", async (req, res) => {
         })
     }, function() {
         res.render("404")
+    })
+})
+app.get("/view-profile/:id", async (req, res) => {
+    let user = await users.findOne( { id: req.params.id } )
+    user = tryDelete(user, "password", "_id")
+    getStartingAppData(req, res, function(username, level, profilePicture, fullUser) {
+        res.render("view-profile", {
+            username,
+            level,
+            profilePicture,
+            userData: user,
+            loggedIn: true,
+            isSelf: sessions[req.cookies.session].id == fullUser.id
+        })
+    }, function() {
+        res.render("view-profile", {
+            userData: user,
+            loggedIn: false,
+            isSelf: false
+        })
     })
 })
 async function getStartingAppData(req, res, onSuccess, notLoggedIn = function() {}) {
