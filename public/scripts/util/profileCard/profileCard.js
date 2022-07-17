@@ -6,10 +6,10 @@ let profileCardBio = document.getElementById("profileCardBio")
 let profileCardFollowButton = document.getElementById("profileCardFollowButton")
 let profileCardFollowButtonIcon = document.getElementById("profileCardFollowButtonIcon")
 let profileCardFollowButtonLabel = document.getElementById("profileCardFollowButtonLabel")
-let profileCardFollowers = document.querySelector("#profileCardfollowersContainer > .followersNumber")
+let profileCardFollowers = document.querySelector("#profileCardFollowersContainer > .followersNumber")
 let profileCardFollowing = document.querySelector("#profileCardFollowingContainer > .followingNumber")
-let profileCardfollowersContainer = document.getElementById("profileCardfollowersContainer")
-let profileCardfollowingContainer = document.getElementById("profileCardfollowingContainer")
+let profileCardFollowersContainer = document.getElementById("profileCardFollowersContainer")
+let profileCardFollowingContainer = document.getElementById("profileCardFollowingContainer")
 let profileCardEditButton = document.getElementById("profileCardEditButton")
 
 let lastProfileCardReset = -Infinity
@@ -177,11 +177,20 @@ window.addEventListener("click", (event) => {
 let profileCardCurrentUsername = ""
 let profileCardCurrentFollowersList = []
 let profileCardCurrentFollowingList = []
-profileCardfollowersContainer.addEventListener("click", (event) => {
-    profileCardElement.style.display = "none"
+profileCardFollowersContainer.addEventListener("click", (event) => {
+    hideProfileCard()
     middleTop.style.display = "none"
     postsContainer.style.display = "none"
     setFollowersFollowing(true, profileCardCurrentUsername, profileCardCurrentFollowersList, profileCardCurrentFollowingList, function() {
+        middleTop.style.display = "block"
+        postsContainer.style.display = "block"
+    })
+})
+profileCardFollowingContainer.addEventListener("click", (event) => {
+    hideProfileCard()
+    middleTop.style.display = "none"
+    postsContainer.style.display = "none"
+    setFollowersFollowing(false, profileCardCurrentUsername, profileCardCurrentFollowersList, profileCardCurrentFollowingList, function() {
         middleTop.style.display = "block"
         postsContainer.style.display = "block"
     })

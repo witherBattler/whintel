@@ -70,6 +70,9 @@ async function parseProfileImage(image) {
 
 let cachedBasicUserData = {}
 async function cacheBasicUserDataFromArray(usersArray) {
+    if(usersArray.length == 0) {
+        return
+    }
     for(let i = usersArray.length; i != 0; i++) {
         let id = usersArray[i]
         if(cachedBasicUserData[id] == undefined) {

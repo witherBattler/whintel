@@ -85,14 +85,14 @@
     margin-top: -10px;
     width: 100%;
 }
-#profileCardfollowersContainer {
+#profileCardFollowersContainer {
     display: flex;
     font-size: 20px;
 }
-#profileCardfollowersContainer > .followersNumber {
+#profileCardFollowersContainer > .followersNumber {
     font-weight: 900;
 }
-#profileCardfollowersContainer:hover {
+#profileCardFollowersContainer:hover {
     text-decoration: black 2px underline solid;
     cursor: pointer;
     user-select: none;

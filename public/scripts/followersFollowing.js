@@ -48,6 +48,7 @@ async function setFollowersFollowing(isFollowers, username, followersList, follo
         followersContainer.style.display = "none"
         followingContainer.style.display = "block"
 
+        console.log(followingList)
         await cacheBasicUserDataFromArray(followingList)
         followingListCached = true
 
