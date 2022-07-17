@@ -55,7 +55,7 @@ async function triggerFeedRerender(type, skip = 0, callback = function() {}) {
         let user = await ajax("GET", "/api/get-basic-user-data/" + result[i].user)
         user = JSON.parse(user)
         userData.push(user)
-        let isHearted = await ajax("GET", "/api/post-is-liked/" + result[i].id)
+        let isHearted = result[i].heartsFrom.includes(selfData.id)
         result[i].hearted = isHearted
     }
     postsContainer.innerText = ""

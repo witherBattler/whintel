@@ -34,7 +34,6 @@ io.on("connection", (socket) => {
                 break
             case "user-update":
                 console.log("update:" + data.id)
-                socket.join("update:" + data.id)
                 break;
         }
     })
@@ -518,7 +517,7 @@ app.get("/api/feed/recent", async (req, res) => {
     let recentPosts = posts.find({}).limit(14).skip(skip).sort({ creationDate: -1 })
     recentPosts.toArray((err, data) => {
         for(let i = 0; i != data.length; i++) {
-            data[i] = tryDelete(data[i], "_id", "options", "heartsFrom", "commentsData", "images")
+            data[i] = tryDelete(data[i], "_id", "content", "options", "commentsData", "images")
         }
         res.send(data)
     })
