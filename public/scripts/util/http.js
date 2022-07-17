@@ -37,7 +37,6 @@ async function ajax(method, url, data = {}) {
                 resolve(request.response);
             } else {
                 reject(Error(request.statusText));
-                console.log("problem")
             }
         }
     })
@@ -67,4 +66,32 @@ async function parseProfileImage(image) {
             resolve(realSrc)
         }
     })
+}
+
+let cachedBasicUserData = {}
+async function cacheBasicUserDataFromArray(usersArray) {
+    for(let i = usersArray.length; i != 0; i++) {
+        let id = usersArray[i]
+        if(cachedBasicUserData[id] == undefined) {
+            usersArray.splice(i, 1)
+            break
+        }
+        if(cachedFullUserData.indexOf(id) != -1) {
+            cachedBasicUserData[id] = cachedFullUserData[id]
+            usersArray.splice(i, 1)
+            break
+        }
+    }
+    usersArray = [...new Set(usersArray)]
+
+    let result = await ajax("GET", "/api/basic-user-data-array/" + usersArray.join(","))
+    result = JSON.parse(result)
+    console.log(result)
+    for(let i = 0; i != result.length; i++) {
+        cachedBasicUserData[result[i].id] = result[i]
+    }
+}
+
+function getCachedBasicUserData(id) {
+    return cachedBasicUserData[id]
 }

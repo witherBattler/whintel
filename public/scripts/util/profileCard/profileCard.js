@@ -8,12 +8,19 @@ let profileCardFollowButtonIcon = document.getElementById("profileCardFollowButt
 let profileCardFollowButtonLabel = document.getElementById("profileCardFollowButtonLabel")
 let profileCardFollowers = document.querySelector("#profileCardfollowersContainer > .followersNumber")
 let profileCardFollowing = document.querySelector("#profileCardFollowingContainer > .followingNumber")
+let profileCardfollowersContainer = document.getElementById("profileCardfollowersContainer")
+let profileCardfollowingContainer = document.getElementById("profileCardfollowingContainer")
 let profileCardEditButton = document.getElementById("profileCardEditButton")
 
 let lastProfileCardReset = -Infinity
+
+
 async function setProfileCard(x, y, userId, profilePicture, username, bio, followersList, followingList) {
     lastProfileCardReset = Date.now()
-    
+    profileCardCurrentUsername = username
+    profileCardCurrentFollowersList = followersList
+    profileCardCurrentFollowingList = followingList
+
     // Setting profile card values
     if([profilePicture, username, bio, followersList, followingList].indexOf(undefined) == -1) {
         let bannerColor
@@ -92,6 +99,7 @@ function setProfileCardValues(userId, profilePicture, bannerColor, username, bio
     profileCardBio.innerHTML = bio
     profileCardFollowers.innerHTML = followersList.length
     profileCardFollowing.innerHTML = followingList.length
+
     if(userId != selfData.id) {
         profileCardEditButton.style.display = "none"
         profileCardFollowButton.style.display = "flex"
@@ -164,4 +172,17 @@ window.addEventListener("click", (event) => {
             hideProfileCard()
         }
     }
+})
+
+let profileCardCurrentUsername = ""
+let profileCardCurrentFollowersList = []
+let profileCardCurrentFollowingList = []
+profileCardfollowersContainer.addEventListener("click", (event) => {
+    profileCardElement.style.display = "none"
+    middleTop.style.display = "none"
+    postsContainer.style.display = "none"
+    setFollowersFollowing(true, profileCardCurrentUsername, profileCardCurrentFollowersList, profileCardCurrentFollowingList, function() {
+        middleTop.style.display = "block"
+        postsContainer.style.display = "block"
+    })
 })

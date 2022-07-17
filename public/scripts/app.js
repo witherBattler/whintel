@@ -16,10 +16,11 @@ socket.on("new-post", async (data) => {
 })
 
 
+let middleTop = document.getElementById("middle-top")
+let postsContainer = document.getElementById("postsContainer")
 let feedCategoriesElements = document.getElementById("feedCategories").children
 let feedCategoryRecent = document.getElementById("feedCategoryRecent")
 let feedCategoryFollowing = document.getElementById("feedCategoryFollowing")
-let postsContainer = document.getElementById("postsContainer")
 let currentFeedCategory = "recent"
 for(let i = 0; i != feedCategoriesElements.length; i++) {
     feedCategoriesElements[i].addEventListener("click", () => {

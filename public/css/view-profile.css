@@ -91,16 +91,7 @@
     margin-right: 5px;
     -webkit-user-drag: none;
 }
-#followersFollowingSwitch > p {
-    margin-left: 10px;
-    color: var(--theme-color);
-    font-size: 20px;
-    user-select: none;
-    cursor: pointer;
-}
-#followersFollowingSwitch > p:first-child {
-    margin-left: 0px;
-}
+
 
 
 

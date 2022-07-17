@@ -530,6 +530,22 @@ app.get("/api/get-basic-user-data/:id", async (req, res) => {
     user = tryDelete(user, "_id", "level", "posts", "comments", "heartedPosts", "heartedComments", "followers", "following", "bio", "location", "createdAt")
     res.send(user)
 })
+app.get("/api/basic-user-data-array/:usersArray", async (req, res) => {
+    let usersArray = req.params.usersArray.split(",")
+    console.log(usersArray, "body")
+    let result = users.find({
+        id: {
+            $in: usersArray
+        }
+    })
+    result.toArray((err, data) => {
+        if(err) console.log(err)
+        for(let i = 0; i != data.length; i++) {
+            data[i] = tryDelete(data[i], "_id", "password", "level", "posts", "comments", "heartedPosts", "heartedComments", "followers", "following", "location", "createdAt")
+        }
+        res.send(data)
+    })
+})
 function validInt(int, fallback) {
     let parsedInt = parseInt(int)
     if(parsedInt == NaN) {
