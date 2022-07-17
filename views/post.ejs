@@ -30,10 +30,10 @@
             </div>
         </div>
     </body>
+    <%- include("partials/loggedIn") %>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="scripts/util/util.js"></script>
     <script src="scripts/util/http.js"></script>
-    <script src="scripts/left.js"></script>
     <script src="scripts/viewPost.js"></script>
     <script>
         function stringToBoolean(string) {
@@ -56,8 +56,5 @@
             }
             initMarked()
         })()
-        
-        
-        
     </script>
 </html>

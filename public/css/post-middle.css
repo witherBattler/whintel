@@ -11,6 +11,9 @@
     font-size: 55px;
     margin: 0px;
     line-height: 140%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
 }
 #postAuthor {
     display: flex;

@@ -47,7 +47,7 @@ class postDisplayer extends HTMLElement {
 
         let title = document.createElement("a")
         title.setAttribute("class", "title")
-        title.innerHTML = this.getAttribute("title")
+        title.textContent = this.getAttribute("title")
         title.href = this.getAttribute("redirect")
 
         let bottom = document.createElement("div")
@@ -72,7 +72,7 @@ class postDisplayer extends HTMLElement {
 
         let profileUsername = document.createElement("p")
         profileUsername.setAttribute("class", "profileUsername")
-        profileUsername.innerHTML = this.getAttribute("poster-username")
+        profileUsername.textContent = this.getAttribute("poster-username")
 
         let date = document.createElement("p")
         date.setAttribute("class", "date")
