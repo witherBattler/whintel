@@ -15,7 +15,7 @@
 }
 
 * {
-    margin: 0px;
+    margin-bottom: 10px;
 }
 
 .marked-h1 {
@@ -23,6 +23,7 @@
     line-height: 100%;
     font-family: var(--marked-main-font);
     font-weight: 300;
+    margin-bottom: 10px;
 }
 
 .marked-h2 {
@@ -30,6 +31,7 @@
     font-family: var(--marked-main-font);
     font-weight: 300;
     line-height: 100%;
+    margin-bottom: 10px;
 }
 
 .marked-h3 {
@@ -37,6 +39,7 @@
     font-family: var(--marked-main-font);
     font-weight: 300;
     line-height: 100%;
+    margin-bottom: 10px;
 }
 
 .marked-h4 {
@@ -44,6 +47,7 @@
     font-family: var(--marked-main-font);
     font-weight: 300;
     line-height: 100%;
+    margin-bottom: 10px;
 }
 
 .marked-h5 {
@@ -51,6 +55,7 @@
     font-family: var(--marked-main-font);
     font-weight: 300;
     line-height: 100%;
+    margin-bottom: 10px;
 }
 
 .marked-h6 {
@@ -58,6 +63,7 @@
     font-family: var(--marked-main-font);
     font-weight: 300;
     line-height: 100%;
+    margin-bottom: 10px;
 }
 
 .marked-link {

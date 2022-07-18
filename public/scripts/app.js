@@ -51,25 +51,29 @@ async function triggerFeedRerender(type, skip = 0, callback = function() {}) {
             result = JSON.parse(result)
             break
     }
-    let userData = []
-    for(let i = 0; i != result.length; i++) {
-        let user = await ajax("GET", "/api/get-basic-user-data/" + result[i].user)
-        user = JSON.parse(user)
-        userData.push(user)
-        let isHearted = result[i].heartsFrom.includes(selfData.id)
-        result[i].hearted = isHearted
-    }
+    let userData = result.userData
+    let postData = result.postData
+    cacheReadyFullUserDataFromArray(userData)
+    console.log(cachedFullUserData)
+    // for(let i = 0; i != result.length; i++) {
+    //     let user = await ajax("GET", "/api/get-basic-user-data/" + result[i].user)
+    //     user = JSON.parse(user)
+    //     userData.push(user)
+    //     let isHearted = result[i].heartsFrom.includes(selfData.id)
+    //     result[i].hearted = isHearted
+    // }
     postsContainer.innerText = ""
     postsContainer.style.display = "none"
-    for(let i = 0; i != result.length; i++) {
+    for(let i = 0; i != postData.length; i++) {
         let element = document.createElement("automatic-post-manager")
-        element.setAttribute("post-id", result[i].id)
-        element.dataset.postData = JSON.stringify(result[i])
-        element.dataset.userData = JSON.stringify(userData[i])
+        element.setAttribute("post-id", postData[i].id)
+        element.dataset.postData = JSON.stringify(postData[i])
+        // Already cached
+        let userData = getCachedFullUserData(postData[i].user)
+        element.dataset.userData = JSON.stringify(userData)
         postsContainer.appendChild(element)
     }
     postsContainer.style.display = "block"
-
     callback()
 }
 

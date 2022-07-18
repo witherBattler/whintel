@@ -516,10 +516,26 @@ app.get("/api/feed/recent", async (req, res) => {
     let skip = validInt(req.query.skip, 0)
     let recentPosts = posts.find({}).limit(14).skip(skip).sort({ creationDate: -1 })
     recentPosts.toArray((err, data) => {
+        let authorsArray = []
         for(let i = 0; i != data.length; i++) {
             data[i] = tryDelete(data[i], "_id", "content", "options", "commentsData", "images")
+            authorsArray.push(data[i].user)
         }
-        res.send(data)
+
+        let authorsSearch = users.find({
+            id: {
+                $in: authorsArray
+            }
+        })
+        authorsSearch.toArray((err, dataAuthors) => {
+            for(let i = 0; i != dataAuthors.length; i++) {
+                dataAuthors[i] = tryDelete(dataAuthors[i], "_id", "password")
+            }
+            res.send({
+                postData: data,
+                userData: dataAuthors
+            })
+        })
     })
 })
 app.get("/api/get-basic-user-data/:id", async (req, res) => {
@@ -532,7 +548,6 @@ app.get("/api/get-basic-user-data/:id", async (req, res) => {
 })
 app.get("/api/basic-user-data-array/:usersArray", async (req, res) => {
     let usersArray = req.params.usersArray.split(",")
-    console.log(usersArray, "body")
     let result = users.find({
         id: {
             $in: usersArray

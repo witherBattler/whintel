@@ -14,6 +14,8 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow-x: hidden;
+    font-size: 40px;
+    font-weight: 500;
 }
 #postAuthor {
     display: flex;
@@ -25,6 +27,8 @@
 }
 #postAuthor * {
     line-height: 80%;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 #postAuthor > img {
     height: 100%;
@@ -35,5 +39,5 @@
     font-size: 23px;
 }
 .equalHr {
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }

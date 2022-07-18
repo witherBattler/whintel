@@ -10,6 +10,15 @@ async function getFullUserData(id) {
     return cachedFullUserData[id]
 }
 
+function cacheReadyFullUserDataFromArray(array) {
+    for(let i = 0; i != array.length; i++) {
+        cachedFullUserData[array[i].id] = array[i]
+    }
+}
+function getCachedFullUserData(id) {
+    return cachedFullUserData[id]
+}
+
 async function post(url, data) {
     let request = new XMLHttpRequest();
     request.open("POST", url);
