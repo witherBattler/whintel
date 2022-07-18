@@ -23,7 +23,12 @@ class AutomaticPostManager extends HTMLElement {
         let convertedTime = convertTimeFromMS(dateDelta)
         element.setAttribute("date", convertedTime + " ago")
 
-        element.setAttribute("post-hearted", postData.hearted)
+        if(loggedIn == false) {
+            element.setAttribute("post-hearted", false)
+        } else {
+            element.setAttribute("post-hearted", postData.heartsFrom.indexOf(selfData.id) != -1)
+        }
+            
 
         shadow.appendChild(element)
 
