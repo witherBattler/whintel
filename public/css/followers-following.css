@@ -33,6 +33,7 @@
 #followersFollowingTopUsernameLabel {
     margin-left: 10px;
     font-size: 30px;
+    font-weight: 900;
 }
 #followersContainer, #followingContainer {
     display: flex;
@@ -48,4 +49,11 @@
 }
 #followersFollowingSwitch > p:first-child {
     margin-left: 0px;
+}
+#userDoesntHaveFollowers, #userDoesntHaveFollowing {
+    text-align: center;
+    color: var(--disabled-text);
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 50px;
 }

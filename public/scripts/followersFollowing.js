@@ -5,6 +5,8 @@ let followingSwitch = document.getElementById("followingSwitch")
 let followersContainer = document.getElementById("followersContainer")
 let followingContainer = document.getElementById("followingContainer")
 let followersFollowingTopUsernameLabel = document.getElementById("followersFollowingTopUsernameLabel")
+let userDoesntHaveFollowers = document.getElementById("userDoesntHaveFollowers")
+let userDoesntHaveFollowing = document.getElementById("userDoesntHaveFollowing")
 
 let currentFollowersList = null
 let currentFollowingList = null
@@ -30,6 +32,11 @@ async function setFollowersFollowing(isFollowers, username, followersList, follo
         followingContainer.style.display = "none"
         
         await renderFollowersList(followersList)
+
+        if(currentFollowersList.length == 0) {
+            userDoesntHaveFollowers.style.display = "block"
+        }
+        userDoesntHaveFollowing.style.display = "none"
     } else {
         followersSwitch.style.color = "#d1d1d1"
         followingSwitch.style.color = "var(--theme-color)"
@@ -37,40 +44,55 @@ async function setFollowersFollowing(isFollowers, username, followersList, follo
         followingContainer.style.display = "block"
 
         await renderFollowingList(followingList)
+
+        if(currentFollowingList.length == 0) {
+            userDoesntHaveFollowing.style.display = "block"
+        }
+        userDoesntHaveFollowers.style.display = "none"
     }
     followersFollowingTopUsernameLabel.textContent = username
 }
 
 async function renderFollowersList(followersList) {
-    await cacheBasicUserDataFromArray(followersList)
-    followersListRendered = true
+    if(followersList.length > 0) {
+        userDoesntHaveFollowers.style.display = "none"
 
-    // updating dom
-    for(let i = 0; i != followersList.length; i++) {
-        let userData = getCachedBasicUserData(followersList[i])
-        let element = document.createElement("followers-list-element")
-        element.setAttribute("username", userData.username)
-        element.setAttribute("profile-picture", userData.profilePicture)
-        element.setAttribute("bio", userData.bio)
-        element.setAttribute("id", userData.id)
-        followersContainer.appendChild(element)
+        await cacheBasicUserDataFromArray(followersList)
+
+        // updating dom
+        for(let i = 0; i != followersList.length; i++) {
+            let userData = getCachedBasicUserData(followersList[i])
+            let element = document.createElement("followers-list-element")
+            element.setAttribute("username", userData.username)
+            element.setAttribute("profile-picture", userData.profilePicture)
+            element.setAttribute("bio", userData.bio)
+            element.setAttribute("id", userData.id)
+            followersContainer.appendChild(element)
+        }
     }
+    
+    followersListRendered = true
 }
 
 async function renderFollowingList(followingList) {
-    await cacheBasicUserDataFromArray(followingList)
-    followingListRendered = true
-
-    // updating dom
-    for(let i = 0; i != followingList.length; i++) {
-        let userData = getCachedBasicUserData(followingList[i])
-        let element = document.createElement("followers-list-element")
-        element.setAttribute("username", userData.username)
-        element.setAttribute("profile-picture", userData.profilePicture)
-        element.setAttribute("bio", userData.bio)
-        element.setAttribute("id", userData.id)
-        followingContainer.appendChild(element)
+    if(followingList.length > 0) {
+        userDoesntHaveFollowing.style.display = "none"
+        await cacheBasicUserDataFromArray(followingList)
+        
+        // updating dom
+        for(let i = 0; i != followingList.length; i++) {
+            let userData = getCachedBasicUserData(followingList[i])
+            let element = document.createElement("followers-list-element")
+            element.setAttribute("username", userData.username)
+            element.setAttribute("profile-picture", userData.profilePicture)
+            element.setAttribute("bio", userData.bio)
+            element.setAttribute("id", userData.id)
+            followingContainer.appendChild(element)
+        }
     }
+        
+
+    followingListRendered = true
 }
 
 followersFollowingTopBackButton.addEventListener("click", (event) => {
@@ -86,6 +108,10 @@ followersSwitch.addEventListener("click", (event) => {
     if(!followersListRendered) {
         renderFollowersList(currentFollowersList)
     }
+    if(currentFollowersList.length == 0) {
+        userDoesntHaveFollowers.style.display = "block"
+    }
+    userDoesntHaveFollowing.style.display = "none"
 })
 
 followingSwitch.addEventListener("click", (event) => {
@@ -96,4 +122,8 @@ followingSwitch.addEventListener("click", (event) => {
     if(!followingListRendered) {
         renderFollowingList(currentFollowingList)
     }
+    if(currentFollowingList.length == 0) {
+        userDoesntHaveFollowing.style.display = "block"
+    }
+    userDoesntHaveFollowers.style.display = "none"
 })
