@@ -4,6 +4,7 @@ let accountSettings = document.getElementById("accountSettings")
 let displaySettings = document.getElementById("displaySettings")
 let extraSettings = document.getElementById("extraSettings")
 let settingsSectionButtons = Array.from(document.getElementsByClassName("settingsCategoryButton"))
+let usernameInput = document.getElementById("usernameInput")
 
 function openSettings() {
     settingsContainer.style.display = "flex"
@@ -16,7 +17,6 @@ for(let i = 0; i != settingsSectionButtons.length; i++) {
     let section = settingsSectionButtons[i].dataset.settingsSection
     console.log(section)
     button.addEventListener("click", (event) => {
-        console.log("should be running")
         unselectPreviousSection()
 
         switch(section) {
@@ -51,3 +51,11 @@ function unselectPreviousSection() {
         previousSelectedSection.style.display = "none"
     }
 }
+
+
+onSelfDataLoad(function() {
+    profileCardAPI.setBio(selfData.bio)
+    profileCardAPI.setUsername(selfData.username)
+    profileCardAPI.setProfilePicture(selfData.profilePicture)
+    usernameInput.placeholder = selfData.username
+})

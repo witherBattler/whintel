@@ -42,5 +42,10 @@
         </div>
     </div>
 </div>
-<script src="scripts/util/profileCard/profileCard.js"></script>
 <link rel="stylesheet" href="scripts/util/profileCard/profileCard.css">
+<% if(typeof static != "undefined" && static == true) { %>
+    <link rel="stylesheet" href="scripts/util/profileCard/profileCardPositionStatic.css">
+    <script src="scripts/util/profileCard/profileCardPositionStatic.js"></script>
+    <% } else { %>
+    <script src="scripts/util/profileCard/profileCard.js"></script>
+<% } %>

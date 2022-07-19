@@ -56,8 +56,15 @@ async function getSelfData() {
     return JSON.parse(data)
 }
 let selfData
+let selfDataLoadListeners = []
+function onSelfDataLoad(func) {
+    selfDataLoadListeners.push(func)
+}
 (async () => {
     selfData = await getSelfData()
+    for(let i = 0; i != selfDataLoadListeners.length; i++) {
+        selfDataLoadListeners[i](selfData)
+    }
 })()
 
 let cachedProfileImages = {}

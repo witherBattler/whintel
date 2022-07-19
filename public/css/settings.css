@@ -1,10 +1,10 @@
 #settingsContainer {
     display: none;
-    width: 900px;
+    width: 1000px;
     margin-top: 80px;
 }
 #settingsLeft {
-    width: 35%;
+    width: 30%;
     height: 100%;
     box-shadow: 20px 0px 20px -20px rgb(235 235 235);
 }
@@ -58,4 +58,21 @@
 }
 .settingsContentSection {
     display: none;
+}
+#profileSettings {
+    display: block;
+}
+
+#profileCardPreview {
+    display: flex;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+#profileCardEditor {
+    flex-grow: 1;
+}
+
+.inputLabel {
+    font-size: 18px;
+    color: var(--disabled-text);
 }

@@ -29,8 +29,15 @@
     </div>
     <div id="settingsContent">
         <div class="settingsContentSection" id="profileSettings">
-            <div class="profileCardPreview">
+            <div id="profileCardPreview">
+                <div id="profileCardEditor">
+                    <p class="inputLabel">
+                        Username
+                    </p>
+                    <input type="text" id="usernameInput">
+                </div>
 
+                <%- include("profileCard", {static: true}) %>
             </div>
         </div>
         <div class="settingsContentSection" id="accountSettings">
