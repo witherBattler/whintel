@@ -14,8 +14,8 @@
         <%- include("partials/left", {activeCategory: isSelf ? "profile" : "home"}) %>
 
 
-        <div id="editProfileMiddle">
-            <div id="editProfileContainer">
+        <div id="profileMiddle">
+            <div id="viewProfileContainer">
                 <div id="profileBanner" bannerImage="<%= userData.bannerImage  %>">
                     <div id="profileBannerContent">
                         <div id="profileBannerLeft">
@@ -34,6 +34,9 @@
                             </button>
                         </div>
                     </div>
+                    <button id="profileBannerSettingsButton">
+                        <img src="images/icons/settings.svg">
+                    </button>
                 </div>
                 <div id="underBanner">
                     <div id="level">
@@ -84,14 +87,13 @@
                     </div>
                 </div>
             </div>
+            <%- include('partials/settings'); -%>
         </div>
         <script>
             const userData = <%- JSON.stringify(userData) %>
         </script>
-        <%- include("partials/loggedIn") %>
         <script src="scripts/util/util.js"></script>
         <script src="scripts/util/http.js"></script>
-        <script src="scripts/left.js"></script>
         <script src="scripts/viewProfile.js"></script>
         <script src="scripts/util/followersListElement/followersListElement.js"></script>
     </body>

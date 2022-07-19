@@ -1,11 +1,10 @@
-#editProfileMiddle {
+#profileMiddle {
     display: flex;
     flex: 1;
     align-items: center;
     flex-direction: column;
-
 }
-#editProfileContainer {
+#viewProfileContainer {
     display: flex;
     flex-direction: column;
     width: 900px;
@@ -28,6 +27,19 @@
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    position: relative;
+}
+#profileBannerSettingsButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    width: 50px;
+    cursor: pointer;
+}
+#profileBannerSettingsButton > img {
+    height: 100%;
+    width: 100%;
 }
 #profileBannerContent {
     display: flex;

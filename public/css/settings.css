@@ -1,0 +1,61 @@
+#settingsContainer {
+    display: none;
+    width: 900px;
+    margin-top: 80px;
+}
+#settingsLeft {
+    width: 35%;
+    height: 100%;
+    box-shadow: 20px 0px 20px -20px rgb(235 235 235);
+}
+#settingsCategoriesContainer {
+    width: 100%;
+    height: 100%;
+}
+.settingsCategoryButton {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--disabled-text);
+    user-select: none;
+    transition: border-color 0.2s var(--popup-transition), box-shadow 0.2s var(--popup-transition), color 0.2s var(--popup-transition);
+    -webkit-transition: border-color 0.2s var(--popup-transition), box-shadow 0.2s var(--popup-transition), color 0.2s var(--popup-transition);
+    -moz-transition: border-color 0.2s var(--popup-transition), box-shadow 0.2s var(--popup-transition), color 0.2s var(--popup-transition);
+    -ms-transition: border-color 0.2s var(--popup-transition), box-shadow 0.2s var(--popup-transition), color 0.2s var(--popup-transition);
+    -o-transition: border-color 0.2s var(--popup-transition), box-shadow 0.2s var(--popup-transition), color 0.2s var(--popup-transition);
+    border-color: white;
+}
+.settingsCategoryArrowContainer {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.settingsCategoryArrowContainer > img {
+    width: 10px;
+    margin-right: 4px;
+    -webkit-user-drag: none;
+}
+.settingsCategoryButton.selected {
+    border-right: 4px solid var(--theme-color);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 40px;
+    color: black;
+}
+.settingsCategoryButton.selected > .settingsCategoryArrowContainer > img {
+    margin: 0px;
+}
+#settingsContent {
+    flex-grow: 1;
+    border-left: 2px solid #e8e8e8;
+}
+.settingsContentSection {
+    display: none;
+}

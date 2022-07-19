@@ -9,6 +9,8 @@ let followersSwitch = document.getElementById("followersSwitch")
 let followingSwitch = document.getElementById("followingSwitch")
 let followersContainer = document.getElementById("followersContainer")
 let followingContainer = document.getElementById("followingContainer")
+let profileBannerSettingsButton = document.getElementById("profileBannerSettingsButton")
+let viewProfileContainer = document.getElementById("viewProfileContainer")
 
 followersSwitch.style.color = "var(--theme-color)"
 followersSwitch.addEventListener("click", async (event) => {
@@ -116,4 +118,13 @@ followingLabel.addEventListener("click", async (event) => {
 followersFollowingTopBackButton.addEventListener("click", (event) => {
     followersFollowingContainer.style.display = "none"
     editProfileContainer.style.display = "flex"
+})
+
+profileBannerSettingsButton.addEventListener("click", (event) => {
+    viewProfileContainer.style.display = "none"
+    profileButtonLeft.classList.remove("selectedButton")
+    settingsButtonLeft.classList.add("selectedButton")
+    profileButtonLeft.querySelector("img").src = "/images/icons/defaultProfile-blurred.svg"
+    settingsButtonLeft.querySelector("img").src = "/images/icons/settings.svg"
+    openSettings()
 })
