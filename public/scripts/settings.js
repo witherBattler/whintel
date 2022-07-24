@@ -102,7 +102,37 @@ profileBannerInput.addEventListener("input", (event) => {
         settingsProfileChanges.profileBanner = null
     }
 })
+usernameInput.onInput((value) => {
+    settingsProfileChanges.username = value
+    console.log(settingsProfileChanges.username)
+})
+bioInput.onInput((value) => {
+    settingsProfileChanges.bio = value
+})
 
-saveButtonProfile.addEventListener("click", (event) => {
-    
+saveButtonProfile.addEventListener("click", async (event) => {
+    let usernameChanged = settingsProfileChanges.username != null && settingsProfileChanges.username != selfData.username
+    let bioChanged = settingsProfileChanges.bio != null && settingsProfileChanges.bio != selfData.bio
+    let profilePictureChanged = settingsProfileChanges.profilePicture != null
+    let profileBannerChanged = settingsProfileChanges.profileBanner != null
+    let changes = {}
+    if(usernameChanged) {
+        changes.username = settingsProfileChanges.username
+    }
+    if(bioChanged) {
+        changes.bio = settingsProfileChanges.bio
+    }
+    if(profilePictureChanged) {
+        changes.profilePicture = settingsProfileChanges.profilePicture
+    }
+    if(profileBannerChanged) {
+        changes.profileBanner = settingsProfileChanges.profileBanner
+    }
+    if(Object.keys(changes).length > 0) {
+        showSnackbar("Saving...")
+        await updateSelfData(changes)
+        showSnackbar("Changes successfully saved!")
+    } else {
+        showSnackbar("No changes made.")
+    }
 })

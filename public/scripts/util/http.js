@@ -24,12 +24,16 @@ async function post(url, data) {
     request.open("POST", url);
     request.setRequestHeader("Content-Type", "application/json");
     request.send(JSON.stringify(data));
+    console.log("doing post")
     let promise = new Promise((resolve, reject) => {
         request.onload = () => {
+            console.log('loaded')
             if (request.status == 200) {
                 resolve(request.response);
+                console.log('posted')
             } else {
                 reject(Error(request.statusText));
+                console.log("Error posting")
             }
         }
     })
@@ -110,7 +114,6 @@ async function cacheBasicUserDataFromArray(usersArray) {
 
     let result = await ajax("GET", "/api/basic-user-data-array/" + usersArray.join(","))
     result = JSON.parse(result)
-    console.log(result)
     for(let i = 0; i != result.length; i++) {
         cachedBasicUserData[result[i].id] = result[i]
     }
@@ -118,4 +121,8 @@ async function cacheBasicUserDataFromArray(usersArray) {
 
 function getCachedBasicUserData(id) {
     return cachedBasicUserData[id]
+}
+
+async function updateSelfData(data) {
+    ajax("POST", mainDomain + "/api/update-self-data", data).then(function() {return true})
 }

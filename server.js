@@ -734,6 +734,42 @@ app.get("/api/get-following-basic-data/:id", async (req, res) => {
         res.send(data)
     })
 })
+app.post("/api/update-self-data", async (req, res) => {
+    let user = await getUserBySession(req.cookies.session, res)
+    user.delete("password")
+    if(user == null) {
+        return
+    }
+    let toSend = {}
+    if(req.body.username != null && req.body.username != user.username) {
+        toSend.username = req.body.username
+    }
+    if(req.body.bio != null && req.body.bio != user.bio) {
+        toSend.bio = req.body.bio
+    }
+    if(req.body.profilePicture != null) {
+        let storageId = await storeImageAsset(req.body.profilePicture)
+        toSend.profilePicture = storageId
+    }
+    if(req.body.coverPicture != null) {
+        let storageId = await storeImageAsset(req.body.coverPicture)
+        toSend.coverPicture = storageId
+    }
+
+    if(Object.keys(toSend).length > 0) {
+        users.updateOne({
+            id: user.id,
+        }, {
+            $set: toSend
+        })
+        res.send({
+            user,
+            ...toSend
+        })
+        return
+    }
+    res.send("No data to update")
+})
 app.post("/api/post-toggle-heart/:id", async (req, res) => {
     let ipBanned = await ipInXssShame(getIpFromReq(req))
     if(ipBanned) {

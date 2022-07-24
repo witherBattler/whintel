@@ -81,6 +81,11 @@ class MaterialTextArea extends HTMLElement {
             this.container.classList.add("positioned-blur")
         }
     }
+    onInput(callback) {
+        this.input.addEventListener("input", function() {
+            callback(this.value)
+        })
+    }
 }
 
 customElements.define('material-text-area', MaterialTextArea);

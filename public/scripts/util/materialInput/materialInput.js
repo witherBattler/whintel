@@ -70,7 +70,6 @@ class MaterialInput extends HTMLElement {
         return this.input.value
     }
     set value(value) {
-        console.log(value, "value")
         this.input.value = value
         let maxLength = this.getAttribute("max-length")
         if(maxLength) {
@@ -79,6 +78,11 @@ class MaterialInput extends HTMLElement {
         if(this.input.value != 0) {
             this.container.classList.add("positioned-blur")
         }
+    }
+    onInput(callback) {
+        this.input.addEventListener("input", function() {
+            callback(this.value)
+        })
     }
 }
 
