@@ -75,10 +75,7 @@ app.get("/settings", async (req, res) => {
             settings: fullUser.settings
         })
     }, function() {
-        res.render("settings", {
-            loggedIn: false,
-            settings: fullUser.settings,
-        })
+        res.render("404")
     })
 })
 app.get("/xss", async (req, res) => {
@@ -700,7 +697,6 @@ app.post("/api/unfollow/:id", async(req, res) => {
     target.followers.remove(unfollower.id)
     unfollower.following.remove(target.id)
 
-    console.log(target.followers, unfollower.following)
     io.to("update:" + target.id).emit("user-update", {
         id: target.id,
         value: target

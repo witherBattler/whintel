@@ -31,13 +31,27 @@
         <div class="settingsContentSection" id="profileSettings">
             <div id="profileCardPreview">
                 <div id="profileCardEditor">
-                    <p class="inputLabel">
-                        Username
-                    </p>
-                    <input type="text" id="usernameInput">
+                    <div id="imagesEditor">
+                        <div id="profileBannerSettings">
+                            <input type="file" id="profileBannerInput" accept="image/png, image/jpeg, image/jpg, image/webp">
+                            <label for="profileBannerInput" id="profileBannerInputButton">
+                                <img src="images/icons/pickImage.svg">
+                            </label>
+                        </div>
+                        <div id="profileImage">
+                            <input type="file" id="profileImageInput" accept="image/png, image/jpeg, image/jpg, image/webp">
+                            <label for="profileImageInput" id="profileImageInputButton">
+                                <img src="images/icons/pickImage.svg">
+                            </label>
+                        </div>
+                    </div>
+                    <material-input allow-spaces="false" placeholder="Username" max-length="20" id="usernameInput"></material-input>
+                    <material-text-area placeholder="Bio" max-length="300" id="bioInput"></material-text-area>
+                    <button id="saveButtonProfile">
+                        <img src="images/icons/save.svg">
+                        <p>Save</p>
+                    </button>
                 </div>
-
-                <%- include("profileCard", {static: true}) %>
             </div>
         </div>
         <div class="settingsContentSection" id="accountSettings">
@@ -51,5 +65,13 @@
         </div>
     </div>
 </div>
+<%- include("snackbar") %>
 <script src="scripts/settings.js"></script>
 <link rel="stylesheet" href="css/settings.css">
+<script src="scripts/util/materialInput/materialInput.js"></script>
+<script src="scripts/util/materialTextArea/materialTextArea.js"></script>
+<% if(typeof opened != "undefined" && opened == true) { %>
+    <script>
+        openSettings();
+    </script>
+<% } %>

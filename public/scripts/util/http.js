@@ -68,10 +68,15 @@ function onSelfDataLoad(func) {
 })()
 
 let cachedProfileImages = {}
-async function parseProfileImage(image) {
+async function parseProfileImage(image, withPadding = false) {
     return new Promise(async (resolve, reject) => {
         if(image == "default") {
-            resolve("/images/icons/defaultProfile.svg")
+            if(withPadding) {
+                resolve("/images/icons/defaultProfilePadding.svg")
+            } else {
+                resolve("/images/icons/defaultProfile.svg")
+            }
+            
         } else {
             if(cachedProfileImages[image]) {
                 resolve(cachedProfileImages[image])

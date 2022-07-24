@@ -2,7 +2,6 @@ let followersLabel = document.getElementById("followersLabel")
 let followingLabel = document.getElementById("followingLabel")
 let followersLabelNumber = document.getElementById("followersLabelNumber")
 let followingLabelNumber = document.getElementById("followingLabelNumber")
-let editProfileContainer = document.getElementById("editProfileContainer")
 let followersFollowingContainer = document.getElementById("followersFollowingContainer")
 let followersFollowingTopBackButton = document.getElementById("followersFollowingTopBackButton")
 let followersSwitch = document.getElementById("followersSwitch")
@@ -63,7 +62,9 @@ followingSwitch.addEventListener("click", async (event) => {
 let followersAlreadyLoaded = false
 followersLabel.addEventListener("click", async (event) => {
     followersFollowingContainer.style.display = "flex"
-    editProfileContainer.style.display = "none"
+    viewProfileContainer.style.display = "none"
+    followersSwitch.style.color = "var(--theme-color)"
+    followingSwitch.style.color = "#d1d1d1"
     if(userData.id != selfData.id) {
         changeUrlWithoutReload(`${mainDomain}/view-profile/${userData.id}/followers`)
     } else {
@@ -91,7 +92,9 @@ followersLabel.addEventListener("click", async (event) => {
 let followingAlreadyLoaded = false
 followingLabel.addEventListener("click", async (event) => {
     followersFollowingContainer.style.display = "flex"
-    editProfileContainer.style.display = "none"
+    viewProfileContainer.style.display = "none"
+    followersSwitch.style.color = "#d1d1d1"
+    followingSwitch.style.color = "var(--theme-color)"
     if(userData.id != selfData.id) {
         changeUrlWithoutReload(`${mainDomain}/profile/${userData.id}/following`)
     } else {
@@ -117,7 +120,7 @@ followingLabel.addEventListener("click", async (event) => {
 })
 followersFollowingTopBackButton.addEventListener("click", (event) => {
     followersFollowingContainer.style.display = "none"
-    editProfileContainer.style.display = "flex"
+    viewProfileContainer.style.display = "flex"
 })
 
 profileBannerSettingsButton.addEventListener("click", (event) => {

@@ -5,6 +5,12 @@ let displaySettings = document.getElementById("displaySettings")
 let extraSettings = document.getElementById("extraSettings")
 let settingsSectionButtons = Array.from(document.getElementsByClassName("settingsCategoryButton"))
 let usernameInput = document.getElementById("usernameInput")
+let bioInput = document.getElementById("bioInput")
+let profileBanner = document.getElementById("profileBannerSettings")
+let profileImage = document.getElementById("profileImage")
+let profileBannerInput = document.getElementById("profileBannerInput")
+let profileImageInput = document.getElementById("profileImageInput")
+let saveButtonProfile = document.getElementById("saveButtonProfile") 
 
 function openSettings() {
     settingsContainer.style.display = "flex"
@@ -15,7 +21,6 @@ let previousSelectedSection = profileSettings
 for(let i = 0; i != settingsSectionButtons.length; i++) {
     let button = settingsSectionButtons[i]
     let section = settingsSectionButtons[i].dataset.settingsSection
-    console.log(section)
     button.addEventListener("click", (event) => {
         unselectPreviousSection()
 
@@ -52,10 +57,52 @@ function unselectPreviousSection() {
     }
 }
 
+onSelfDataLoad(() => {
+    usernameInput.value = selfData.username
+    bioInput.value = selfData.bio
+    parseProfileImage(selfData.profilePicture, true).then(function(pictureUrl) {
+        profileImage.style.backgroundImage = `url(${pictureUrl})`
+    })
+})
 
-onSelfDataLoad(function() {
-    profileCardAPI.setBio(selfData.bio)
-    profileCardAPI.setUsername(selfData.username)
-    profileCardAPI.setProfilePicture(selfData.profilePicture)
-    usernameInput.placeholder = selfData.username
+
+let settingsProfileChanges = {
+    username: null,
+    bio: null,
+    profilePicture: null,
+    profileBanner: null
+}
+profileImageInput.addEventListener("input", (event) => {
+    let image = event.target.files[0]
+    if(image != null) {
+        let reader = new FileReader()
+        reader.onload = function(event) {
+            let result = event.target.result
+            profileImage.style.backgroundImage = `url(${result})`
+            settingsProfileChanges.profilePicture = result
+        }
+        reader.readAsDataURL(image)
+    } else {
+        profileImage.style.backgroundImage = "none"
+        settingsProfileChanges.profilePicture = null
+    }
+})
+profileBannerInput.addEventListener("input", (event) => {
+    let image = event.target.files[0]
+    if(image != null) {
+        let reader = new FileReader()
+        reader.onload = function(event) {
+            let result = event.target.result
+            profileBanner.style.backgroundImage = `url(${result})`
+            settingsProfileChanges.profileBanner = result
+        }
+        reader.readAsDataURL(image)
+    } else {
+        profileBanner.style.backgroundImage = "none"
+        settingsProfileChanges.profileBanner = null
+    }
+})
+
+saveButtonProfile.addEventListener("click", (event) => {
+    
 })
