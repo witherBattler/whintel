@@ -805,9 +805,9 @@ app.post("/api/update-self-data", async (req, res) => {
         let storageId = await storeImageAsset(req.body.profilePicture)
         toSend.profilePicture = storageId
     }
-    if(req.body.coverPicture != null) {
-        let storageId = await storeImageAsset(req.body.coverPicture)
-        toSend.coverPicture = storageId
+    if(req.body.bannerImage != null) {
+        let storageId = await storeImageAsset(req.body.bannerImage)
+        toSend.bannerImage = storageId
     }
 
     if(Object.keys(toSend).length > 0) {
@@ -887,6 +887,9 @@ function dataUriToBase64(dataURI) {
 
 async function retrieveImageAsset(assetID, type = "dataURI") {
     let asset = await imageAssets.findOne({id: assetID})
+    if(asset == null) {
+        return null
+    }
     if(type == "dataURI") {
         return "data:image/" + asset.type + ";base64," + asset.data.toString("base64")
     } else if(type == "buffer") {

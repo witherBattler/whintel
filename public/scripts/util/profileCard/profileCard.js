@@ -15,7 +15,7 @@ let profileCardEditButton = document.getElementById("profileCardEditButton")
 let lastProfileCardReset = -Infinity
 
 
-async function setProfileCard(x, y, userId, profilePicture, username, bio, followersList, followingList) {
+async function setProfileCard(x, y, userId, profilePicture, bannerImage, username, bio, followersList, followingList) {
     lastProfileCardReset = Date.now()
     profileCardCurrentUsername = username
     profileCardCurrentFollowersList = followersList
@@ -23,19 +23,11 @@ async function setProfileCard(x, y, userId, profilePicture, username, bio, follo
 
     // Setting profile card values
     if([profilePicture, username, bio, followersList, followingList].indexOf(undefined) == -1) {
-        let bannerColor
-        let profilePictureSrc
         let profileLink = mainDomain + "/view-profile/" + userId
         let followed = followersList.indexOf(selfData.id) != -1
-        if(profilePicture != "default") {
-            bannerColor = await getMainColorFromImageSrc(profilePicture)
-            profilePictureSrc = profilePicture
-            setProfileCardValues(userId, profilePictureSrc, bannerColor, username, bio, followersList, followingList, profileLink, followed)
-        } else {
-            bannerColor = "#e0e5ea"
-            profilePictureSrc = "images/icons/defaultProfilePadding.svg"
-            setProfileCardValues(userId, profilePictureSrc, bannerColor, username, bio, followersList, followingList, profileLink, followed)
-        }
+        let profilePictureParsed = await parseProfileImage(profilePicture, true)
+        bannerImage = await parseProfileImage(bannerImage, false)
+        setProfileCardValues(userId, profilePictureParsed, bannerImage, username, bio, followersList, followingList, profileLink, followed)
         socket.emit("subscribe", {
             type: "user-update",
             id: userId
@@ -92,9 +84,9 @@ profileCardEditButton.addEventListener("click", (event) => {
 })
 
 // also changes colors for buttons and removes in some particular cases
-function setProfileCardValues(userId, profilePicture, bannerColor, username, bio, followersList, followingList, profileLink, isFollowed) {
+function setProfileCardValues(userId, profilePicture, bannerImage, username, bio, followersList, followingList, profileLink, isFollowed) {
     profileCardProfilePicture.src = profilePicture
-    profileCardBanner.style.backgroundColor = bannerColor
+    profileCardBanner.style.backgroundImage = `url(${bannerImage})`
     profileCardUsername.innerHTML = username
     profileCardBio.innerHTML = bio
     profileCardFollowers.innerHTML = followersList.length

@@ -64,7 +64,6 @@ async function triggerFeedRerender(type, skip = 0, callback = function() {}) {
     let userData = result.userData
     let postData = result.postData
     let profilePictures = result.profilePictures
-    console.log(result)
     cacheReadyFullUserDataFromArray(userData)
     cacheReadyProfilePicturesFromObject(profilePictures)
     postsContainer.innerText = ""
@@ -94,25 +93,22 @@ async function appendToFeed(type, skip = 0, callback = function() {}) {
             result = JSON.parse(result)
             break
     }
-    let userData = []
-    for(let i = 0; i != result.length; i++) {
-        if(loggedIn) {
-            let user = await ajax("GET", "/api/user/" + result[i].user)
-            user = JSON.parse(user)
-            userData.push(user)
-            let isHearted = await ajax("GET", "/api/post-is-liked/" + result[i].id)
-            result[i].hearted = isHearted
-        } else {
-            result[i].hearted = false
-        }
-    }
-    for(let i = 0; i != result.length; i++) {
+    let userData = result.userData
+    let postData = result.postData
+    let profilePictures = result.profilePictures
+    cacheReadyFullUserDataFromArray(userData)
+    cacheReadyProfilePicturesFromObject(profilePictures)
+    postsContainer.style.display = "none"
+    for(let i = 0; i != postData.length; i++) {
         let element = document.createElement("automatic-post-manager")
-        element.setAttribute("post-id", result[i].id)
-        element.dataset.postData = JSON.stringify(result[i])
-        element.dataset.userData = JSON.stringify(userData[i])
+        element.setAttribute("post-id", postData[i].id)
+        element.dataset.postData = JSON.stringify(postData[i])
+        // Already cached
+        let userData = getCachedFullUserData(postData[i].user)
+        element.dataset.userData = JSON.stringify(userData)
         postsContainer.appendChild(element)
     }
+    postsContainer.style.display = "block"
     callback()
 }
 

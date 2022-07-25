@@ -70,7 +70,7 @@ let settingsProfileChanges = {
     username: null,
     bio: null,
     profilePicture: null,
-    profileBanner: null
+    bannerImage: null
 }
 profileImageInput.addEventListener("input", (event) => {
     let image = event.target.files[0]
@@ -94,12 +94,12 @@ profileBannerInput.addEventListener("input", (event) => {
         reader.onload = function(event) {
             let result = event.target.result
             profileBanner.style.backgroundImage = `url(${result})`
-            settingsProfileChanges.profileBanner = result
+            settingsProfileChanges.bannerImage = result
         }
         reader.readAsDataURL(image)
     } else {
         profileBanner.style.backgroundImage = "none"
-        settingsProfileChanges.profileBanner = null
+        settingsProfileChanges.bannerImage = null
     }
 })
 usernameInput.onInput((value) => {
@@ -113,7 +113,7 @@ saveButtonProfile.addEventListener("click", async (event) => {
     let usernameChanged = settingsProfileChanges.username != null && settingsProfileChanges.username != selfData.username
     let bioChanged = settingsProfileChanges.bio != null && settingsProfileChanges.bio != selfData.bio
     let profilePictureChanged = settingsProfileChanges.profilePicture != null
-    let profileBannerChanged = settingsProfileChanges.profileBanner != null
+    let profileBannerChanged = settingsProfileChanges.bannerImage != null
     let changes = {}
     if(usernameChanged) {
         changes.username = settingsProfileChanges.username
@@ -125,7 +125,7 @@ saveButtonProfile.addEventListener("click", async (event) => {
         changes.profilePicture = settingsProfileChanges.profilePicture
     }
     if(profileBannerChanged) {
-        changes.profileBanner = settingsProfileChanges.profileBanner
+        changes.bannerImage = settingsProfileChanges.bannerImage
     }
     if(Object.keys(changes).length > 0) {
         showSnackbar("Saving...")
