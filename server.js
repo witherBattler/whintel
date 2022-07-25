@@ -536,7 +536,43 @@ app.get("/api/feed/recent", async (req, res) => {
         })
     })
 })
+app.get("/api/feed/following", async(req, res) => {
+    let user = await getUserBySession(req.cookies.session)
+    if(user == false) {
+        res.redirect("/404")
+        return
+    }
+    let following = user.following
 
+    let skip = validInt(req.query.skip, 0)
+    let recentPosts = posts.find({
+        user: {
+            $in: following
+        }
+    }).limit(14).skip(skip).sort({ creationDate: -1 })
+    recentPosts.toArray((err, data) => {
+        let authorsArray = []
+        for(let i = 0; i != data.length; i++) {
+            data[i] = tryDelete(data[i], "_id", "content", "options", "commentsData", "images")
+            authorsArray.push(data[i].user)
+        }
+
+        let authorsSearch = users.find({
+            id: {
+                $in: authorsArray
+            }
+        })
+        authorsSearch.toArray((err, dataAuthors) => {
+            for(let i = 0; i != dataAuthors.length; i++) {
+                dataAuthors[i] = tryDelete(dataAuthors[i], "_id", "password")
+            }
+            res.send({
+                postData: data,
+                userData: dataAuthors
+            })
+        })
+    })
+})
 app.get("/api/get-basic-user-data/:id", async (req, res) => {
     let user = await getUserById(req.params.id)
     if(user == false) {

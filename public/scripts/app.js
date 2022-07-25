@@ -31,9 +31,19 @@ for(let i = 0; i != feedCategoriesElements.length; i++) {
                 feedCategoryFollowing.classList.remove("selected")
                 break
             case "following":
+                if(loggedIn) {
                 feedCategoryRecent.classList.remove("selected")
                 feedCategoryFollowing.classList.add("selected")
                 break
+            } else {
+                setPopup(
+                    `<span class="special">Login</span> to view following feed.`,
+                    `You need to be logged in to be able to view your following feed. Go ahead!`,
+                    `<a href="/login">Login</a>`,
+                    `<button style="background-color: black;" onclick="hidePopup()">Later</button>`
+                )
+                return
+            }
         }
         triggerFeedRerender(currentFeedCategory)
     })
