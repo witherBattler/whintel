@@ -142,6 +142,9 @@ async function getStartingAppData(req, res, onSuccess, notLoggedIn = function() 
     let username = user.username || ""
     let level = user.level || "?"
     let profilePicture = user.profilePicture || "default"
+    if(user.profilePicture != "default") {
+        profilePicture = await retrieveImageAsset(user.profilePicture)
+    }
     onSuccess(username, level, profilePicture, user)
     return true
 }
@@ -525,13 +528,26 @@ app.get("/api/feed/recent", async (req, res) => {
                 $in: authorsArray
             }
         })
-        authorsSearch.toArray((err, dataAuthors) => {
+       
+
+        authorsSearch.toArray(async (err, dataAuthors) => {
             for(let i = 0; i != dataAuthors.length; i++) {
                 dataAuthors[i] = tryDelete(dataAuthors[i], "_id", "password")
             }
+
+
+            let profilePictureAssetIds = []
+            for(let i = 0; i != dataAuthors.length; i++) {
+                if(dataAuthors[i].profilePicture != "default") {
+                    profilePictureAssetIds.push(dataAuthors[i].profilePicture)
+                }
+            }
+            let profilePictureAssets = await retrieveImageAssets(profilePictureAssetIds)
+
             res.send({
                 postData: data,
-                userData: dataAuthors
+                userData: dataAuthors,
+                profilePictures: profilePictureAssets
             })
         })
     })
@@ -888,6 +904,23 @@ async function storeImageAsset(dataURI) {
         type,
     })
     return assetID
+}
+async function retrieveImageAssets(assetIDs, type = "dataURI") {
+    let assets = imageAssets.find({id: {$in: assetIDs}})
+    return new Promise((resolve, reject) => {
+        assets.toArray((err, data) => {
+            for(let i = 0; i != data.length; i++) {
+                if(type == "dataURI") {
+                    data[i] = "data:image/" + data[i].type + ";base64," + data[i].data.toString("base64")
+                } else if(type == "buffer") {
+                    data[i] = data[i].data
+                } else {
+                    throw new Error("Invalid type: " + type)
+                }
+            }
+            resolve(data)
+        })
+    })
 }
 Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;

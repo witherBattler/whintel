@@ -9,14 +9,18 @@ class AutomaticPostManager extends HTMLElement {
         let id = this.getAttribute("post-id")
         let postData = JSON.parse(this.dataset.postData)
 
+
         // this user data is incomplete and only contains profile picture, username and id
         let userData = JSON.parse(this.dataset.userData)
+        console.log(cachedProfileImages, userData.profilePicture)
+        let profilePicture = await parseProfileImage(userData.profilePicture)
 
         element.setAttribute("title", postData.title)
         element.setAttribute("hearts-count", postData.heartsCount)
         element.setAttribute("comments-count", postData.commentsCount)
         element.setAttribute("poster-username", userData.username)
-        element.setAttribute("poster-image", userData.profilePicture)
+        
+        element.setAttribute("poster-image", profilePicture)
         element.setAttribute("redirect", mainDomain + "/post/" + id)
         
         let dateDelta = Date.now() - postData.creationDate
@@ -48,7 +52,6 @@ class AutomaticPostManager extends HTMLElement {
         })
         element.appendEvent("profileClicked", async (event) => {
             let fullUserData = await getFullUserData(userData.id)
-            console.log(fullUserData)
             setProfileCard(event.clientX, event.clientY, fullUserData.id, fullUserData.profilePicture, fullUserData.username, fullUserData.bio, fullUserData.followers, fullUserData.following)
         })
     }

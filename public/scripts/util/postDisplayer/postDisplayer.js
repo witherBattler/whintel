@@ -64,8 +64,7 @@ class postDisplayer extends HTMLElement {
         let profileImage = document.createElement("img")
         profileImage.setAttribute("class", "profileImage")
         let src = this.getAttribute("poster-image")
-        if(src == "default") {
-            src = "images/icons/defaultProfile.svg"
+        if(src == "/images/icons/defaultProfile.svg") {
             profileImage.style.aspectRatio = PROFILE_IMAGE_WIDTH_HEIGHT_RATIO
         }
         profileImage.src = src

@@ -63,15 +63,10 @@ async function triggerFeedRerender(type, skip = 0, callback = function() {}) {
     }
     let userData = result.userData
     let postData = result.postData
+    let profilePictures = result.profilePictures
+    console.log(result)
     cacheReadyFullUserDataFromArray(userData)
-    console.log(cachedFullUserData)
-    // for(let i = 0; i != result.length; i++) {
-    //     let user = await ajax("GET", "/api/get-basic-user-data/" + result[i].user)
-    //     user = JSON.parse(user)
-    //     userData.push(user)
-    //     let isHearted = result[i].heartsFrom.includes(selfData.id)
-    //     result[i].hearted = isHearted
-    // }
+    cacheReadyProfilePicturesFromObject(profilePictures)
     postsContainer.innerText = ""
     postsContainer.style.display = "none"
     for(let i = 0; i != postData.length; i++) {

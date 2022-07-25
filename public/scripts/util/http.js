@@ -90,6 +90,13 @@ async function parseProfileImage(image, withPadding = false) {
         }
     })
 }
+function cacheReadyProfilePicturesFromObject(object) {
+    console.log(object)
+    cachedProfileImages = {
+        ...cachedProfileImages,
+        ...object
+    }
+}
 
 let cachedBasicUserData = {}
 async function cacheBasicUserDataFromArray(usersArray) {
