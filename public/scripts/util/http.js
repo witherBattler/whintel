@@ -27,13 +27,11 @@ async function post(url, data) {
     console.log("doing post")
     let promise = new Promise((resolve, reject) => {
         request.onload = () => {
-            console.log('loaded')
+            
             if (request.status == 200) {
                 resolve(request.response);
-                console.log('posted')
             } else {
                 reject(Error(request.statusText));
-                console.log("Error posting")
             }
         }
     })
@@ -124,5 +122,10 @@ function getCachedBasicUserData(id) {
 }
 
 async function updateSelfData(data) {
-    ajax("POST", mainDomain + "/api/update-self-data", data).then(function() {return true})
+    let newData = await ajax("POST", mainDomain + "/api/update-self-data", data)
+    console.log(newData)
+    newData = JSON.parse(newData)
+    selfData = newData
+    updateLeft()
+    return newData
 }

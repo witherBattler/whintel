@@ -6,6 +6,7 @@ let settingsButtonLeft = document.getElementById("settingsButtonLeft")
 let logOutButtonLeft = document.getElementById("logOutButtonLeft")
 let leftBurgerMenu = document.getElementById("leftBurgerMenu")
 let left = document.getElementById("left")
+let profileWidgetUsername = document.getElementById("profileWidgetUsername")
 
 if(loggedIn) {
     logOutButtonLeft.addEventListener("click", async (event) => {
@@ -29,3 +30,9 @@ leftBurgerMenu.addEventListener("click", (event) => {
             break;
     }
 })
+
+function updateLeft() {
+    if(loggedIn) {
+        profileWidgetUsername.textContent = selfData.username
+    }
+}

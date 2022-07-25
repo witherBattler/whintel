@@ -12,6 +12,7 @@ const socketIo = require("socket.io");
 const bcrypt = require("bcrypt")
 const xss = require("xss");
 
+const currentDomain = "http://localhost:3000"
 const hashRounds = 10
 app.use(cookieParser())
 app.use(express.static('public'))
@@ -434,7 +435,7 @@ app.post("/api/create-post", async (req, res) => {
                 posts: postId,
             },
         })
-        res.send("https://whintel.herokuapp.com/post/" + postId)
+        res.send(currentDomain + "/" + postId)
         
         // Sending update to subscribed sockets
         for(let i = 0; i != feedSubscriptions.length; i++) {
@@ -535,6 +536,7 @@ app.get("/api/feed/recent", async (req, res) => {
         })
     })
 })
+
 app.get("/api/get-basic-user-data/:id", async (req, res) => {
     let user = await getUserById(req.params.id)
     if(user == false) {
@@ -736,7 +738,7 @@ app.get("/api/get-following-basic-data/:id", async (req, res) => {
 })
 app.post("/api/update-self-data", async (req, res) => {
     let user = await getUserBySession(req.cookies.session, res)
-    user.delete("password")
+    user = tryDelete(user, "_id", "password")
     if(user == null) {
         return
     }
@@ -763,12 +765,12 @@ app.post("/api/update-self-data", async (req, res) => {
             $set: toSend
         })
         res.send({
-            user,
+            ...user,
             ...toSend
         })
         return
     }
-    res.send("No data to update")
+    res.status(204).send()
 })
 app.post("/api/post-toggle-heart/:id", async (req, res) => {
     let ipBanned = await ipInXssShame(getIpFromReq(req))

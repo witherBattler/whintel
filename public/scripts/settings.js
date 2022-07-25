@@ -104,7 +104,6 @@ profileBannerInput.addEventListener("input", (event) => {
 })
 usernameInput.onInput((value) => {
     settingsProfileChanges.username = value
-    console.log(settingsProfileChanges.username)
 })
 bioInput.onInput((value) => {
     settingsProfileChanges.bio = value
@@ -130,7 +129,7 @@ saveButtonProfile.addEventListener("click", async (event) => {
     }
     if(Object.keys(changes).length > 0) {
         showSnackbar("Saving...")
-        await updateSelfData(changes)
+        let data = await updateSelfData(changes)
         showSnackbar("Changes successfully saved!")
     } else {
         showSnackbar("No changes made.")
