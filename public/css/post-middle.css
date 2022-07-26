@@ -24,19 +24,25 @@
     margin-left: 3px;
     align-items: center;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 #postAuthor * {
     line-height: 80%;
-    user-select: none;
     -webkit-user-drag: none;
+    user-select: none;
 }
 #postAuthor > img {
     height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 #postAuthor > .main {
     font-weight: 900;
     margin-left: 5px;
     font-size: 23px;
+}
+#postAuthor:hover {
+    text-decoration: underline;
 }
 .equalHr {
     margin-bottom: 20px;

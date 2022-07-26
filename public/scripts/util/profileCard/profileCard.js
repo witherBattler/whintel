@@ -15,7 +15,10 @@ let profileCardEditButton = document.getElementById("profileCardEditButton")
 let lastProfileCardReset = -Infinity
 
 
-async function setProfileCard(x, y, userId, profilePicture, bannerImage, username, bio, followersList, followingList) {
+async function setProfileCard(x, y, userId, profilePicture, bannerImage, username, bio, followersList, followingList, onFollowersFollowingShown, onFollowersFollowingHidden) {
+    currentOnFollowersFollowingShown = onFollowersFollowingShown
+    currentOnFollowersFollowingHidden = onFollowersFollowingHidden
+    
     lastProfileCardReset = Date.now()
     profileCardCurrentUsername = username
     profileCardCurrentFollowersList = followersList
@@ -24,10 +27,14 @@ async function setProfileCard(x, y, userId, profilePicture, bannerImage, usernam
     // Setting profile card values
     if([profilePicture, username, bio, followersList, followingList].indexOf(undefined) == -1) {
         let profileLink = mainDomain + "/view-profile/" + userId
-        let followed = followersList.indexOf(selfData.id) != -1
+        let followed = loggedIn ? followersList.indexOf(selfData.id) != -1 : false
         let profilePictureParsed = await parseProfileImage(profilePicture, true)
-        bannerImage = await parseProfileImage(bannerImage, false)
-        setProfileCardValues(userId, profilePictureParsed, bannerImage, username, bio, followersList, followingList, profileLink, followed)
+        bannerImage = await parseBannerImage(bannerImage, false)
+        let bannerColor = "#E1E5EA"
+        if(bannerImage == "" && profilePicture != "default") {
+            bannerColor = await getMainColorFromImageSrc(profilePictureParsed)
+        }
+        setProfileCardValues(userId, profilePictureParsed, bannerImage, username, bio, followersList, followingList, profileLink, followed, bannerColor)
         socket.emit("subscribe", {
             type: "user-update",
             id: userId
@@ -63,11 +70,9 @@ profileCardFollowButton.addEventListener("click", async (event) => {
     if(loggedIn) {
         if(profileCardFollow) {
             let success = await ajax("POST", "/api/follow/" + profileCardCurrentUserId)
-            console.log(success)
             setProfileCardIsFollowed(stringToBoolean(success))
         } else {
             let success = await ajax("POST", "/api/unfollow/" + profileCardCurrentUserId)
-            console.log(success)
             setProfileCardIsFollowed(!stringToBoolean(success))
         }
     } else {
@@ -82,17 +87,20 @@ profileCardFollowButton.addEventListener("click", async (event) => {
 profileCardEditButton.addEventListener("click", (event) => {
     window.location = mainDomain + "/settings"
 })
+let currentOnFollowersFollowingShown = () => {}
+let currentOnFollowersFollowingHidden = () => {}
 
 // also changes colors for buttons and removes in some particular cases
-function setProfileCardValues(userId, profilePicture, bannerImage, username, bio, followersList, followingList, profileLink, isFollowed) {
+function setProfileCardValues(userId, profilePicture, bannerImage, username, bio, followersList, followingList, profileLink, isFollowed, bannerColor) {
     profileCardProfilePicture.src = profilePicture
+    profileCardBanner.style.backgroundColor = bannerColor
     profileCardBanner.style.backgroundImage = `url(${bannerImage})`
     profileCardUsername.innerHTML = username
     profileCardBio.innerHTML = bio
     profileCardFollowers.innerHTML = followersList.length
     profileCardFollowing.innerHTML = followingList.length
 
-    if(userId != selfData.id) {
+    if(loggedIn && userId != selfData.id) {
         profileCardEditButton.style.display = "none"
         profileCardFollowButton.style.display = "flex"
         if(isFollowed != undefined) {
@@ -171,19 +179,15 @@ let profileCardCurrentFollowersList = []
 let profileCardCurrentFollowingList = []
 profileCardFollowersContainer.addEventListener("click", (event) => {
     hideProfileCard()
-    middleTop.style.display = "none"
-    postsContainer.style.display = "none"
+    currentOnFollowersFollowingShown()
     setFollowersFollowing(true, profileCardCurrentUsername, profileCardCurrentFollowersList, profileCardCurrentFollowingList, function() {
-        middleTop.style.display = "block"
-        postsContainer.style.display = "block"
+        currentOnFollowersFollowingHidden()
     })
 })
 profileCardFollowingContainer.addEventListener("click", (event) => {
     hideProfileCard()
-    middleTop.style.display = "none"
-    postsContainer.style.display = "none"
+    currentOnFollowersFollowingShown()
     setFollowersFollowing(false, profileCardCurrentUsername, profileCardCurrentFollowersList, profileCardCurrentFollowingList, function() {
-        middleTop.style.display = "block"
-        postsContainer.style.display = "block"
+        currentOnFollowersFollowingHidden()
     })
 })

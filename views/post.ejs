@@ -18,7 +18,7 @@
                     <%= postData.title %>
                 </div>
                 <div id="postAuthor">
-                    <img src="/images/icons/defaultProfile.svg">
+                    <img src="<%- authorProfilePicture == "default" ? "/images/icons/defaultProfile.svg" : authorProfilePicture %>">
                     <div class="main">
                         <%= authorData.username %>
                     </div>
@@ -30,10 +30,13 @@
             </div>
         </div>
     </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="scripts/util/util.js"></script>
     <script src="scripts/util/http.js"></script>
     <script src="scripts/viewPost.js"></script>
+    <%- include('partials/followersFollowing') %>
+    <%- include('partials/profileCard') %>
     <script>
         function stringToBoolean(string) {
             return string == "true"
@@ -55,5 +58,8 @@
             }
             initMarked()
         })()
+        var authorData = <%- JSON.stringify(authorData) %>
+        var authorProfilePicture = "<%- authorProfilePicture %>"
+        cacheReadyProfilePicture(authorData.profilePicture, authorProfilePicture)
     </script>
 </html>

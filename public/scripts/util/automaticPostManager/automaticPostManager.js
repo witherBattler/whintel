@@ -52,7 +52,13 @@ class AutomaticPostManager extends HTMLElement {
         })
         element.appendEvent("profileClicked", async (event) => {
             let fullUserData = await getFullUserData(userData.id)
-            setProfileCard(event.clientX, event.clientY, fullUserData.id, fullUserData.profilePicture, fullUserData.bannerImage, fullUserData.username, fullUserData.bio, fullUserData.followers, fullUserData.following)
+            setProfileCard(event.clientX, event.clientY, fullUserData.id, fullUserData.profilePicture, fullUserData.bannerImage, fullUserData.username, fullUserData.bio, fullUserData.followers, fullUserData.following, function() {
+                middleTop.style.display = "none"
+                postsContainer.style.display = "none"
+            }, function() {
+                middleTop.style.display = "block"
+                postsContainer.style.display = "block"
+            })
         })
     }
 }

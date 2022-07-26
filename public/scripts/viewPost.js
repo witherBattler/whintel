@@ -1,6 +1,8 @@
-
+let socket = io.connect(mainDomain)
 
 let postContentElement = document.getElementById("postContent")
+let postAuthor = document.getElementById("postAuthor")
+let middlePost = document.getElementById("middle-post")
 
 let root = document.querySelector(":root")
 
@@ -15,3 +17,11 @@ function initMarked() {
     postContentParsed = marked.parse(content)
     postContentElement.innerHTML = postContentParsed
 }
+
+postAuthor.addEventListener("click", async (event) => {
+    setProfileCard(event.clientX, event.clientY, authorData.id, authorData.profilePicture, authorData.bannerImage, authorData.username, authorData.bio, authorData.followers, authorData.following, function() {
+        middlePost.style.display = "none"
+    }, function() {
+        middlePost.style.display = "block"
+    })
+})

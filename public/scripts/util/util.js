@@ -130,11 +130,12 @@ async function getMainColorFromImageSrc(imageSrc) {
     let context = canvas.getContext("2d");
     let image = new Image();
     image.src = imageSrc;
-    return new Promise((reject, resolve) => {
+    return new Promise((resolve, reject) => {
+        console.log("AAAAAAAAAAAAAAAAAAAA")
         image.onload = () => {
             context.drawImage(image, 0, 0, 1, 1);
             let imageData = context.getImageData(0, 0, 1, 1).data;
-            return `rgb(${imageData[0]}, ${imageData[1]}, ${imageData[2]})`;
+            resolve(`rgb(${imageData[0]}, ${imageData[1]}, ${imageData[2]})`)
         };
     });
 }

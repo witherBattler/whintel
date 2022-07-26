@@ -117,6 +117,9 @@ async function parseBannerImage(image) {
         }
     })
 }
+async function cacheReadyProfilePicture(src, profilePicture) {
+    cachedProfileImages[src] = profilePicture
+}
 
 let cachedBasicUserData = {}
 async function cacheBasicUserDataFromArray(usersArray) {

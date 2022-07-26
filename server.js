@@ -293,7 +293,12 @@ app.get("/post/:id", async (req, res) => {
     let authorData = await getUserById(postData.user)
     let postImages = await postData.images
     postImages = JSON.stringify(postImages)
+    let authorProfilePicture = "default"
+    if(authorData.profilePicture != "default") {
+        authorProfilePicture = await retrieveImageAsset(authorData.profilePicture)
+    }
     getStartingAppData(req, res, function(username, level, profilePicture) {
+        authorData = tryDelete(authorData, "password", "_id", "level", "posts", "comments", "heartedPosts", "heartedComments", "createdAt")
         res.render("post", {
             username,
             level,
@@ -301,7 +306,8 @@ app.get("/post/:id", async (req, res) => {
             postData,
             authorData,
             postImages,
-            loggedIn: true
+            loggedIn: true,
+            authorProfilePicture
         })
     }, function() {
         res.render("post", {
@@ -309,6 +315,7 @@ app.get("/post/:id", async (req, res) => {
             postData,
             authorData,
             loggedIn: false,
+            authorProfilePicture
         })
     })
 })
