@@ -80,7 +80,7 @@ profileCardFollowButton.addEventListener("click", async (event) => {
     }
 })
 profileCardEditButton.addEventListener("click", (event) => {
-    window.location = mainDomain + "/edit-profile"
+    window.location = mainDomain + "/settings"
 })
 
 // also changes colors for buttons and removes in some particular cases

@@ -15,6 +15,7 @@
     -o-border-radius: 50px;
     border: none;
     margin-top: 10px;
+    object-fit: cover;
 }
 .top {
     display: flex;

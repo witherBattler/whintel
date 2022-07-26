@@ -42,6 +42,14 @@ class MaterialTextArea extends HTMLElement {
             }
         })
         this.input = input
+        let marginTop = this.getAttribute("margin-top")
+        if(marginTop) {
+            container.style.marginTop = marginTop
+        }
+        let height = this.getAttribute("height")
+        if(height) {
+            input.style.height = height
+        }
 
         let label = document.createElement("p")
         label.classList.add("label")
@@ -85,6 +93,9 @@ class MaterialTextArea extends HTMLElement {
         this.input.addEventListener("input", function() {
             callback(this.value)
         })
+    }
+    selectLastPosition() {
+        this.input.focus()
     }
 }
 

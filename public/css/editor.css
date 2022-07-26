@@ -85,30 +85,6 @@
     color: dimgrey;
     font-style: italic;
 }
-
-#editorContent {
-    padding: 5px;
-    padding-top: 10px;
-    box-sizing: border-box;
-    font-family: consolas, monospace !important;
-    font-size: 20px;
-    background-color: white;
-    height: 300px;
-    border-radius: 5px;
-    outline: 2px solid black;
-    line-height: 20px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    margin-bottom: 4px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
-#editorContent * {
-    font-family: consolas, monospace !important;
-}
 #markupResult {
     padding: 5px;
     padding-top: 10px;

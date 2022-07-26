@@ -15,8 +15,8 @@
         <div id="editorInnerContainer">
             <div id="editorContainer">
                 <div id="editor">
-                    <input id="editorTitle" placeholder="Short title">
-                    <div id="editorContent" contenteditable="true" tabindex="-1">Type your markup here.</div>
+                    <material-input margin-top="18px" id="editorTitle" placeholder="Short title"></material-input>
+                    <material-text-area height="200px" id="editorContent" placeholder="Post markdown">Type your markup here.</material-text-area>
                     <div id="editorToolbar">
                         <div class="toolbarDefault">
                             <smart-dropdown id="fontPickerEditor" width="200px" special="font" options="Euclid, Helvetica, Red Hat, Times, Consolas, Georgia, Tahoma, Verdana, Trebuchet MS"></smart-dropdown>
@@ -72,12 +72,12 @@
             </div>
         </div>
     </body>
-    <%- include("partials/loggedIn") %>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="scripts/util/util.js"></script>
     <script src="scripts/util/smartDropdown/smartDropdown.js"></script>
     <script src="scripts/util/uploadedImageEditor/uploadedImageEditor.js"></script>
+    <script src="scripts/util/materialInput/materialInput.js"></script>
+    <script src="scripts/util/materialTextArea/materialTextArea.js"></script>
     <script src="scripts/util/http.js"></script>
     <script src="scripts/editor.js"></script>
-    <script src="scripts/left.js"></script>
 </html>

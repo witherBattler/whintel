@@ -13,15 +13,12 @@ marked.setOptions({
     smartypants: true,
 })
 
-editorContentElement.addEventListener("keydown", (event) => {
-    setTimeout(function() {
-        if(previousEditorContent != editorContentElement.textContent) {
-            let content = editorContentElement.innerText
-            let markupResult = marked.parse(content)
-            markupResultElement.innerHTML = markupResult
-            previousEditorContent = content
-        }
-    })
+editorContentElement.onInput(text => {
+    if(previousEditorContent != text) {
+        let markupResult = marked.parse(text)
+        markupResultElement.innerHTML = markupResult
+        previousEditorContent = text
+    }
 })
 
 marked.use({
@@ -59,13 +56,7 @@ for(let i = 0; i != headingButtonsEditor.length; i++) {
     })
 }
 
-function selectLastPositionEditor() {
-    editorContentElement.focus()
-    let range = document.createRange()
-    let selection = window.getSelection()
-    selection.collapse(editorContentElement.lastChild, editorContentElement.lastChild.length)
-    selection.addRange(range)
-}
+let selectLastPositionEditor = editorContentElement.selectLastPosition.bind(editorContentElement)
 
 function triggerResultRerender() {
     let content = editorContentElement.innerText
@@ -126,15 +117,15 @@ function imagesHaveId(id) {
 let orderedListButton = document.getElementById("orderedListButtonEditor")
 let unorderedListButton = document.getElementById("unorderedListButtonEditor")
 orderedListButton.addEventListener("click", (event) => {
-    let newContent = editorContentElement.innerHTML + "<br><br>1.&nbsp;"
-    editorContentElement.innerHTML = newContent
+    let newContent = editorContentElement.value + "\n\n1. "
+    editorContentElement.value = newContent
     selectLastPositionEditor()
     previousEditorContent = newContent
     triggerResultRerender()
 })
 unorderedListButton.addEventListener("click", (event) => {
-    let newContent = editorContentElement.innerHTML + "<br><br>*&nbsp;"
-    editorContentElement.innerHTML = newContent
+    let newContent = editorContentElement.value + "\n\n* "
+    editorContentElement.value = newContent
     selectLastPositionEditor()
     previousEditorContent = newContent
     triggerResultRerender()
