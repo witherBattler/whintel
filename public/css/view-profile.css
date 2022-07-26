@@ -12,7 +12,7 @@
 }
 #profileBanner {
     width: 100%;
-    background-image: url(../images/logo.svg);
+    background-image: var(--src);
     height: 200px;
     background-repeat: no-repeat;
     background-position: 50% 50%;

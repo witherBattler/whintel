@@ -18,10 +18,10 @@
 
         <div id="profileMiddle">
             <div id="viewProfileContainer">
-                <div id="profileBanner" bannerImage="<%= userData.bannerImage  %>">
+                <div id="profileBanner" style="--src: url(<%- userBannerImage == "" ? "../images/icons/coolBackground.svg" : userBannerImage %>)">
                     <div id="profileBannerContent">
                         <div id="profileBannerLeft">
-                            <img id="profileBannerProfilePicture" src="<%= userData.profilePicture == "default" ? "/images/icons/defaultProfile.svg" : profilePicture %>">
+                            <img id="profileBannerProfilePicture" src="<%= userProfilePicture == "default" ? "/images/icons/defaultProfile.svg" : userProfilePicture %>">
                             <div>
                                 <div id="profileBannerUsername"><%= userData.username %></div>
                                 <div id="profileBannerBio"><%= userData.bio %></div>    

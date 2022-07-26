@@ -95,7 +95,16 @@ app.get("/view-profile", async (req, res) => {
     res.redirect("/view-profile/self")
 })
 app.get("/view-profile/self", async (req, res) => {
-    getStartingAppData(req, res, function(username, level, profilePicture, fullUser) {
+    getStartingAppData(req, res, async function(username, level, profilePicture, fullUser) {
+        let userProfilePicture = "default"
+        if(fullUser.profilePicture != "default") {
+            userProfilePicture = await retrieveImageAsset(user.profilePicture)
+        }
+        let userBannerImage = ""
+        if(fullUser.bannerImage != "") {
+            await retrieveImageAsset(fullUser.bannerImage)
+        }
+
         res.render("view-profile", {
             username,
             level,
@@ -103,6 +112,8 @@ app.get("/view-profile/self", async (req, res) => {
             loggedIn: true,
             isSelf: true,
             userData: fullUser,
+            userBannerImage,
+            userProfilePicture
         })
     }, function() {
         res.render("404")
@@ -110,7 +121,20 @@ app.get("/view-profile/self", async (req, res) => {
 })
 app.get("/view-profile/:id", async (req, res) => {
     let user = await users.findOne( { id: req.params.id } )
+    if(user == null) {
+        res.render("404")
+        return
+    }
     user = tryDelete(user, "password", "_id")
+    let userProfilePicture = "default"
+    if(user.profilePicture != "default") {
+        userProfilePicture = await retrieveImageAsset(user.profilePicture)
+    }
+    let userBannerImage = ""
+    if(user.bannerImage != "") {
+        userBannerImage = await retrieveImageAsset(user.bannerImage)
+    }
+    
     getStartingAppData(req, res, function(username, level, profilePicture, fullUser) {
         res.render("view-profile", {
             username,
@@ -118,13 +142,17 @@ app.get("/view-profile/:id", async (req, res) => {
             profilePicture,
             userData: user,
             loggedIn: true,
-            isSelf: sessions[req.cookies.session].id == fullUser.id
+            isSelf: sessions[req.cookies.session].id == fullUser.id,
+            userBannerImage,
+            userProfilePicture
         })
     }, function() {
         res.render("view-profile", {
             userData: user,
             loggedIn: false,
-            isSelf: false
+            isSelf: false,
+            userBannerImage,
+            userProfilePicture
         })
     })
 })
