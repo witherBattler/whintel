@@ -98,7 +98,7 @@ app.get("/view-profile/self", async (req, res) => {
     getStartingAppData(req, res, async function(username, level, profilePicture, fullUser) {
         let userProfilePicture = "default"
         if(fullUser.profilePicture != "default") {
-            userProfilePicture = await retrieveImageAsset(user.profilePicture)
+            userProfilePicture = await retrieveImageAsset(fullUser.profilePicture)
         }
         let userBannerImage = ""
         if(fullUser.bannerImage != "") {
@@ -163,6 +163,7 @@ async function getStartingAppData(req, res, onSuccess, notLoggedIn = function() 
         return false
     }
     let user = await users.findOne({ id: sessions[session].id })
+    console.log(user)
     if(user == null) {
         notLoggedIn()
         return false

@@ -63,6 +63,9 @@ onSelfDataLoad(() => {
     parseProfileImage(selfData.profilePicture, true).then(function(pictureUrl) {
         profileImage.style.backgroundImage = `url(${pictureUrl})`
     })
+    parseBannerImage(selfData.bannerImage).then(function(pictureUrl) {
+        profileBanner.style.backgroundImage = `url(${pictureUrl})`
+    })
 })
 
 

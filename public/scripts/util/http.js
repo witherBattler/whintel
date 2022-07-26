@@ -62,12 +62,16 @@ let selfDataLoadListeners = []
 function onSelfDataLoad(func) {
     selfDataLoadListeners.push(func)
 }
-(async () => {
-    selfData = await getSelfData()
-    for(let i = 0; i != selfDataLoadListeners.length; i++) {
-        selfDataLoadListeners[i](selfData)
-    }
-})()
+
+if(loggedIn) {
+    (async () => {
+        selfData = await getSelfData()
+        for(let i = 0; i != selfDataLoadListeners.length; i++) {
+            selfDataLoadListeners[i](selfData)
+        }
+    })()
+}
+    
 
 let cachedProfileImages = {}
 async function parseProfileImage(image, withPadding = false) {
@@ -96,6 +100,22 @@ function cacheReadyProfilePicturesFromObject(object) {
         ...cachedProfileImages,
         ...object
     }
+}
+let cachedBannerImages = {}
+async function parseBannerImage(image) {
+    return new Promise(async (resolve, reject) => {
+        if(image == "") {
+            resolve("/images/icons/defaultBanner.svg")
+        } else {
+            if(cachedBannerImages[image]) {
+                resolve(cachedBannerImages[image])
+                return
+            }
+            let realSrc = await ajax("GET", mainDomain + "/api/assets/images/" + image)
+            cachedBannerImages[image] = realSrc
+            resolve(realSrc)
+        }
+    })
 }
 
 let cachedBasicUserData = {}

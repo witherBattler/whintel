@@ -29,6 +29,9 @@
     position: relative;
     cursor: pointer;
     pointer-events: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 #profileCardProfilePicture {
     position: absolute;

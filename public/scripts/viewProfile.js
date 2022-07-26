@@ -65,7 +65,7 @@ followersLabel.addEventListener("click", async (event) => {
     viewProfileContainer.style.display = "none"
     followersSwitch.style.color = "var(--theme-color)"
     followingSwitch.style.color = "#d1d1d1"
-    if(userData.id != selfData.id) {
+    if(loggedIn && userData.id != selfData.id) {
         changeUrlWithoutReload(`${mainDomain}/view-profile/${userData.id}/followers`)
     } else {
         changeUrlWithoutReload(`${mainDomain}/view-profile/self/followers`)
@@ -123,11 +123,15 @@ followersFollowingTopBackButton.addEventListener("click", (event) => {
     viewProfileContainer.style.display = "flex"
 })
 
-profileBannerSettingsButton.addEventListener("click", (event) => {
-    viewProfileContainer.style.display = "none"
-    profileButtonLeft.classList.remove("selectedButton")
-    settingsButtonLeft.classList.add("selectedButton")
-    profileButtonLeft.querySelector("img").src = "/images/icons/defaultProfile-blurred.svg"
-    settingsButtonLeft.querySelector("img").src = "/images/icons/settings.svg"
-    openSettings()
-})
+if(loggedIn) {
+    profileBannerSettingsButton.addEventListener("click", (event) => {
+        viewProfileContainer.style.display = "none"
+        profileButtonLeft.classList.remove("selectedButton")
+        settingsButtonLeft.classList.add("selectedButton")
+        profileButtonLeft.querySelector("img").src = "/images/icons/defaultProfile-blurred.svg"
+        settingsButtonLeft.querySelector("img").src = "/images/icons/settings.svg"
+        openSettings()
+    })
+} else {
+    profileBannerSettingsButton.style.display = "none"
+}
