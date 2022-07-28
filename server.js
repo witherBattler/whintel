@@ -948,16 +948,17 @@ async function retrieveImageAssets(assetIDs, type = "dataURI") {
     let assets = imageAssets.find({id: {$in: assetIDs}})
     return new Promise((resolve, reject) => {
         assets.toArray((err, data) => {
+            let object = {}
             for(let i = 0; i != data.length; i++) {
                 if(type == "dataURI") {
-                    data[i] = "data:image/" + data[i].type + ";base64," + data[i].data.toString("base64")
+                    object[data.id] = "data:image/" + data[i].type + ";base64," + data[i].data.toString("base64")
                 } else if(type == "buffer") {
-                    data[i] = data[i].data
+                    object[data.id] = data[i].data
                 } else {
                     throw new Error("Invalid type: " + type)
                 }
             }
-            resolve(data)
+            resolve(object)
         })
     })
 }

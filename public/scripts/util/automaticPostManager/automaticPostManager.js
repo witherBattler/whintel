@@ -13,7 +13,9 @@ class AutomaticPostManager extends HTMLElement {
         // this user data is incomplete and only contains profile picture, username and id
         let userData = JSON.parse(this.dataset.userData)
         console.log(cachedProfileImages, userData.profilePicture)
+        let time = new Date()
         let profilePicture = await parseProfileImage(userData.profilePicture)
+        console.log(time - new Date())
 
         element.setAttribute("title", postData.title)
         element.setAttribute("hearts-count", postData.heartsCount)
