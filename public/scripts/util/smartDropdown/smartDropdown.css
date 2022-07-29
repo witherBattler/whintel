@@ -57,4 +57,6 @@
 .dropdownLabel {
     font-size: 25px;
     line-height: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

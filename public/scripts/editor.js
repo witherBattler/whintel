@@ -5,7 +5,7 @@ let editorOptions = {
 
 let editorContentElement = document.getElementById("editorContent")
 let markupResultElement = document.getElementById("markupResult")
-let previousEditorContent = editorContentElement.innerText
+let previousEditorContent = editorContentElement.getRerenderedMarkdown()
 
 marked.setOptions({
     breaks: true,
@@ -13,12 +13,15 @@ marked.setOptions({
     smartypants: true,
 })
 
-editorContentElement.onInput(text => {
+let root = document.querySelector(":root")
+editorContentElement.onMarkdownChange(text => {
     if(previousEditorContent != text) {
-        let markupResult = marked.parse(text)
-        markupResultElement.innerHTML = markupResult
+        markupResultElement.innerHTML = text
         previousEditorContent = text
     }
+})
+editorContentElement.onFontChange(font => {
+    root.style.setProperty("--marked-main-font", font)
 })
 
 marked.use({
@@ -26,8 +29,8 @@ marked.use({
 })
 
 
-// Toolbar
-let root = document.querySelector(":root")
+/* // Toolbar
+
 let fontPickerEditor = document.getElementById("fontPickerEditor")
 console.log(fontPickerEditor)
 fontPickerEditor.appendEvent("change", (value) => {
@@ -63,8 +66,9 @@ function triggerResultRerender() {
     let markupResult = marked.parse(content)
     markupResultElement.innerHTML = markupResult
 }
-triggerResultRerender()
+triggerResultRerender() */
 // Image Upload
+/* 
 let uploadedImages = []
 let imageUploader = document.getElementById("imageButtonEditor")
 let imageUploadingEditor = document.getElementById("imageUploadingEditor")
@@ -112,40 +116,7 @@ function imagesHaveId(id) {
         }
     }
     return false
-}
-
-let orderedListButton = document.getElementById("orderedListButtonEditor")
-let unorderedListButton = document.getElementById("unorderedListButtonEditor")
-orderedListButton.addEventListener("click", (event) => {
-    let newContent = editorContentElement.value + "\n\n1. "
-    editorContentElement.value = newContent
-    selectLastPositionEditor()
-    previousEditorContent = newContent
-    triggerResultRerender()
-})
-unorderedListButton.addEventListener("click", (event) => {
-    let newContent = editorContentElement.value + "\n\n* "
-    editorContentElement.value = newContent
-    selectLastPositionEditor()
-    previousEditorContent = newContent
-    triggerResultRerender()
-})
-
-let caseSwitchButton = document.getElementById("caseSwitchButtonEditor")
-let caseSwitchButtonImage = document.getElementById("caseSwitchButtonEditorImage")
-let editorTitle = document.getElementById("editorTitle")
-editorTitle.value = "Untitled"
-caseSwitchButton.addEventListener("click", (event) => {
-    editorOptions.smartypants = !editorOptions.smartypants
-    if(editorOptions.smartypants) {
-        caseSwitchButtonImage.src = "images/icons/smartypantsCase.svg"
-    } else {
-        caseSwitchButtonImage.src = "images/icons/normalCase.svg"
-    }
-    marked.use({smartypants: editorOptions.smartypants, smartLists: editorOptions.smartypants})
-    triggerResultRerender()
-})
-
+} */
 // confirm post
 let confirmPostButton = document.getElementById("confirmPost")
 confirmPostButton.addEventListener("click", async (event) => {

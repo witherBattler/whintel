@@ -5,6 +5,12 @@ class RichTextArea extends HTMLElement {
             font: "Euclid",
             smartypants: true,
         }
+        this.events = {
+            input: [],
+            fontChange: [],
+            caseChange: [],
+            markdownChange: []
+        }
     }
     connectedCallback() {
         let shadow = this.attachShadow({mode: "open"})
@@ -23,13 +29,14 @@ class RichTextArea extends HTMLElement {
 
         let fontSelector = document.createElement("smart-dropdown")
         fontSelector.classList.add("font-selector")
-        fontSelector.setAttribute("options", "Euclid,Helvetica,Red Hat,Times,Consolas,Georgia,Tahoma,Verdana,Trebuchet MS")
+        fontSelector.setAttribute("options", "Euclid,Helvetica,Red Hat,Times,Consolas,Georgia,Tahoma,Verdana,Garamond")
         fontSelector.setAttribute("special", "font")
         fontSelector.setAttribute("width", "180px")
         fontSelector.setAttribute("border-radius", "left")
         fontSelector.appendEvent("change", (value) => {
             this.editorOptions.font = value
             fontSelector.font = value
+            this.events.fontChange.forEach(callback => callback(value))
         })
 
         let caseSwitchButton = document.createElement("button")
@@ -37,6 +44,12 @@ class RichTextArea extends HTMLElement {
         let caseSwitchButtonIcon = document.createElement("img")
         caseSwitchButtonIcon.src = "images/icons/smartypantsCase.svg"
         caseSwitchButton.appendChild(caseSwitchButtonIcon)
+        caseSwitchButton.addEventListener("click", () => {
+            this.editorOptions.smartypants = !this.editorOptions.smartypants
+            caseSwitchButtonIcon.src = this.editorOptions.smartypants ? "images/icons/smartypantsCase.svg" : "images/icons/normalCase.svg"
+            this.events.caseChange.forEach(callback => callback(this.editorOptions.smartypants))
+            this.triggerMarkdownRerender()
+        })
 
         section1.appendChild(fontSelector)
         section1.appendChild(caseSwitchButton)
@@ -100,7 +113,39 @@ class RichTextArea extends HTMLElement {
         container.appendChild(textArea)
         textArea.setAttribute("placeholder", "Enter the content of your post here...")
         textArea.setAttribute("spellcheck", "false")
-
+        textArea.addEventListener("input", (event) => {
+            this.events.input.forEach(callback => callback(event.target.value))
+            this.triggerMarkdownRerender()
+        })
+        this.textArea = textArea
+    }
+    get value() {
+        return this.textArea.value
+    }
+    set value(value) {
+        this.textArea.value = value
+    }
+    onInput(callback) {
+        this.events.input.push(callback)
+    }
+    onFontChange(callback) {
+        this.events.fontChange.push(callback)
+    }
+    onCaseChange(callback) {
+        this.events.caseChange.push(callback)
+    }
+    onMarkdownChange(callback) {
+        this.events.markdownChange.push(callback)
+    }
+    getRerenderedMarkdown() {
+        marked.setOptions({
+            smartypants: this.editorOptions.smartypants,
+            smartLists: this.editorOptions.smartypants,
+        })
+        return marked.parse(this.value)
+    }
+    triggerMarkdownRerender() {
+        this.events.markdownChange.forEach(callback => callback(this.getRerenderedMarkdown()))
     }
 }
 
