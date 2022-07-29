@@ -12,7 +12,7 @@
 #settingsLeft {
     width: 30%;
     height: 100%;
-    box-shadow: 20px 0px 20px -20px rgb(202, 202, 202);
+    border-right: solid 1px rgb(202, 202, 202);
 }
 #settingsCategoriesContainer {
     width: 100%;

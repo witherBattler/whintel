@@ -50,7 +50,7 @@ body {
     z-index: 100;
     background-color: white;
     min-width: 300px;
-    box-shadow: rgba(0, 0, 0, 0.05) 10px 0px 20px;
+    border-right: 1px #d1d1d1 solid;
     display: flex;
     flex-direction: column;
     left: 300px;
