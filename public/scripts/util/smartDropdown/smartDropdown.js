@@ -42,9 +42,9 @@ class SmartDropdown extends HTMLElement {
         })
 
         let dropdownLabel = document.createElement("div")
+        dropdownLabel.setAttribute("class", "dropdownLabel")
         dropdownLabel.innerText = options[0]
         this.dropdownLabel = dropdownLabel
-        console.log("FAKE CONSTRUCTOR")
 
         let dropdownIconContainer = document.createElement("div")
         dropdownIconContainer.setAttribute("class", "dropdownIconContainer")
@@ -73,8 +73,13 @@ class SmartDropdown extends HTMLElement {
             })
             dropdownOptions.appendChild(option)
         }
+        let borderRadius = this.getAttribute("border-radius")
+        if(borderRadius == "left") {
+            dropdown.style.borderTopLeftRadius = "5px"
+            dropdown.style.borderBottomLeftRadius = "5px"
+        }
         dropdownOptions.setAttribute("class", "dropdownOptions")
-        dropdownOptionsHeight = options.length * 40 + 6
+        dropdownOptionsHeight = options.length * 34 + 8
 
         dropdownIconContainer.appendChild(dropdownIcon)
         dropdown.appendChild(dropdownLabel)
@@ -88,6 +93,9 @@ class SmartDropdown extends HTMLElement {
     }
     appendEvent(event, callback) {
         this.events[event].push(callback)
+    }
+    set font(fontName) {
+        this.dropdownLabel.style.fontFamily = fontName
     }
 }
 

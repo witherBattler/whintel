@@ -125,11 +125,10 @@
 .headingButtonEditor {
     border-radius: 3px;
     background-color: var(--theme-color);
-    height: 35px;
-    width: 35px;
+    height: 37px;
+    width: 37px;
     margin-left: 10px;
     border: none;
-    outline: black 2px solid;
     cursor: pointer;
     -webkit-user-drag: none;
     user-select: none;
@@ -160,15 +159,14 @@
 }
 #customImageButtonEditor, .listButtonEditor {
     margin-left: 10px;
-    width: 35px;
-    height: 35px;
+    width: 37px;
+    height: 37px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 3px;
     background-color: var(--theme-color);
     border: none;
-    outline: black 2px solid;
     cursor: pointer;
 }
 #customImageButtonEditor > img {

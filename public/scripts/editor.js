@@ -134,6 +134,7 @@ unorderedListButton.addEventListener("click", (event) => {
 let caseSwitchButton = document.getElementById("caseSwitchButtonEditor")
 let caseSwitchButtonImage = document.getElementById("caseSwitchButtonEditorImage")
 let editorTitle = document.getElementById("editorTitle")
+editorTitle.value = "Untitled"
 caseSwitchButton.addEventListener("click", (event) => {
     editorOptions.smartypants = !editorOptions.smartypants
     if(editorOptions.smartypants) {

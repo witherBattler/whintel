@@ -16,51 +16,7 @@
             <div id="editorContainer">
                 <div id="editor">
                     <material-input margin-top="18px" id="editorTitle" placeholder="Short title"></material-input>
-                    <material-text-area height="200px" id="editorContent" placeholder="Post markdown">Type your markup here.</material-text-area>
-                    <div id="editorToolbar">
-                        <div class="toolbarDefault">
-                            <smart-dropdown id="fontPickerEditor" width="200px" special="font" options="Euclid, Helvetica, Red Hat, Times, Consolas, Georgia, Tahoma, Verdana, Trebuchet MS"></smart-dropdown>
-                            <button id="caseSwitchButtonEditor" class="caseSwitchButtonEditor">
-                                <img src="images/icons/smartypantsCase.svg" id="caseSwitchButtonEditorImage">
-                            </button>
-                            <button id="headingButtonEditor1" class="headingButtonEditor">
-                                <img src="images/icons/headings/heading1.svg">
-                            </button>
-                            <button id="headingButtonEditor2" class="headingButtonEditor" ">
-                                <img src="images/icons/headings/heading2.svg">
-                            </button>
-                            <button id="headingButtonEditor3" class="headingButtonEditor" ">
-                                <img src="images/icons/headings/heading3.svg">
-                            </button>
-                            <button id="headingButtonEditor4" class="headingButtonEditor" ">
-                                <img src="images/icons/headings/heading4.svg">
-                            </button>
-                            <button id="headingButtonEditor5" class="headingButtonEditor" ">
-                                <img src="images/icons/headings/heading5.svg">
-                            </button>
-                            <button id="headingButtonEditor6" class="headingButtonEditor">
-                                <img src="images/icons/headings/heading6.svg">
-                            </button>
-                            <label for="imageButtonEditor" type="file" id="customImageButtonEditor">
-                                <img src="images/icons/image.svg">
-                            </label>
-                            <input id="imageButtonEditor" type="file" accept="image/png, image/jpeg, image/jpg, image/webp">
-                            <button id="orderedListButtonEditor" class="listButtonEditor" id="listButtonOrdered">
-                                <img src="images/icons/orderedList.svg">
-                            </button>
-                            <button id="unorderedListButtonEditor" class="listButtonEditor" id="listButtonUnordered">
-                                <img src="images/icons/unorderedList.svg">
-                            </button>
-                        </div>
-                        <div id="imageUploadingEditor">
-                            <div id="uploadedImagesInnerContainerEditor">
-                                <div id="uploadedImagesContainerEditor">
-                                    
-                                </div>
-                            </div>
-                            <p class="editorLabel">Uploaded Images</p>
-                        </div>
-                    </div>
+                    <rich-text-area height="200px" id="editorContent" placeholder="Post markdown">Type your markup here.</rich-text-area>
                     <div id="markupResult"></div>
                 </div>
                 <button id="confirmPost">
@@ -72,6 +28,15 @@
             </div>
         </div>
     </body>
+
+
+
+
+
+
+
+
+    
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="scripts/util/util.js"></script>
     <script src="scripts/util/smartDropdown/smartDropdown.js"></script>
@@ -80,4 +45,5 @@
     <script src="scripts/util/materialTextArea/materialTextArea.js"></script>
     <script src="scripts/util/http.js"></script>
     <script src="scripts/editor.js"></script>
+    <script src="scripts/util/richTextArea/richTextArea.js"></script>
 </html>

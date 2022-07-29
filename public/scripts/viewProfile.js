@@ -130,6 +130,7 @@ if(loggedIn) {
         settingsButtonLeft.classList.add("selectedButton")
         profileButtonLeft.querySelector("img").src = "/images/icons/defaultProfile-blurred.svg"
         settingsButtonLeft.querySelector("img").src = "/images/icons/settings.svg"
+        changeUrlWithoutReload(`${mainDomain}/settings`)
         openSettings()
     })
 } else {

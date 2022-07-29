@@ -1,8 +1,8 @@
 <svg width="83" height="76" viewBox="0 0 83 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M24 64H83V72H24V64Z" fill="white"/>
-<rect x="24" y="4" width="59" height="8" fill="white"/>
-<rect x="24" y="34" width="59" height="8" fill="white"/>
-<circle cx="8" cy="8" r="8" fill="white"/>
-<circle cx="8" cy="38" r="8" fill="white"/>
-<circle cx="8" cy="68" r="8" fill="white"/>
+<path d="M24 64H53.5H83V72H24V64Z" fill="black"/>
+<rect x="24" y="4" width="59" height="8" fill="black"/>
+<rect x="24" y="34" width="59" height="8" fill="black"/>
+<circle cx="8" cy="8" r="8" fill="black"/>
+<circle cx="8" cy="38" r="8" fill="black"/>
+<circle cx="8" cy="68" r="8" fill="black"/>
 </svg>
