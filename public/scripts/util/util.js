@@ -146,3 +146,10 @@ function getMainColorFromImage(image) {
     let imageData = context.getImageData(0, 0, 1, 1).data;
     return `rgb(${imageData[0]}, ${imageData[1]}, ${imageData[2]})`;
 }
+function repeatString(string, times) {
+    let result = ""
+    for(let i = 0; i != times; i++) {
+        result += string
+    }
+    return result
+}

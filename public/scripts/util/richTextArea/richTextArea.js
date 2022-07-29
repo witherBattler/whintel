@@ -9,7 +9,7 @@ class RichTextArea extends HTMLElement {
             input: [],
             fontChange: [],
             caseChange: [],
-            markdownChange: []
+            markdownChange: [],
         }
     }
     connectedCallback() {
@@ -77,6 +77,20 @@ class RichTextArea extends HTMLElement {
             headingButton.appendChild(headingButtonIcon)
             headingButtons.push(headingButton)
             headingButtonsSection.appendChild(headingButton)
+
+            let hashes = repeatString("#", heading)
+
+            headingButton.addEventListener("click", () => {
+                let value = this.value
+                let newValue
+                if(value == "") {
+                    newValue = this.value + `${hashes} `
+                } else {
+                    newValue = this.value + `\n${hashes} `
+                }
+                this.value = newValue
+                this.textArea.focus()
+            })
         }
         toolbar.appendChild(headingButtonsSection)
         
@@ -90,17 +104,48 @@ class RichTextArea extends HTMLElement {
         imageButtonIcon.src = "images/icons/pickImage2.svg"
         imageButton.appendChild(imageButtonIcon)
 
+        let imageOptions = document.createElement("div")
+        imageOptions.classList.add('imageOptions')
+        imageButton.addEventListener("click", (event) => {
+            imageOptions.style.display = "flex"
+            imageOptions.style.top = event.clientY + "px"
+            imageOptions.style.left = event.clientX + "px"
+        })
+
         let orderedListButton = document.createElement("button")
         orderedListButton.classList.add("orderedListButton")
         let orderedListButtonIcon = document.createElement("img")
         orderedListButtonIcon.src = "images/icons/orderedList.svg"
         orderedListButton.appendChild(orderedListButtonIcon)
+        orderedListButton.addEventListener("click", () => {
+            let value = this.value
+            let newValue
+            if(value == "") {
+                newValue = this.value + `1. `
+            } else {
+                newValue = this.value + `\n1. `
+            }
+            this.value = newValue
+            this.textArea.focus()
+        })
+
 
         let unorderedListButton = document.createElement("button")
         unorderedListButton.classList.add("unorderedListButton")
         let unorderedListButtonIcon = document.createElement("img")
         unorderedListButtonIcon.src = "images/icons/unorderedList.svg"
         unorderedListButton.appendChild(unorderedListButtonIcon)
+        unorderedListButton.addEventListener("click", () => {
+            let value = this.value
+            let newValue
+            if(value == "") {
+                newValue = this.value + `* `
+            } else {
+                newValue = this.value + `\n* `
+            }
+            this.value = newValue
+            this.textArea.focus()
+        })
 
         section3.appendChild(imageButton)
         section3.appendChild(orderedListButton)
@@ -118,6 +163,8 @@ class RichTextArea extends HTMLElement {
             this.triggerMarkdownRerender()
         })
         this.textArea = textArea
+
+        container.appendChild(imageOptions)
     }
     get value() {
         return this.textArea.value
@@ -137,7 +184,7 @@ class RichTextArea extends HTMLElement {
     onMarkdownChange(callback) {
         this.events.markdownChange.push(callback)
     }
-    getRerenderedMarkdown() {
+    getMarked() {
         marked.setOptions({
             smartypants: this.editorOptions.smartypants,
             smartLists: this.editorOptions.smartypants,
@@ -145,7 +192,7 @@ class RichTextArea extends HTMLElement {
         return marked.parse(this.value)
     }
     triggerMarkdownRerender() {
-        this.events.markdownChange.forEach(callback => callback(this.getRerenderedMarkdown()))
+        this.events.markdownChange.forEach(callback => callback(this.getMarked()))
     }
 }
 

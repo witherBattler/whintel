@@ -5,7 +5,7 @@ let editorOptions = {
 
 let editorContentElement = document.getElementById("editorContent")
 let markupResultElement = document.getElementById("markupResult")
-let previousEditorContent = editorContentElement.getRerenderedMarkdown()
+let previousEditorContent = editorContentElement.getMarked()
 
 marked.setOptions({
     breaks: true,
