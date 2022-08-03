@@ -11,6 +11,7 @@ class RichTextArea extends HTMLElement {
             caseChange: [],
             markdownChange: [],
         }
+        this.images = []
     }
     connectedCallback() {
         let shadow = this.attachShadow({mode: "open"})
@@ -111,6 +112,41 @@ class RichTextArea extends HTMLElement {
             imageOptions.style.top = event.clientY + "px"
             imageOptions.style.left = event.clientX + "px"
         })
+        window.addEventListener("click", (event) => {
+            if(!imageButton.matches(":hover") && !imageOptions.matches(":hover")) {
+                imageOptions.style.display = "none"
+                if(this.images.length == 0) {
+                    imageOptionsAddImage.style.borderBottom = null
+                    return
+                }
+                imageOptionsAddImage.style.borderBottom = "1px solid #d1d1d1"
+            }
+        })
+        let imageOptionsAddImage = document.createElement("button")
+        imageOptionsAddImage.classList.add("imageOptionsAddImage")
+        imageOptions.appendChild(imageOptionsAddImage)
+
+        let imageOptionsAddImageInput = document.createElement("input")
+        imageOptionsAddImageInput.id = "imageOptionsAddImageInput"
+        imageOptionsAddImageInput.type = "file"
+        imageOptionsAddImageInput.accept = "image/*"
+        imageOptionsAddImage.appendChild(imageOptionsAddImageInput)
+
+        let imageOptionsAddImageLabel = document.createElement("label")
+        imageOptionsAddImageLabel.for = "imageOptionsAddImageInput"
+        imageOptionsAddImage.appendChild(imageOptionsAddImageLabel)
+
+        let imageOptionsAddImageIcon = document.createElement("img")
+        imageOptionsAddImageIcon.src = "images/icons/plusLeft.svg"
+        imageOptionsAddImageLabel.appendChild(imageOptionsAddImageIcon)
+
+        let imageOptionsAddImageText = document.createElement("p")
+        imageOptionsAddImageText.innerText = "Add Image"
+        imageOptionsAddImageLabel.appendChild(imageOptionsAddImageText)
+
+        let imagesList = document.createElement("div")
+        imagesList.classList.add("imagesList")
+        imageOptions.appendChild(imagesList)
 
         let orderedListButton = document.createElement("button")
         orderedListButton.classList.add("orderedListButton")
