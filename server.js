@@ -10,7 +10,6 @@ const fs = require("fs")
 const cookieParser = require("cookie-parser")
 const socketIo = require("socket.io");
 const bcrypt = require("bcrypt")
-const xss = require("xss");
 
 const currentDomain = "http://localhost:3000"
 const hashRounds = 10
@@ -64,7 +63,6 @@ let sessions = {}
 let users = client.db("users").collection("users")
 let posts = client.db("posts").collection("posts")
 let imageAssets = client.db("assets").collection("images")
-let xssShame = client.db("shame").collection("xss")
 
 app.get("/settings", async (req, res) => {
     getStartingAppData(req, res, function(username, level, profilePicture, fullUser) {
@@ -78,9 +76,6 @@ app.get("/settings", async (req, res) => {
     }, function() {
         res.render("404")
     })
-})
-app.get("/xss", async (req, res) => {
-    res.render("xss")
 })
 app.get("/app", async (req, res) => {
     res.redirect("/home")
@@ -241,21 +236,12 @@ app.post("/api/login/", async(req, res) => {
         res.send(false)
     })()
 })
-async function ipInXssShame(ip) {
-    return false
-}
 function getIpFromReq(req) {
     return req.headers['x-forwarded-for'] || req.socket.remoteAddress
 
 }
 app.post("/api/register/", async(req, res) => {
-    let ipBanned = await ipInXssShame(getIpFromReq(req))
-    if(ipBanned) {
-        res.send(false)
-        return
-    }
-    
-    const username = xss(req.body.username)
+    const username = req.body.username
     const password = req.body.password
     const result = await users.findOne({ username: username })
     if(result != null) {
@@ -425,20 +411,10 @@ async function getUserBySession(session, res = false) {
 }
 
 app.post("/api/create-post", async (req, res) => {
-    let ipBanned = await ipInXssShame(getIpFromReq(req))
-    if(ipBanned) {
-        res.send(false)
-        return
-    }
     let user = await getUserBySession(req.cookies.session, res)
     if(user != false) {
         let title = req.body.title
-        if(title == "") {
-            title = "Untitled"
-        }
-        const safeTitle = xss(title)
         const content = req.body.content
-        const safeContent = xss(content)
         const options = req.body.options
         const heartsCount = 0
         const heartsFrom = []
@@ -454,8 +430,8 @@ app.post("/api/create-post", async (req, res) => {
             imagesIds.push(imageId)
         }
         const post = {
-            title: safeTitle || "Untitled",
-            content: safeContent,
+            title: title || "Untitled",
+            content: content,
             options: options,
             heartsCount: heartsCount,
             heartsFrom: heartsFrom,
@@ -696,12 +672,6 @@ app.post("/api/follow/:id", async(req, res) => {
         res.send(false)
         return
     }
-
-    let ipBanned = await ipInXssShame(getIpFromReq(req))
-    if(ipBanned) {
-        res.send(false)
-        return
-    }
     let follower = await getUserBySession(req.cookies.session)
     let target = await getUserById(req.params.id)
     if(target == null) {
@@ -748,11 +718,6 @@ app.post("/api/follow/:id", async(req, res) => {
     })
 })
 app.post("/api/unfollow/:id", async(req, res) => {
-    let ipBanned = await ipInXssShame(getIpFromReq(req))
-    if(ipBanned) {
-        res.send(false)
-        return
-    }
     let unfollower = await getUserBySession(req.cookies.session)
     let target = await getUserById(req.params.id)
     if(target == null) {
@@ -861,11 +826,6 @@ app.post("/api/update-self-data", async (req, res) => {
     res.status(204).send()
 })
 app.post("/api/post-toggle-heart/:id", async (req, res) => {
-    let ipBanned = await ipInXssShame(getIpFromReq(req))
-    if(ipBanned) {
-        res.send(false)
-        return
-    }
     if(!userIsLoggedIn(req.cookies.session)) {
         res.send("error");
         return;
