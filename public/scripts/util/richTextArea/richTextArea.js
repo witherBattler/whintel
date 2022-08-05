@@ -225,7 +225,7 @@ class RichTextArea extends HTMLElement {
             smartypants: this.editorOptions.smartypants,
             smartLists: this.editorOptions.smartypants,
         })
-        return marked.parse(this.value)
+        return smartMarkedParse(this.value).innerHTML
     }
     triggerMarkdownRerender() {
         this.events.markdownChange.forEach(callback => callback(this.getMarked()))

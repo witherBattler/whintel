@@ -14,8 +14,8 @@ function initMarked() {
         smartypants: postIsSmartypants,
     })
     root.style.setProperty("--marked-main-font", postFont)
-    postContentParsed = marked.parse(content)
-    postContentElement.innerHTML = postContentParsed
+    postContentParsed = smartMarkedParse(content)
+    postContentElement.innerHTML = postContentParsed.innerHTML
 }
 
 postAuthor.addEventListener("click", async (event) => {
