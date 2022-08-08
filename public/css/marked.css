@@ -71,9 +71,6 @@
 }
 
 .marked-paragraph {
-    font-size: 22px;
-    font-family: var(--marked-main-font);
-    font-weight: 300;
     line-height: 140%;
 }
 

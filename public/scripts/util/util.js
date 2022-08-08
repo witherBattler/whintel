@@ -12,10 +12,10 @@
 //     reader.readAsDataURL(file)
 // })
 
-let lexer = new marked.Lexer()
-
 function smartMarkedParse(text) {
     let lexer = new marked.Lexer()
+    lexer.options.xhtml = true
+    lexer.tokenizer.rules.block.html = { exec: function() {return null} }
     let lexed = lexer.lex(text)
     if(lexed.links != undefined) {
         delete lexed.links
@@ -29,27 +29,26 @@ function smartMarkedParse(text) {
     return toReturn
 }
 function parseMarkedToken(tokenObject) {
+    if(tokenObject.type == "list") {
+        console.log(tokenObject)
+    }
+    if(tokenObject.tokens != undefined && tokenObject.type == "text") {
+        // list_item
+        
+    }
     let element = tokenToElement(tokenObject)
-    if(tokenObject.tokens != undefined) {
+    if(tokenObject.tokens != undefined && tokenObject.type != "text") {
         for(let i = 0; i != tokenObject.tokens.length; i++) {
             element.appendChild(parseMarkedToken(tokenObject.tokens[i]))
         }
     }
     return element
 }
-marked.use({
-    renderer: {
-        html(text, options, env) {
-            return text
-        }
-    }
-})
+
 function tokenToElement(token) {
     let element
-    console.log(token.text, token.type)
     switch(token.type) {
         case "text":
-            console.log(token.text)
             element = document.createTextNode(he.decode(token.text))
             return element
         case "em":
@@ -58,7 +57,7 @@ function tokenToElement(token) {
             return element
         case "codespan":
             element = document.createElement("code")
-            element.textContent = token.text
+            element.textContent = he.decode(token.text)
             element.classList.add("marked-code")
             return element
         case "br":
@@ -79,9 +78,7 @@ function tokenToElement(token) {
             let caption = token.text
             const includeCaption = caption != ""
             if(href.startsWith("image-")) {
-                console.log(uploadedImages)
                 for(let i = 0; i != uploadedImages.length; i++) {
-                    console.log(href)
                     if(uploadedImages[i].id == href) {
                         
                         realSrc = uploadedImages[i].dataUrl
@@ -120,11 +117,26 @@ function tokenToElement(token) {
                 element = document.createElement("ul")
                 element.classList.add("marked-list")
             }
-            break
+            token.tokens = token.items
+            return element
+        case "list_item":
+            element = document.createElement("li")
+            element.classList.add("marked-list-item")
+            console.log(token.tokens)
+            if(token.tokens.length > 0) {
+                token.tokens = token.tokens[0].tokens
+            } else {
+                token.tokens = []
+            }
+            return element  
         case "html":
-            break;
+            element = document.createElement("div")
+            element.innerText = he.decode(token.text)
+            element.classList.add("marked-paragraph")
+            return element
         case "escape":
-            break;
+            element = document.createTextNode(he.decode(token.text))
+            return element
         case "hr":
             element = document.createElement("hr")
             element.classList.add("marked-hr")
@@ -132,6 +144,11 @@ function tokenToElement(token) {
         case "heading":
             element = document.createElement("h" + token.depth)
             element.classList.add("marked-h" + token.depth)
+            return element
+        case "space":
+            element = document.createElement("span")
+            element.classList.add("marked-space")
+            element.innerHTML = "<br>".repeat(token.raw.match(/\n/g).length - 1)
             return element
         default: 
             throw new Error(token.type)
@@ -243,9 +260,7 @@ const markedRenderer = {
         let realSrc = href
         const includeCaption = caption != ""
         if(href.startsWith("image-")) {
-            console.log(uploadedImages)
             for(let i = 0; i != uploadedImages.length; i++) {
-                console.log(href)
                 if(uploadedImages[i].id == href) {
                     
                     realSrc = uploadedImages[i].dataUrl
@@ -274,7 +289,6 @@ async function getMainColorFromImageSrc(imageSrc) {
     let image = new Image();
     image.src = imageSrc;
     return new Promise((resolve, reject) => {
-        console.log("AAAAAAAAAAAAAAAAAAAA")
         image.onload = () => {
             context.drawImage(image, 0, 0, 1, 1);
             let imageData = context.getImageData(0, 0, 1, 1).data;
