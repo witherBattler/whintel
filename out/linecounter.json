@@ -1,0 +1,872 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\programming\\zoomino 6\\html5help",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2022-08-08 22:06:53",
+            "filesum": 135,
+            "codesum": 10622,
+            "commentsum": 157,
+            "blanksum": 353,
+            "statistics": {
+                ".ejs": {
+                    "code": 582,
+                    "comment": 0,
+                    "blank": 22
+                },
+                ".css": {
+                    "code": 2097,
+                    "comment": 0,
+                    "blank": 63
+                },
+                ".svg": {
+                    "code": 437,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".js": {
+                    "code": 2953,
+                    "comment": 157,
+                    "blank": 268
+                },
+                "": {
+                    "code": 5,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".json": {
+                    "code": 4548,
+                    "comment": 0,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".env"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 4524,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "Procfile"
+                },
+                {
+                    "blank": 1,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "public\\css\\404.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "public\\css\\app-middle.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 261,
+                    "comment": 0,
+                    "filename": "public\\css\\editor.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "public\\css\\followers-following.css"
+                },
+                {
+                    "blank": 9,
+                    "code": 201,
+                    "comment": 0,
+                    "filename": "public\\css\\left.css"
+                },
+                {
+                    "blank": 7,
+                    "code": 153,
+                    "comment": 0,
+                    "filename": "public\\css\\login-signup.css"
+                },
+                {
+                    "blank": 11,
+                    "code": 123,
+                    "comment": 0,
+                    "filename": "public\\css\\marked.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "public\\css\\post-middle.css"
+                },
+                {
+                    "blank": 6,
+                    "code": 166,
+                    "comment": 0,
+                    "filename": "public\\css\\settings.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 115,
+                    "comment": 0,
+                    "filename": "public\\css\\view-profile.css"
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\bold-italic.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\bold.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\light-italic.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\light.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\medium-italic.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\medium.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\regular-italic.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\regular.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\semibold-italic.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\euclid\\semibold.ttf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\rh\\black.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\rh\\light.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\fonts\\rh\\semibold.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "public\\images\\404-background.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "public\\images\\auth-background.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "public\\images\\blockquote.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\burgerMenu-closed.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\burgerMenu-opened.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\checkmark.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\coolBackground.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\copy.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\defaultProfile-blurred.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\defaultProfile.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\defaultProfilePadding.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\downVoteArrow.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\downVoteArrowSelected.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\dropdownIcon.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\exitArrow.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\hashtagX.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\headings\\heading1.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\headings\\heading2.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\headings\\heading3.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\headings\\heading4.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\headings\\heading5.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\headings\\heading6.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\heart-blurred.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\heart.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\home-blurred.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\home.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\image.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\impixel.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\loginIcon.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\logOut.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\messages-blurred.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\messages.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\normalCase.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\notification-blurred.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\notification.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\openIn.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\orderedList.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\penIcon.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\pickImage.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\pickImage2.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\plusFollow.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\plusLeft-blurred.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\plusLeft.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\plusPost.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\save.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\search.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\settings-blurred.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\settings.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\settingsArrow.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\smartypantsCase.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\unOrderedList.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\upVoteArrow.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\upVoteArrowSelected.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "public\\images\\icons\\x.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "public\\images\\logo.svg"
+                },
+                {
+                    "blank": 12,
+                    "code": 121,
+                    "comment": 16,
+                    "filename": "public\\scripts\\app.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "public\\scripts\\auth\\login.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "public\\scripts\\auth\\register.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 40,
+                    "comment": 90,
+                    "filename": "public\\scripts\\editor.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 108,
+                    "comment": 2,
+                    "filename": "public\\scripts\\followersFollowing.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "public\\scripts\\left.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 131,
+                    "comment": 0,
+                    "filename": "public\\scripts\\settings.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 37,
+                    "comment": 1,
+                    "filename": "public\\scripts\\util\\automaticPostManager\\automaticPostManager.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 75,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\followersListElement\\followersListElement.css"
+                },
+                {
+                    "blank": 9,
+                    "code": 46,
+                    "comment": 10,
+                    "filename": "public\\scripts\\util\\followersListElement\\followersListElement.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 148,
+                    "comment": 1,
+                    "filename": "public\\scripts\\util\\http.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 78,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\materialInput\\materialInput.css"
+                },
+                {
+                    "blank": 8,
+                    "code": 91,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\materialInput\\materialInput.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\materialTextArea\\materialTextArea.css"
+                },
+                {
+                    "blank": 8,
+                    "code": 94,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\materialTextArea\\materialTextArea.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\popup\\popup.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\popup\\popup.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 110,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\postDisplayer\\postDisplayer.css"
+                },
+                {
+                    "blank": 24,
+                    "code": 134,
+                    "comment": 16,
+                    "filename": "public\\scripts\\util\\postDisplayer\\postDisplayer.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 163,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\profileCard\\profileCard.css"
+                },
+                {
+                    "blank": 8,
+                    "code": 71,
+                    "comment": 2,
+                    "filename": "public\\scripts\\util\\profileCard\\profileCard.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\profileCard\\profileCardPositionStatic.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\profileCard\\profileCardPositionStatic.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 172,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\richTextArea\\richTextArea.css"
+                },
+                {
+                    "blank": 27,
+                    "code": 230,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\richTextArea\\richTextArea.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\smartDropdown\\smartDropdown.css"
+                },
+                {
+                    "blank": 9,
+                    "code": 93,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\smartDropdown\\smartDropdown.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\snackbar\\snackbar.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\snackbar\\snackbar.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\uploadedImageEditor\\uploadedImageEditor.css"
+                },
+                {
+                    "blank": 14,
+                    "code": 102,
+                    "comment": 0,
+                    "filename": "public\\scripts\\util\\uploadedImageEditor\\uploadedImageEditor.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 286,
+                    "comment": 13,
+                    "filename": "public\\scripts\\util\\util.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "public\\scripts\\viewPost.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 130,
+                    "comment": 0,
+                    "filename": "public\\scripts\\viewProfile.js"
+                },
+                {
+                    "blank": 46,
+                    "code": 918,
+                    "comment": 6,
+                    "filename": "server.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "views\\404.ejs"
+                },
+                {
+                    "blank": 3,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "views\\app.ejs"
+                },
+                {
+                    "blank": 10,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "views\\create-post.ejs"
+                },
+                {
+                    "blank": 0,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "views\\login.ejs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "views\\partials\\base.ejs"
+                },
+                {
+                    "blank": 1,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "views\\partials\\followersFollowing.ejs"
+                },
+                {
+                    "blank": 0,
+                    "code": 82,
+                    "comment": 0,
+                    "filename": "views\\partials\\left.ejs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "views\\partials\\loggedIn.ejs"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "views\\partials\\popup.ejs"
+                },
+                {
+                    "blank": 0,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "views\\partials\\profileCard.ejs"
+                },
+                {
+                    "blank": 3,
+                    "code": 74,
+                    "comment": 0,
+                    "filename": "views\\partials\\settings.ejs"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "views\\partials\\snackbar.ejs"
+                },
+                {
+                    "blank": 0,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "views\\post.ejs"
+                },
+                {
+                    "blank": 1,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "views\\register.ejs"
+                },
+                {
+                    "blank": 0,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "views\\settings.ejs"
+                },
+                {
+                    "blank": 3,
+                    "code": 96,
+                    "comment": 0,
+                    "filename": "views\\view-profile.ejs"
+                },
+                {
+                    "blank": 1,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "views\\xss.ejs"
+                }
+            ]
+        }
+    ]
+}
