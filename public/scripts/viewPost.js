@@ -14,7 +14,9 @@ function initMarked() {
         smartypants: postIsSmartypants,
     })
     root.style.setProperty("--marked-main-font", postFont)
-    postContentParsed = smartMarkedParse(content)
+    console.log(images)
+    postContentParsed = smartMarkedParse(content, images)
+    console.log(postContentParsed)
     postContentElement.innerHTML = postContentParsed.innerHTML
 }
 

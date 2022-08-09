@@ -1,7 +1,7 @@
 class RichTextArea extends HTMLElement {
     constructor() {
         super()
-        this.editorOptions = {
+        this.options = {
             font: "Euclid",
             smartypants: true,
         }
@@ -12,6 +12,7 @@ class RichTextArea extends HTMLElement {
             markdownChange: [],
         }
         this.images = []
+        this.lastImageIndex = 0
     }
     connectedCallback() {
         let shadow = this.attachShadow({mode: "open"})
@@ -35,7 +36,7 @@ class RichTextArea extends HTMLElement {
         fontSelector.setAttribute("width", "180px")
         fontSelector.setAttribute("border-radius", "left")
         fontSelector.appendEvent("change", (value) => {
-            this.editorOptions.font = value
+            this.options.font = value
             fontSelector.font = value
             this.events.fontChange.forEach(callback => callback(value))
         })
@@ -46,8 +47,8 @@ class RichTextArea extends HTMLElement {
         caseSwitchButtonIcon.src = "images/icons/smartypantsCase.svg"
         caseSwitchButton.appendChild(caseSwitchButtonIcon)
         caseSwitchButton.addEventListener("click", () => {
-            this.editorOptions.smartypants = !this.editorOptions.smartypants
-            caseSwitchButtonIcon.src = this.editorOptions.smartypants ? "images/icons/smartypantsCase.svg" : "images/icons/normalCase.svg"
+            this.options.smartypants = !this.options.smartypants
+            caseSwitchButtonIcon.src = this.options.smartypants ? "images/icons/smartypantsCase.svg" : "images/icons/normalCase.svg"
             this.events.caseChange.forEach(callback => callback(this.editorOptions.smartypants))
             this.triggerMarkdownRerender()
         })
@@ -130,10 +131,31 @@ class RichTextArea extends HTMLElement {
         imageOptionsAddImageInput.id = "imageOptionsAddImageInput"
         imageOptionsAddImageInput.type = "file"
         imageOptionsAddImageInput.accept = "image/*"
+        imageOptionsAddImageInput.addEventListener("change", (event) => {
+            if(event.target.files.length == 0) {
+                return
+            }
+            let file = event.target.files[0]
+            let reader = new FileReader()
+            reader.onload = (event) => {
+                this.lastImageIndex++
+
+                let name = "image-" + this.lastImageIndex
+                this.images.push({
+                    dataURI: event.target.result,
+                    alt: file.name,
+                    id: name
+                })
+                this.value = this.value + `![${file.name}](${name})`
+                this.textArea.focus()
+                this.triggerMarkdownRerender()
+            }
+            reader.readAsDataURL(file)
+        })
         imageOptionsAddImage.appendChild(imageOptionsAddImageInput)
 
         let imageOptionsAddImageLabel = document.createElement("label")
-        imageOptionsAddImageLabel.for = "imageOptionsAddImageInput"
+        imageOptionsAddImageLabel.setAttribute("for", "imageOptionsAddImageInput")
         imageOptionsAddImage.appendChild(imageOptionsAddImageLabel)
 
         let imageOptionsAddImageIcon = document.createElement("img")
@@ -222,10 +244,10 @@ class RichTextArea extends HTMLElement {
     }
     getMarked() {
         marked.setOptions({
-            smartypants: this.editorOptions.smartypants,
-            smartLists: this.editorOptions.smartypants,
+            smartypants: this.options.smartypants,
+            smartLists: this.options.smartypants,
         })
-        return smartMarkedParse(this.value).innerHTML
+        return smartMarkedParse(this.value, this.images).innerHTML
     }
     triggerMarkdownRerender() {
         this.events.markdownChange.forEach(callback => callback(this.getMarked()))

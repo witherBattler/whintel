@@ -121,14 +121,15 @@ function imagesHaveId(id) {
 let confirmPostButton = document.getElementById("confirmPost")
 confirmPostButton.addEventListener("click", async (event) => {
     let toSend = {
-        content: editorContentElement.innerText,
-        options: editorOptions,
-        images: uploadedImages,
+        content: editorContentElement.value,
+        options: editorContentElement.options,
+        images: editorContentElement.images,
         title: editorTitle.value,
     }
+    console.log(toSend)
     let result = await ajax("POST", "api/create-post", toSend)
     if(result != false) {
-        window.location = result
+        //window.location = result
     } else {
         alert("Error creating post")
     }

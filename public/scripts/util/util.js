@@ -12,7 +12,7 @@
 //     reader.readAsDataURL(file)
 // })
 
-function smartMarkedParse(text) {
+function smartMarkedParse(text, images) {
     let lexer = new marked.Lexer()
     lexer.options.xhtml = true
     lexer.tokenizer.rules.block.html = { exec: function() {return null} }
@@ -23,29 +23,22 @@ function smartMarkedParse(text) {
     let tokens = Object.values(lexed)
     let toReturn = document.createElement("div")
     for(let i = 0; i != tokens.length; i++) {
-        let tokenToElement = parseMarkedToken(tokens[i])
+        let tokenToElement = parseMarkedToken(tokens[i], images)
         toReturn.appendChild(tokenToElement)
     }
     return toReturn
 }
-function parseMarkedToken(tokenObject) {
-    if(tokenObject.type == "list") {
-        console.log(tokenObject)
-    }
-    if(tokenObject.tokens != undefined && tokenObject.type == "text") {
-        // list_item
-        
-    }
-    let element = tokenToElement(tokenObject)
+function parseMarkedToken(tokenObject, images) {
+    let element = tokenToElement(tokenObject, images)
     if(tokenObject.tokens != undefined && tokenObject.type != "text") {
         for(let i = 0; i != tokenObject.tokens.length; i++) {
-            element.appendChild(parseMarkedToken(tokenObject.tokens[i]))
+            element.appendChild(parseMarkedToken(tokenObject.tokens[i], images))
         }
     }
     return element
 }
 
-function tokenToElement(token) {
+function tokenToElement(token, images) {
     let element
     switch(token.type) {
         case "text":
@@ -75,13 +68,15 @@ function tokenToElement(token) {
             element.classList.add("marked-link")
             return element
         case "image":
-            let caption = token.text
-            const includeCaption = caption != ""
+            const captionText = token.text
+            const includeCaption = captionText != ""
+            let href = token.href
+            let realSrc = href
             if(href.startsWith("image-")) {
-                for(let i = 0; i != uploadedImages.length; i++) {
-                    if(uploadedImages[i].id == href) {
-                        
-                        realSrc = uploadedImages[i].dataUrl
+                console.log(images, "76")
+                for(let i = 0; i != images.length; i++) {
+                    if(images[i].id == href) {
+                        realSrc = images[i].dataURI
                         break
                     }
                 }
@@ -91,7 +86,7 @@ function tokenToElement(token) {
             if(includeCaption) {
                 let caption = document.createElement("p")
                 caption.classList.add("marked-image-caption")
-                caption.textContent = this.caption
+                caption.textContent = captionText
                 container.appendChild(caption)
             }
             let image = document.createElement("img")
@@ -150,10 +145,13 @@ function tokenToElement(token) {
             element.classList.add("marked-space")
             element.innerHTML = "<br>".repeat(token.raw.match(/\n/g).length - 1)
             return element
+        case "blockquote":
+            element = document.createElement("blockquote")
+            element.classList.add("marked-blockquote")
+            return element
         default: 
             throw new Error(token.type)
     }
-
 }
 
 function changeUrlWithoutReload(url) {
@@ -281,7 +279,7 @@ const markedRenderer = {
     },
     code(code, lang) {
         return `<pre class="marked-code"><code class="marked-code">${code}</code></pre>`
-    }
+    },
 }
 async function getMainColorFromImageSrc(imageSrc) {
     let canvas = document.createElement("canvas");

@@ -277,8 +277,14 @@ app.post("/api/register/", async(req, res) => {
 app.get("/post/:id", async (req, res) => {
     let postData = await getPostData(req.params.id)
     let authorData = await getUserById(postData.user)
-    let postImages = await postData.images
-    postImages = JSON.stringify(postImages)
+    let postImages = []
+    for(let i = 0; i != postData.images.length; i++) {
+        let image = await retrieveImageAsset(postData.images[i])
+        postImages.push({
+            dataURI: image,
+            id: "image-" + (i + 1)
+        })  
+    }
     let authorProfilePicture = "default"
     if(authorData.profilePicture != "default") {
         authorProfilePicture = await retrieveImageAsset(authorData.profilePicture)
@@ -426,7 +432,7 @@ app.post("/api/create-post", async (req, res) => {
         let imagesIds = []
         for(let i = 0; i < req.body.images.length; i++) {
             const image = req.body.images[i]
-            let imageId = await storeImageAsset(image.dataUrl)
+            let imageId = await storeImageAsset(image.dataURI)
             imagesIds.push(imageId)
         }
         const post = {

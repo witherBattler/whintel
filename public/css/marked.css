@@ -109,8 +109,26 @@
     -moz-transform: translateY(-5px);
     -ms-transform: translateY(-5px);
     -o-transform: translateY(-5px);
+    overflow-x: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
 }
 .marked-code {
     font-family: consolas, monospace;
     font-size: 20px;
+}
+.marked-blockquote {
+    width: 100%;
+    height: fit-content;
+    min-height: 60px;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    background-size: contain;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../images/blockquote.svg);
+    padding: 20px;
 }

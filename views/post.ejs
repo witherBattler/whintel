@@ -45,22 +45,10 @@
         var postFont = "<%= postData.options.font %>";
         var postIsSmartypants = stringToBoolean("<%= postData.options.smartypants %>");
         var content = `<%= postData.content %>`;
-        var uploadedImagesIds = `<%= postImages %>`.replaceAll('&#34;', "").replace("[", "").replace("]", "").split(",");
-        var uploadedImages = [];
-        (async () => {
-            if(uploadedImagesIds[0] != "") {
-                for (var i = 0; i < uploadedImagesIds.length; i++) {
-                    var image = await ajax("GET", "/api/assets/images/" + uploadedImagesIds[i]);
-                    uploadedImages.push({
-                        id: "image-" + (i + 1),
-                        dataUrl: image
-                    });
-                }
-            }
-            initMarked()
-        })()
+        var images = <%- JSON.stringify(postImages) %>
         var authorData = <%- JSON.stringify(authorData) %>
         var authorProfilePicture = "<%- authorProfilePicture %>"
         cacheReadyProfilePicture(authorData.profilePicture, authorProfilePicture)
+        initMarked()
     </script>
 </html>
